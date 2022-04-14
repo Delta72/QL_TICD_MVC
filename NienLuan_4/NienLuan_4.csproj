@@ -1,0 +1,432 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B8FAF318-EE9A-46D1-8EA5-C4CEAD480A4C}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NienLuan_4</RootNamespace>
+    <AssemblyName>NienLuan_4</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44345</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.3\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.3\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\PointController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\addMarkerModel.cs" />
+    <Compile Include="Models\BINHLUAN.cs">
+      <DependentUpon>DatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DatabaseModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatabaseModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DatabaseModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DatabaseModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatabaseModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DIADIEM.cs">
+      <DependentUpon>DatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HINHANH.cs">
+      <DependentUpon>DatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LOAIDIADIEM.cs">
+      <DependentUpon>DatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LOAITAIKHOAN.cs">
+      <DependentUpon>DatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PHUONGXA.cs">
+      <DependentUpon>DatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PointDisplayModel.cs" />
+    <Compile Include="Models\pointModel.cs" />
+    <Compile Include="Models\PolyModel.cs" />
+    <Compile Include="Models\QUANHUYEN.cs">
+      <DependentUpon>DatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>DatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TAIKHOAN.cs">
+      <DependentUpon>DatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\userRoleProvider.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\3.jpg" />
+    <Content Include="Content\Images\UserProfile\AnoAvatar.png" />
+    <Content Include="Content\Images\UserProfile\User1.png" />
+    <Content Include="Content\layout-style.css" />
+    <Content Include="Content\Leaflet\images\greenhuman.png" />
+    <Content Include="Content\Leaflet\images\layers-2x.png" />
+    <Content Include="Content\Leaflet\images\layers.png" />
+    <Content Include="Content\Leaflet\images\marker-icon-2x.png" />
+    <Content Include="Content\Leaflet\images\marker-icon.png" />
+    <Content Include="Content\Leaflet\images\marker-icon2.png" />
+    <Content Include="Content\Leaflet\images\marker-shadow.png" />
+    <Content Include="Content\Leaflet\leaflet-pip.js" />
+    <Content Include="Content\Leaflet\leaflet-src.esm.js" />
+    <Content Include="Content\Leaflet\leaflet-src.js" />
+    <Content Include="Content\Leaflet\leaflet.css" />
+    <Content Include="Content\Leaflet\leaflet.js" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Models\DatabaseModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DatabaseModel.edmx</DependentUpon>
+      <LastGenOutput>DatabaseModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DatabaseModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DatabaseModel.edmx</DependentUpon>
+      <LastGenOutput>DatabaseModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Scripts\AddController.js" />
+    <Content Include="Scripts\AddIcon.js" />
+    <Content Include="Scripts\AddLogin.js" />
+    <Content Include="Scripts\AddMap.js" />
+    <Content Include="Scripts\AddMarker.js" />
+    <Content Include="Scripts\AddMenu.js" />
+    <Content Include="Scripts\AddPolygon.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\Leaflet\leaflet-src.esm.js.map" />
+    <Content Include="Content\Leaflet\leaflet-src.js.map" />
+    <Content Include="Content\Leaflet\leaflet.js.map" />
+    <Content Include="Content\Geojson\CanTho.geojson" />
+    <Content Include="Content\Geojson\QH_BinhThuy.geojson" />
+    <Content Include="Content\Geojson\QH_CaiRang.geojson" />
+    <Content Include="Content\Geojson\QH_CoDo.geojson" />
+    <Content Include="Content\Geojson\QH_NinhKieu.geojson" />
+    <Content Include="Content\Geojson\QH_OMon.geojson" />
+    <Content Include="Content\Geojson\QH_PhongDien.geojson" />
+    <Content Include="Content\Geojson\QH_ThoiLai.geojson" />
+    <Content Include="Content\Geojson\QH_ThotNot.geojson" />
+    <Content Include="Content\Geojson\QH_VinhThanh.geojson" />
+    <EntityDeploy Include="Models\DatabaseModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DatabaseModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DatabaseModel.edmx.diagram">
+      <DependentUpon>DatabaseModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Content\Geojson\BT_PhuongAnThoi.geojson" />
+    <Content Include="Content\Geojson\BT_PhuongBinhThuy.geojson" />
+    <Content Include="Content\Geojson\BT_PhuongBuiHuuNghia.geojson" />
+    <Content Include="Content\Geojson\BT_PhuongLongHoa.geojson" />
+    <Content Include="Content\Geojson\BT_PhuongLongTuyen.geojson" />
+    <Content Include="Content\Geojson\BT_PhuongThoiAnDong.geojson" />
+    <Content Include="Content\Geojson\BT_PhuongTraAn.geojson" />
+    <Content Include="Content\Geojson\BT_PhuongTraNoc.geojson" />
+    <Content Include="Content\Geojson\CD_TTCoDo.geojson" />
+    <Content Include="Content\Geojson\CD_XaDongHiep.geojson" />
+    <Content Include="Content\Geojson\CD_XaDongThang.geojson" />
+    <Content Include="Content\Geojson\CD_XaThanhPhu.geojson" />
+    <Content Include="Content\Geojson\CD_XaThoi Xuan.geojson" />
+    <Content Include="Content\Geojson\CD_XaThoiDong.geojson" />
+    <Content Include="Content\Geojson\CD_XaThoiHung.geojson" />
+    <Content Include="Content\Geojson\CD_XaTrungAn.geojson" />
+    <Content Include="Content\Geojson\CD_XaTrungHung.geojson" />
+    <Content Include="Content\Geojson\CD_XaTrungThanh.geojson" />
+    <Content Include="Content\Geojson\CR_PhuongBaLang.geojson" />
+    <Content Include="Content\Geojson\CR_PhuongHungPhu.geojson" />
+    <Content Include="Content\Geojson\CR_PhuongHungThanh.geojson" />
+    <Content Include="Content\Geojson\CR_PhuongLeBinh.geojson" />
+    <Content Include="Content\Geojson\CR_PhuongPhuThu.geojson" />
+    <Content Include="Content\Geojson\CR_PhuongTanPhu.geojson" />
+    <Content Include="Content\Geojson\CR_PhuongThuongThanh.geojson" />
+    <Content Include="Content\Geojson\NK_PhuongAnBinh.geojson" />
+    <Content Include="Content\Geojson\NK_PhuongAnCu.geojson" />
+    <Content Include="Content\Geojson\NK_PhuongAnHoa.geojson" />
+    <Content Include="Content\Geojson\NK_PhuongAnHoi.geojson" />
+    <Content Include="Content\Geojson\NK_PhuongAnKhanh.geojson" />
+    <Content Include="Content\Geojson\NK_PhuongAnLac.geojson" />
+    <Content Include="Content\Geojson\NK_PhuongAnNghiep.geojson" />
+    <Content Include="Content\Geojson\NK_PhuongAnPhu.geojson" />
+    <Content Include="Content\Geojson\NK_PhuongCaiKhe.geojson" />
+    <Content Include="Content\Geojson\NK_PhuongHungLoi.geojson" />
+    <Content Include="Content\Geojson\NK_PhuongTanAn.geojson" />
+    <Content Include="Content\Geojson\NK_PhuongThoiBinh.geojson" />
+    <Content Include="Content\Geojson\NK_PhuongXuanKhanh.geojson" />
+    <Content Include="Content\Geojson\OM_PhuongChauVanLiem.geojson" />
+    <Content Include="Content\Geojson\OM_PhuongLongHung.geojson" />
+    <Content Include="Content\Geojson\OM_PhuongPhuocThoi.geojson" />
+    <Content Include="Content\Geojson\OM_PhuongThoiAn.geojson" />
+    <Content Include="Content\Geojson\OM_PhuongThoiHoa.geojson" />
+    <Content Include="Content\Geojson\OM_PhuongThoiLong.geojson" />
+    <Content Include="Content\Geojson\OM_PhuongTruongLac.geojson" />
+    <Content Include="Content\Geojson\PD_TTPhongDien.geojson" />
+    <Content Include="Content\Geojson\PD_XaGiaiXuan.geojson" />
+    <Content Include="Content\Geojson\PD_XaMyKhanh.geojson" />
+    <Content Include="Content\Geojson\PD_XaNhonAi.geojson" />
+    <Content Include="Content\Geojson\PD_XaNhonNghia.geojson" />
+    <Content Include="Content\Geojson\PD_XaTanThoi.geojson" />
+    <Content Include="Content\Geojson\PD_XaTruongLong.geojson" />
+    <Content Include="Content\Geojson\TL_TTThoiLai.geojson" />
+    <Content Include="Content\Geojson\TL_XaDinhMon.geojson" />
+    <Content Include="Content\Geojson\TL_XaDongBinh.geojson" />
+    <Content Include="Content\Geojson\TL_XaDongThuan.geojson" />
+    <Content Include="Content\Geojson\TL_XaTanThanh.geojson" />
+    <Content Include="Content\Geojson\TL_XaThoiTan.geojson" />
+    <Content Include="Content\Geojson\TL_XaThoiThanh.geojson" />
+    <Content Include="Content\Geojson\TL_XaTruongThang.geojson" />
+    <Content Include="Content\Geojson\TL_XaTruongThanh.geojson" />
+    <Content Include="Content\Geojson\TL_XaTruongXuan.geojson" />
+    <Content Include="Content\Geojson\TL_XaTruongXuanA.geojson" />
+    <Content Include="Content\Geojson\TL_XaTruongXuanB.geojson" />
+    <Content Include="Content\Geojson\TL_XaXuanThang.geojson" />
+    <Content Include="Content\Geojson\TN_PhuongTanHung.geojson" />
+    <Content Include="Content\Geojson\TN_PhuongTanLoc.geojson" />
+    <Content Include="Content\Geojson\TN_PhuongThanhHoa.geojson" />
+    <Content Include="Content\Geojson\TN_PhuongThoiThuan.geojson" />
+    <Content Include="Content\Geojson\TN_PhuongThotNot.geojson" />
+    <Content Include="Content\Geojson\TN_PhuongThuanAn.geojson" />
+    <Content Include="Content\Geojson\TN_PhuongThuanHung.geojson" />
+    <Content Include="Content\Geojson\TN_PhuongTrungKien.geojson" />
+    <Content Include="Content\Geojson\TN_PhuongTrungNhut.geojson" />
+    <Content Include="Content\Geojson\VT_TTThanhAn.geojson" />
+    <Content Include="Content\Geojson\VT_TTVinhThanh.geojson" />
+    <Content Include="Content\Geojson\VT_XaThanhAn.geojson" />
+    <Content Include="Content\Geojson\VT_XaThanhLoc.geojson" />
+    <Content Include="Content\Geojson\VT_XaThanhLoi.geojson" />
+    <Content Include="Content\Geojson\VT_XaThanhMy.geojson" />
+    <Content Include="Content\Geojson\VT_XaThanhQuoi.geojson" />
+    <Content Include="Content\Geojson\VT_XaThanhThang.geojson" />
+    <Content Include="Content\Geojson\VT_XaThanhTien.geojson" />
+    <Content Include="Content\Geojson\VT_XaVinhBinh.geojson" />
+    <Content Include="Content\Geojson\VT_XaVinhTrinh.geojson" />
+    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\DisplayMarker.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Login\Error.cshtml" />
+    <Content Include="Views\User\UserHomePage.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Content\Images\Point\" />
+    <Folder Include="Views\Point\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="packages.config" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>1203</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44345/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

@@ -1,0 +1,291 @@
+﻿body {
+    padding: 0;
+    margin: 0;
+}
+
+html, body, #map {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+}
+
+#ddlQ, #ddlP {
+    padding: 6px 9px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background-color: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+
+label {
+    font: Arial, Helvetica, sans-serif;
+    color: green;
+    font-size: 20px;
+    font-weight: 700;
+    margin-left: 5px;
+}
+
+#lgbt {
+    background-color: green;
+    color: yellow;
+    transition: 0.25s;
+}
+
+    #lgbt:hover {
+        background-color: yellow;
+        color: green;
+    }
+
+#lgbt, #lgbt2, #btnSignUp, #btnSignUp2 {
+    background-color: green;
+    color: yellow;
+    transition: 0.25s;
+}
+
+    #lgbt:hover {
+        background-color: yellow;
+        color: green;
+    }
+
+    #lgbt2:hover {
+        background-color: yellow;
+        color: green;
+    }
+
+    #btnSignUp:hover {
+        background-color: yellow;
+        color: green;
+    }
+
+    #btnSignUp2:hover {
+        background-color: yellow;
+        color: green;
+    }
+
+#menubar {
+    width: 25px;
+    height: 3px;
+    background-color: black;
+    margin: 2px 0;
+}
+
+#field, #sufield {
+    outline: 5px dashed green;
+    background-color: #EBEDEF;
+}
+
+#userMenu {
+    background-color: #EBEDEF;
+    text-decoration: none;
+    width: 30%;
+    width: 30vh;
+    height: 80%;
+    height: 80vh;
+    margin-left: 10%;
+    margin-top: 5%;
+    border-radius: 0%;
+    outline: 5px dashed green;
+}
+
+#menuContent {
+    margin-left: 5%;
+    margin-bottom: 5%;
+}
+
+    #menuContent a{
+        color: green;
+        font-size: 15px;
+        transition-property: font-size;
+        transition-duration: 1s;
+        transition-delay: 0s
+    }
+        #menuContent a:hover {
+            font-size: 18px;
+        }
+        #menuContent a:active {
+            font-size: 18px;
+        }
+#avatar {
+    margin-left: 20%;
+    margin-top: 20%;
+}
+
+#avatar img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border:1px solid green;
+}
+
+#menuFooter {
+    position: absolute;
+    bottom: 1%;
+    margin-left: 5%;
+    margin-bottom: 5%;
+}
+
+#menuFooter a {
+    color: green;
+    font-size: 20px;
+    transition-property: font-size;
+    transition-duration: 1s;
+    transition-delay: 0s
+}
+
+#menuFooter a:hover {
+    font-size: 22px;
+}
+
+#userName p {
+    color: black;
+    font-size: 13px;
+    margin-top: 15%;
+    margin-left: 20px;
+}
+
+#userName {
+    width: 130px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#tkct {
+    margin-left: 5%;
+}
+    #tkct a {
+        font-size: 15px;
+    }
+        #tkct a:hover{
+            font-size: 17px;
+        }
+
+#userProfile {
+    background-color: #EBEDEF;
+    text-decoration: none;
+    width: 30%;
+    width: 30vh;
+    height: 8%;
+    height: 8vh;
+    margin-right: 5%;
+    margin-top: 5%;
+    border-radius: 0%;
+    outline: 5px dashed green;
+
+}
+    #userProfile img {
+        margin-top: 20%;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 1px solid green;
+    }
+    #userProfile p {
+        width: 130px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin-left: 20px;
+        margin-top: 7%;
+        text-align: center;
+        color: green;
+        font-size: 18px;
+    }
+
+#markerMenu {
+    background-color: #EBEDEF;
+    text-decoration: none;
+    width: 50%;
+    width: 50vh;
+    height: 80%;
+    height: 80vh;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 5%;
+    border-radius: 0%;
+    outline: 5px dashed green;
+}
+#markerMenu table{
+    text-align: center;
+    margin-left: 5%;
+}
+    #markerMenu label {
+        margin-top: 15%;
+        font-size: 15px;
+    }
+    #markerMenu .txt {
+        width: 180px;
+        margin-left: 5%;
+        margin-top: 5%;
+    }
+.btnMarker {
+    margin-top: 5px;
+    width: 100px;
+    height: 30px;
+    background-color: green;
+    color: yellow;
+    transition: 0.25s;
+}
+    .btnMarker:hover {
+        background-color: yellow;
+        color: green;
+    }
+
+#markerImage {
+    margin-top: 5px;
+    width: 300px;
+    height: 150px;
+    border-right: 1px dashed green;
+    border-left: 1px dashed green;
+}
+
+select option {
+    background-color: #f0f257;
+    color: green;
+}
+
+#trar {
+    margin-top: 5px;
+    width: 300px;
+    height: 150px;
+    border-right: 1px dashed green;
+    border-left: 1px dashed green;
+}
+
+#txtarea {
+    resize: none;
+    width: 300px;
+    height: 150px;
+}
+
+#btnCancelMarker {
+    margin-left: 35%;
+}
+#btnCancelMarker:hover{
+    color: red;
+}
+
+#btnSaveMarker{
+    margin-left: 10%;
+}
+
+#browseFile{
+    display: none;
+}
+
+#imgMarker{
+    width: 300px;
+    height: 150px;
+}
+
+#coor{
+    display: none;
+}
+
+#idpx {
+    display: none;
+}

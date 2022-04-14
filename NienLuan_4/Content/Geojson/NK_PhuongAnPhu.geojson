@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "NK_PhuongAnPhu",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "GID_0": "VNM", "NAME_0": "Vietnam", "GID_1": "VNM.12_1", "NAME_1": "Cần Thơ", "NL_NAME_1": null, "GID_2": "VNM.12.4_1", "NAME_2": "Ninh Kiều", "NL_NAME_2": null, "GID_3": "VNM.12.4.8_1", "NAME_3": "An Phú", "VARNAME_3": "An Phu", "NL_NAME_3": null, "TYPE_3": "Phường", "ENGTYPE_3": "Ward", "CC_3": null, "HASC_3": null }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 105.779907226562443, 10.029501914978027 ], [ 105.777023315429801, 10.027043342590389 ], [ 105.774566650390568, 10.03265285491949 ], [ 105.776466369628849, 10.03774452209467 ], [ 105.781906127929744, 10.031292915344352 ], [ 105.779907226562443, 10.029501914978027 ] ] ] ] } }
+]
+}

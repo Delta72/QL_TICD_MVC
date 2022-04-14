@@ -1,0 +1,770 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="QL_TICDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BINHLUAN">
+          <Key>
+            <PropertyRef Name="ID_BL" />
+          </Key>
+          <Property Name="ID_BL" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="ID_TK" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="ID_DD" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="NOIDUNG_BL" Type="nvarchar" MaxLength="2000" />
+          <Property Name="LUOTTHICH_BL" Type="int" />
+          <Property Name="NGAY_BL" Type="datetime" />
+        </EntityType>
+        <EntityType Name="BINHLUANDATHICH">
+          <Key>
+            <PropertyRef Name="ID_TK" />
+            <PropertyRef Name="ID_BL" />
+          </Key>
+          <Property Name="ID_TK" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="ID_BL" Type="varchar" MaxLength="36" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DIADIEM">
+          <Key>
+            <PropertyRef Name="ID_DD" />
+          </Key>
+          <Property Name="ID_DD" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="ID_TK" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="ID_LOAIDD" Type="int" Nullable="false" />
+          <Property Name="ID_PX" Type="int" Nullable="false" />
+          <Property Name="TEN_DD" Type="nvarchar" MaxLength="500" />
+          <Property Name="TOADO_DD" Type="varchar" MaxLength="500" />
+          <Property Name="MOTA_DD" Type="nvarchar" MaxLength="2000" />
+          <Property Name="LUOTTHICH_DD" Type="int" />
+          <Property Name="NGAYTHEM_DD" Type="datetime" />
+          <Property Name="LADIEMCANHAN" Type="bit" />
+        </EntityType>
+        <EntityType Name="DIADIEMYEUTHICH">
+          <Key>
+            <PropertyRef Name="ID_TK" />
+            <PropertyRef Name="ID_DD" />
+          </Key>
+          <Property Name="ID_TK" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="ID_DD" Type="varchar" MaxLength="36" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HINHANH">
+          <Key>
+            <PropertyRef Name="ID_HA" />
+          </Key>
+          <Property Name="ID_HA" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="ID_DD" Type="varchar" MaxLength="36" />
+          <Property Name="ID_TK" Type="varchar" MaxLength="36" />
+          <Property Name="LINK_HA" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="LOAIDIADIEM">
+          <Key>
+            <PropertyRef Name="ID_LOAIDD" />
+          </Key>
+          <Property Name="ID_LOAIDD" Type="int" Nullable="false" />
+          <Property Name="TEN_LOAIDD" Type="varchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="LOAITAIKHOAN">
+          <Key>
+            <PropertyRef Name="ID_LOAITK" />
+          </Key>
+          <Property Name="ID_LOAITK" Type="int" Nullable="false" />
+          <Property Name="TEN_LOAITK" Type="varchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="PHUONGXA">
+          <Key>
+            <PropertyRef Name="ID_PX" />
+          </Key>
+          <Property Name="ID_PX" Type="int" Nullable="false" />
+          <Property Name="ID_Q" Type="int" Nullable="false" />
+          <Property Name="TEN_PX" Type="nvarchar" MaxLength="50" />
+          <Property Name="POLYGON_PX" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="QUANHUYEN">
+          <Key>
+            <PropertyRef Name="ID_Q" />
+          </Key>
+          <Property Name="ID_Q" Type="int" Nullable="false" />
+          <Property Name="TEN_Q" Type="nvarchar" MaxLength="50" />
+          <Property Name="POLYGON_Q" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TAIKHOAN">
+          <Key>
+            <PropertyRef Name="ID_TK" />
+          </Key>
+          <Property Name="ID_TK" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="ID_LOAITK" Type="int" Nullable="false" />
+          <Property Name="TAIKHOAN_TK" Type="varchar" MaxLength="24" />
+          <Property Name="MATKHAU_TK" Type="varchar" MaxLength="24" />
+          <Property Name="EMAIL_TK" Type="varchar" MaxLength="200" />
+          <Property Name="SDT_TK" Type="char" MaxLength="10" />
+          <Property Name="TENHIENTHI_TK" Type="nvarchar" MaxLength="50" />
+          <Property Name="NGAYTAO_TK" Type="datetime" />
+          <Property Name="LANHDCUOI_TK" Type="datetime" />
+          <Property Name="DAKHOA_TK" Type="bit" />
+        </EntityType>
+        <Association Name="FK_BINHLUAN_CUA_TAIKHOAN">
+          <End Role="TAIKHOAN" Type="Self.TAIKHOAN" Multiplicity="1" />
+          <End Role="BINHLUAN" Type="Self.BINHLUAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAIKHOAN">
+              <PropertyRef Name="ID_TK" />
+            </Principal>
+            <Dependent Role="BINHLUAN">
+              <PropertyRef Name="ID_TK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BINHLUAN_GOM1_BINHLUAN">
+          <End Role="BINHLUAN" Type="Self.BINHLUAN" Multiplicity="1" />
+          <End Role="BINHLUANDATHICH" Type="Self.BINHLUANDATHICH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BINHLUAN">
+              <PropertyRef Name="ID_BL" />
+            </Principal>
+            <Dependent Role="BINHLUANDATHICH">
+              <PropertyRef Name="ID_BL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BINHLUAN_GOM2_TAIKHOAN">
+          <End Role="TAIKHOAN" Type="Self.TAIKHOAN" Multiplicity="1" />
+          <End Role="BINHLUANDATHICH" Type="Self.BINHLUANDATHICH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAIKHOAN">
+              <PropertyRef Name="ID_TK" />
+            </Principal>
+            <Dependent Role="BINHLUANDATHICH">
+              <PropertyRef Name="ID_TK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BINHLUAN_VE_DIADIEM">
+          <End Role="DIADIEM" Type="Self.DIADIEM" Multiplicity="1" />
+          <End Role="BINHLUAN" Type="Self.BINHLUAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIADIEM">
+              <PropertyRef Name="ID_DD" />
+            </Principal>
+            <Dependent Role="BINHLUAN">
+              <PropertyRef Name="ID_DD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DIADIEM_LOAI_LOAIDIAD">
+          <End Role="LOAIDIADIEM" Type="Self.LOAIDIADIEM" Multiplicity="1" />
+          <End Role="DIADIEM" Type="Self.DIADIEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOAIDIADIEM">
+              <PropertyRef Name="ID_LOAIDD" />
+            </Principal>
+            <Dependent Role="DIADIEM">
+              <PropertyRef Name="ID_LOAIDD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DIADIEM_NAM_TRONG_PHUONGXA">
+          <End Role="PHUONGXA" Type="Self.PHUONGXA" Multiplicity="1" />
+          <End Role="DIADIEM" Type="Self.DIADIEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PHUONGXA">
+              <PropertyRef Name="ID_PX" />
+            </Principal>
+            <Dependent Role="DIADIEM">
+              <PropertyRef Name="ID_PX" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DIADIEM_TAOBOI_TAIKHOAN">
+          <End Role="TAIKHOAN" Type="Self.TAIKHOAN" Multiplicity="1" />
+          <End Role="DIADIEM" Type="Self.DIADIEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAIKHOAN">
+              <PropertyRef Name="ID_TK" />
+            </Principal>
+            <Dependent Role="DIADIEM">
+              <PropertyRef Name="ID_TK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DIADIEMY_BAOGOM1_DIADIEM">
+          <End Role="DIADIEM" Type="Self.DIADIEM" Multiplicity="1" />
+          <End Role="DIADIEMYEUTHICH" Type="Self.DIADIEMYEUTHICH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIADIEM">
+              <PropertyRef Name="ID_DD" />
+            </Principal>
+            <Dependent Role="DIADIEMYEUTHICH">
+              <PropertyRef Name="ID_DD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DIADIEMY_BAOGOM2_TAIKHOAN">
+          <End Role="TAIKHOAN" Type="Self.TAIKHOAN" Multiplicity="1" />
+          <End Role="DIADIEMYEUTHICH" Type="Self.DIADIEMYEUTHICH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAIKHOAN">
+              <PropertyRef Name="ID_TK" />
+            </Principal>
+            <Dependent Role="DIADIEMYEUTHICH">
+              <PropertyRef Name="ID_TK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HINHANH_THEMBOI_TAIKHOAN">
+          <End Role="TAIKHOAN" Type="Self.TAIKHOAN" Multiplicity="0..1" />
+          <End Role="HINHANH" Type="Self.HINHANH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAIKHOAN">
+              <PropertyRef Name="ID_TK" />
+            </Principal>
+            <Dependent Role="HINHANH">
+              <PropertyRef Name="ID_TK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HINHANH_THUOCVE_DIADIEM">
+          <End Role="DIADIEM" Type="Self.DIADIEM" Multiplicity="0..1" />
+          <End Role="HINHANH" Type="Self.HINHANH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIADIEM">
+              <PropertyRef Name="ID_DD" />
+            </Principal>
+            <Dependent Role="HINHANH">
+              <PropertyRef Name="ID_DD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PHUONGXA_TRUC_THUO_QUANHUYE">
+          <End Role="QUANHUYEN" Type="Self.QUANHUYEN" Multiplicity="1" />
+          <End Role="PHUONGXA" Type="Self.PHUONGXA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QUANHUYEN">
+              <PropertyRef Name="ID_Q" />
+            </Principal>
+            <Dependent Role="PHUONGXA">
+              <PropertyRef Name="ID_Q" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TAIKHOAN_THUOC_LOAITAIK">
+          <End Role="LOAITAIKHOAN" Type="Self.LOAITAIKHOAN" Multiplicity="1" />
+          <End Role="TAIKHOAN" Type="Self.TAIKHOAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOAITAIKHOAN">
+              <PropertyRef Name="ID_LOAITK" />
+            </Principal>
+            <Dependent Role="TAIKHOAN">
+              <PropertyRef Name="ID_LOAITK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QL_TICDModelStoreContainer">
+          <EntitySet Name="BINHLUAN" EntityType="Self.BINHLUAN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BINHLUANDATHICH" EntityType="Self.BINHLUANDATHICH" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DIADIEM" EntityType="Self.DIADIEM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DIADIEMYEUTHICH" EntityType="Self.DIADIEMYEUTHICH" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HINHANH" EntityType="Self.HINHANH" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LOAIDIADIEM" EntityType="Self.LOAIDIADIEM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LOAITAIKHOAN" EntityType="Self.LOAITAIKHOAN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PHUONGXA" EntityType="Self.PHUONGXA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QUANHUYEN" EntityType="Self.QUANHUYEN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TAIKHOAN" EntityType="Self.TAIKHOAN" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BINHLUAN_CUA_TAIKHOAN" Association="Self.FK_BINHLUAN_CUA_TAIKHOAN">
+            <End Role="TAIKHOAN" EntitySet="TAIKHOAN" />
+            <End Role="BINHLUAN" EntitySet="BINHLUAN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BINHLUAN_GOM1_BINHLUAN" Association="Self.FK_BINHLUAN_GOM1_BINHLUAN">
+            <End Role="BINHLUAN" EntitySet="BINHLUAN" />
+            <End Role="BINHLUANDATHICH" EntitySet="BINHLUANDATHICH" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BINHLUAN_GOM2_TAIKHOAN" Association="Self.FK_BINHLUAN_GOM2_TAIKHOAN">
+            <End Role="TAIKHOAN" EntitySet="TAIKHOAN" />
+            <End Role="BINHLUANDATHICH" EntitySet="BINHLUANDATHICH" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BINHLUAN_VE_DIADIEM" Association="Self.FK_BINHLUAN_VE_DIADIEM">
+            <End Role="DIADIEM" EntitySet="DIADIEM" />
+            <End Role="BINHLUAN" EntitySet="BINHLUAN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DIADIEM_LOAI_LOAIDIAD" Association="Self.FK_DIADIEM_LOAI_LOAIDIAD">
+            <End Role="LOAIDIADIEM" EntitySet="LOAIDIADIEM" />
+            <End Role="DIADIEM" EntitySet="DIADIEM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DIADIEM_NAM_TRONG_PHUONGXA" Association="Self.FK_DIADIEM_NAM_TRONG_PHUONGXA">
+            <End Role="PHUONGXA" EntitySet="PHUONGXA" />
+            <End Role="DIADIEM" EntitySet="DIADIEM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DIADIEM_TAOBOI_TAIKHOAN" Association="Self.FK_DIADIEM_TAOBOI_TAIKHOAN">
+            <End Role="TAIKHOAN" EntitySet="TAIKHOAN" />
+            <End Role="DIADIEM" EntitySet="DIADIEM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DIADIEMY_BAOGOM1_DIADIEM" Association="Self.FK_DIADIEMY_BAOGOM1_DIADIEM">
+            <End Role="DIADIEM" EntitySet="DIADIEM" />
+            <End Role="DIADIEMYEUTHICH" EntitySet="DIADIEMYEUTHICH" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DIADIEMY_BAOGOM2_TAIKHOAN" Association="Self.FK_DIADIEMY_BAOGOM2_TAIKHOAN">
+            <End Role="TAIKHOAN" EntitySet="TAIKHOAN" />
+            <End Role="DIADIEMYEUTHICH" EntitySet="DIADIEMYEUTHICH" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HINHANH_THEMBOI_TAIKHOAN" Association="Self.FK_HINHANH_THEMBOI_TAIKHOAN">
+            <End Role="TAIKHOAN" EntitySet="TAIKHOAN" />
+            <End Role="HINHANH" EntitySet="HINHANH" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HINHANH_THUOCVE_DIADIEM" Association="Self.FK_HINHANH_THUOCVE_DIADIEM">
+            <End Role="DIADIEM" EntitySet="DIADIEM" />
+            <End Role="HINHANH" EntitySet="HINHANH" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PHUONGXA_TRUC_THUO_QUANHUYE" Association="Self.FK_PHUONGXA_TRUC_THUO_QUANHUYE">
+            <End Role="QUANHUYEN" EntitySet="QUANHUYEN" />
+            <End Role="PHUONGXA" EntitySet="PHUONGXA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TAIKHOAN_THUOC_LOAITAIK" Association="Self.FK_TAIKHOAN_THUOC_LOAITAIK">
+            <End Role="LOAITAIKHOAN" EntitySet="LOAITAIKHOAN" />
+            <End Role="TAIKHOAN" EntitySet="TAIKHOAN" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QL_TICDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BINHLUAN">
+          <Key>
+            <PropertyRef Name="ID_BL" />
+          </Key>
+          <Property Name="ID_BL" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_TK" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_DD" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NOIDUNG_BL" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="LUOTTHICH_BL" Type="Int32" />
+          <Property Name="NGAY_BL" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="TAIKHOAN" Relationship="Self.FK_BINHLUAN_CUA_TAIKHOAN" FromRole="BINHLUAN" ToRole="TAIKHOAN" />
+          <NavigationProperty Name="DIADIEM" Relationship="Self.FK_BINHLUAN_VE_DIADIEM" FromRole="BINHLUAN" ToRole="DIADIEM" />
+          <NavigationProperty Name="TAIKHOANs" Relationship="Self.BINHLUANDATHICH" FromRole="BINHLUAN" ToRole="TAIKHOAN" />
+        </EntityType>
+        <EntityType Name="DIADIEM">
+          <Key>
+            <PropertyRef Name="ID_DD" />
+          </Key>
+          <Property Name="ID_DD" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_TK" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_LOAIDD" Type="Int32" Nullable="false" />
+          <Property Name="ID_PX" Type="Int32" Nullable="false" />
+          <Property Name="TEN_DD" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="TOADO_DD" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="MOTA_DD" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="LUOTTHICH_DD" Type="Int32" />
+          <Property Name="NGAYTHEM_DD" Type="DateTime" Precision="3" />
+          <Property Name="LADIEMCANHAN" Type="Boolean" />
+          <NavigationProperty Name="BINHLUANs" Relationship="Self.FK_BINHLUAN_VE_DIADIEM" FromRole="DIADIEM" ToRole="BINHLUAN" />
+          <NavigationProperty Name="LOAIDIADIEM" Relationship="Self.FK_DIADIEM_LOAI_LOAIDIAD" FromRole="DIADIEM" ToRole="LOAIDIADIEM" />
+          <NavigationProperty Name="PHUONGXA" Relationship="Self.FK_DIADIEM_NAM_TRONG_PHUONGXA" FromRole="DIADIEM" ToRole="PHUONGXA" />
+          <NavigationProperty Name="TAIKHOAN" Relationship="Self.FK_DIADIEM_TAOBOI_TAIKHOAN" FromRole="DIADIEM" ToRole="TAIKHOAN" />
+          <NavigationProperty Name="HINHANHs" Relationship="Self.FK_HINHANH_THUOCVE_DIADIEM" FromRole="DIADIEM" ToRole="HINHANH" />
+          <NavigationProperty Name="TAIKHOANs" Relationship="Self.DIADIEMYEUTHICH" FromRole="DIADIEM" ToRole="TAIKHOAN" />
+        </EntityType>
+        <EntityType Name="HINHANH">
+          <Key>
+            <PropertyRef Name="ID_HA" />
+          </Key>
+          <Property Name="ID_HA" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_DD" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="ID_TK" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="LINK_HA" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DIADIEM" Relationship="Self.FK_HINHANH_THUOCVE_DIADIEM" FromRole="HINHANH" ToRole="DIADIEM" />
+          <NavigationProperty Name="TAIKHOAN" Relationship="Self.FK_HINHANH_THEMBOI_TAIKHOAN" FromRole="HINHANH" ToRole="TAIKHOAN" />
+        </EntityType>
+        <EntityType Name="LOAIDIADIEM">
+          <Key>
+            <PropertyRef Name="ID_LOAIDD" />
+          </Key>
+          <Property Name="ID_LOAIDD" Type="Int32" Nullable="false" />
+          <Property Name="TEN_LOAIDD" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DIADIEMs" Relationship="Self.FK_DIADIEM_LOAI_LOAIDIAD" FromRole="LOAIDIADIEM" ToRole="DIADIEM" />
+        </EntityType>
+        <EntityType Name="LOAITAIKHOAN">
+          <Key>
+            <PropertyRef Name="ID_LOAITK" />
+          </Key>
+          <Property Name="ID_LOAITK" Type="Int32" Nullable="false" />
+          <Property Name="TEN_LOAITK" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TAIKHOANs" Relationship="Self.FK_TAIKHOAN_THUOC_LOAITAIK" FromRole="LOAITAIKHOAN" ToRole="TAIKHOAN" />
+        </EntityType>
+        <EntityType Name="PHUONGXA">
+          <Key>
+            <PropertyRef Name="ID_PX" />
+          </Key>
+          <Property Name="ID_PX" Type="Int32" Nullable="false" />
+          <Property Name="ID_Q" Type="Int32" Nullable="false" />
+          <Property Name="TEN_PX" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="POLYGON_PX" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DIADIEMs" Relationship="Self.FK_DIADIEM_NAM_TRONG_PHUONGXA" FromRole="PHUONGXA" ToRole="DIADIEM" />
+          <NavigationProperty Name="QUANHUYEN" Relationship="Self.FK_PHUONGXA_TRUC_THUO_QUANHUYE" FromRole="PHUONGXA" ToRole="QUANHUYEN" />
+        </EntityType>
+        <EntityType Name="QUANHUYEN">
+          <Key>
+            <PropertyRef Name="ID_Q" />
+          </Key>
+          <Property Name="ID_Q" Type="Int32" Nullable="false" />
+          <Property Name="TEN_Q" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="POLYGON_Q" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PHUONGXAs" Relationship="Self.FK_PHUONGXA_TRUC_THUO_QUANHUYE" FromRole="QUANHUYEN" ToRole="PHUONGXA" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TAIKHOAN">
+          <Key>
+            <PropertyRef Name="ID_TK" />
+          </Key>
+          <Property Name="ID_TK" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_LOAITK" Type="Int32" Nullable="false" />
+          <Property Name="TAIKHOAN_TK" Type="String" MaxLength="24" FixedLength="false" Unicode="false" />
+          <Property Name="MATKHAU_TK" Type="String" MaxLength="24" FixedLength="false" Unicode="false" />
+          <Property Name="EMAIL_TK" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="SDT_TK" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="TENHIENTHI_TK" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NGAYTAO_TK" Type="DateTime" Precision="3" />
+          <Property Name="LANHDCUOI_TK" Type="DateTime" Precision="3" />
+          <Property Name="DAKHOA_TK" Type="Boolean" />
+          <NavigationProperty Name="BINHLUANs" Relationship="Self.FK_BINHLUAN_CUA_TAIKHOAN" FromRole="TAIKHOAN" ToRole="BINHLUAN" />
+          <NavigationProperty Name="DIADIEMs" Relationship="Self.FK_DIADIEM_TAOBOI_TAIKHOAN" FromRole="TAIKHOAN" ToRole="DIADIEM" />
+          <NavigationProperty Name="HINHANHs" Relationship="Self.FK_HINHANH_THEMBOI_TAIKHOAN" FromRole="TAIKHOAN" ToRole="HINHANH" />
+          <NavigationProperty Name="LOAITAIKHOAN" Relationship="Self.FK_TAIKHOAN_THUOC_LOAITAIK" FromRole="TAIKHOAN" ToRole="LOAITAIKHOAN" />
+          <NavigationProperty Name="BINHLUANs1" Relationship="Self.BINHLUANDATHICH" FromRole="TAIKHOAN" ToRole="BINHLUAN" />
+          <NavigationProperty Name="DIADIEMs1" Relationship="Self.DIADIEMYEUTHICH" FromRole="TAIKHOAN" ToRole="DIADIEM" />
+        </EntityType>
+        <Association Name="FK_BINHLUAN_CUA_TAIKHOAN">
+          <End Role="TAIKHOAN" Type="Self.TAIKHOAN" Multiplicity="1" />
+          <End Role="BINHLUAN" Type="Self.BINHLUAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAIKHOAN">
+              <PropertyRef Name="ID_TK" />
+            </Principal>
+            <Dependent Role="BINHLUAN">
+              <PropertyRef Name="ID_TK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BINHLUAN_VE_DIADIEM">
+          <End Role="DIADIEM" Type="Self.DIADIEM" Multiplicity="1" />
+          <End Role="BINHLUAN" Type="Self.BINHLUAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIADIEM">
+              <PropertyRef Name="ID_DD" />
+            </Principal>
+            <Dependent Role="BINHLUAN">
+              <PropertyRef Name="ID_DD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DIADIEM_LOAI_LOAIDIAD">
+          <End Role="LOAIDIADIEM" Type="Self.LOAIDIADIEM" Multiplicity="1" />
+          <End Role="DIADIEM" Type="Self.DIADIEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOAIDIADIEM">
+              <PropertyRef Name="ID_LOAIDD" />
+            </Principal>
+            <Dependent Role="DIADIEM">
+              <PropertyRef Name="ID_LOAIDD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DIADIEM_NAM_TRONG_PHUONGXA">
+          <End Role="PHUONGXA" Type="Self.PHUONGXA" Multiplicity="1" />
+          <End Role="DIADIEM" Type="Self.DIADIEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PHUONGXA">
+              <PropertyRef Name="ID_PX" />
+            </Principal>
+            <Dependent Role="DIADIEM">
+              <PropertyRef Name="ID_PX" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DIADIEM_TAOBOI_TAIKHOAN">
+          <End Role="TAIKHOAN" Type="Self.TAIKHOAN" Multiplicity="1" />
+          <End Role="DIADIEM" Type="Self.DIADIEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAIKHOAN">
+              <PropertyRef Name="ID_TK" />
+            </Principal>
+            <Dependent Role="DIADIEM">
+              <PropertyRef Name="ID_TK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HINHANH_THUOCVE_DIADIEM">
+          <End Role="DIADIEM" Type="Self.DIADIEM" Multiplicity="0..1" />
+          <End Role="HINHANH" Type="Self.HINHANH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIADIEM">
+              <PropertyRef Name="ID_DD" />
+            </Principal>
+            <Dependent Role="HINHANH">
+              <PropertyRef Name="ID_DD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HINHANH_THEMBOI_TAIKHOAN">
+          <End Role="TAIKHOAN" Type="Self.TAIKHOAN" Multiplicity="0..1" />
+          <End Role="HINHANH" Type="Self.HINHANH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAIKHOAN">
+              <PropertyRef Name="ID_TK" />
+            </Principal>
+            <Dependent Role="HINHANH">
+              <PropertyRef Name="ID_TK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TAIKHOAN_THUOC_LOAITAIK">
+          <End Role="LOAITAIKHOAN" Type="Self.LOAITAIKHOAN" Multiplicity="1" />
+          <End Role="TAIKHOAN" Type="Self.TAIKHOAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOAITAIKHOAN">
+              <PropertyRef Name="ID_LOAITK" />
+            </Principal>
+            <Dependent Role="TAIKHOAN">
+              <PropertyRef Name="ID_LOAITK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PHUONGXA_TRUC_THUO_QUANHUYE">
+          <End Role="QUANHUYEN" Type="Self.QUANHUYEN" Multiplicity="1" />
+          <End Role="PHUONGXA" Type="Self.PHUONGXA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QUANHUYEN">
+              <PropertyRef Name="ID_Q" />
+            </Principal>
+            <Dependent Role="PHUONGXA">
+              <PropertyRef Name="ID_Q" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BINHLUANDATHICH">
+          <End Role="BINHLUAN" Type="Self.BINHLUAN" Multiplicity="*" />
+          <End Role="TAIKHOAN" Type="Self.TAIKHOAN" Multiplicity="*" />
+        </Association>
+        <Association Name="DIADIEMYEUTHICH">
+          <End Role="DIADIEM" Type="Self.DIADIEM" Multiplicity="*" />
+          <End Role="TAIKHOAN" Type="Self.TAIKHOAN" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="QL_TICD_Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BINHLUANs" EntityType="Self.BINHLUAN" />
+          <EntitySet Name="DIADIEMs" EntityType="Self.DIADIEM" />
+          <EntitySet Name="HINHANHs" EntityType="Self.HINHANH" />
+          <EntitySet Name="LOAIDIADIEMs" EntityType="Self.LOAIDIADIEM" />
+          <EntitySet Name="LOAITAIKHOANs" EntityType="Self.LOAITAIKHOAN" />
+          <EntitySet Name="PHUONGXAs" EntityType="Self.PHUONGXA" />
+          <EntitySet Name="QUANHUYENs" EntityType="Self.QUANHUYEN" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="TAIKHOANs" EntityType="Self.TAIKHOAN" />
+          <AssociationSet Name="FK_BINHLUAN_CUA_TAIKHOAN" Association="Self.FK_BINHLUAN_CUA_TAIKHOAN">
+            <End Role="TAIKHOAN" EntitySet="TAIKHOANs" />
+            <End Role="BINHLUAN" EntitySet="BINHLUANs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BINHLUAN_VE_DIADIEM" Association="Self.FK_BINHLUAN_VE_DIADIEM">
+            <End Role="DIADIEM" EntitySet="DIADIEMs" />
+            <End Role="BINHLUAN" EntitySet="BINHLUANs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DIADIEM_LOAI_LOAIDIAD" Association="Self.FK_DIADIEM_LOAI_LOAIDIAD">
+            <End Role="LOAIDIADIEM" EntitySet="LOAIDIADIEMs" />
+            <End Role="DIADIEM" EntitySet="DIADIEMs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DIADIEM_NAM_TRONG_PHUONGXA" Association="Self.FK_DIADIEM_NAM_TRONG_PHUONGXA">
+            <End Role="PHUONGXA" EntitySet="PHUONGXAs" />
+            <End Role="DIADIEM" EntitySet="DIADIEMs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DIADIEM_TAOBOI_TAIKHOAN" Association="Self.FK_DIADIEM_TAOBOI_TAIKHOAN">
+            <End Role="TAIKHOAN" EntitySet="TAIKHOANs" />
+            <End Role="DIADIEM" EntitySet="DIADIEMs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HINHANH_THUOCVE_DIADIEM" Association="Self.FK_HINHANH_THUOCVE_DIADIEM">
+            <End Role="DIADIEM" EntitySet="DIADIEMs" />
+            <End Role="HINHANH" EntitySet="HINHANHs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HINHANH_THEMBOI_TAIKHOAN" Association="Self.FK_HINHANH_THEMBOI_TAIKHOAN">
+            <End Role="TAIKHOAN" EntitySet="TAIKHOANs" />
+            <End Role="HINHANH" EntitySet="HINHANHs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TAIKHOAN_THUOC_LOAITAIK" Association="Self.FK_TAIKHOAN_THUOC_LOAITAIK">
+            <End Role="LOAITAIKHOAN" EntitySet="LOAITAIKHOANs" />
+            <End Role="TAIKHOAN" EntitySet="TAIKHOANs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PHUONGXA_TRUC_THUO_QUANHUYE" Association="Self.FK_PHUONGXA_TRUC_THUO_QUANHUYE">
+            <End Role="QUANHUYEN" EntitySet="QUANHUYENs" />
+            <End Role="PHUONGXA" EntitySet="PHUONGXAs" />
+          </AssociationSet>
+          <AssociationSet Name="BINHLUANDATHICH" Association="Self.BINHLUANDATHICH">
+            <End Role="BINHLUAN" EntitySet="BINHLUANs" />
+            <End Role="TAIKHOAN" EntitySet="TAIKHOANs" />
+          </AssociationSet>
+          <AssociationSet Name="DIADIEMYEUTHICH" Association="Self.DIADIEMYEUTHICH">
+            <End Role="DIADIEM" EntitySet="DIADIEMs" />
+            <End Role="TAIKHOAN" EntitySet="TAIKHOANs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QL_TICDModelStoreContainer" CdmEntityContainer="QL_TICD_Entities">
+          <EntitySetMapping Name="BINHLUANs">
+            <EntityTypeMapping TypeName="QL_TICDModel.BINHLUAN">
+              <MappingFragment StoreEntitySet="BINHLUAN">
+                <ScalarProperty Name="ID_BL" ColumnName="ID_BL" />
+                <ScalarProperty Name="ID_TK" ColumnName="ID_TK" />
+                <ScalarProperty Name="ID_DD" ColumnName="ID_DD" />
+                <ScalarProperty Name="NOIDUNG_BL" ColumnName="NOIDUNG_BL" />
+                <ScalarProperty Name="LUOTTHICH_BL" ColumnName="LUOTTHICH_BL" />
+                <ScalarProperty Name="NGAY_BL" ColumnName="NGAY_BL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DIADIEMs">
+            <EntityTypeMapping TypeName="QL_TICDModel.DIADIEM">
+              <MappingFragment StoreEntitySet="DIADIEM">
+                <ScalarProperty Name="ID_DD" ColumnName="ID_DD" />
+                <ScalarProperty Name="ID_TK" ColumnName="ID_TK" />
+                <ScalarProperty Name="ID_LOAIDD" ColumnName="ID_LOAIDD" />
+                <ScalarProperty Name="ID_PX" ColumnName="ID_PX" />
+                <ScalarProperty Name="TEN_DD" ColumnName="TEN_DD" />
+                <ScalarProperty Name="TOADO_DD" ColumnName="TOADO_DD" />
+                <ScalarProperty Name="MOTA_DD" ColumnName="MOTA_DD" />
+                <ScalarProperty Name="LUOTTHICH_DD" ColumnName="LUOTTHICH_DD" />
+                <ScalarProperty Name="NGAYTHEM_DD" ColumnName="NGAYTHEM_DD" />
+                <ScalarProperty Name="LADIEMCANHAN" ColumnName="LADIEMCANHAN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HINHANHs">
+            <EntityTypeMapping TypeName="QL_TICDModel.HINHANH">
+              <MappingFragment StoreEntitySet="HINHANH">
+                <ScalarProperty Name="ID_HA" ColumnName="ID_HA" />
+                <ScalarProperty Name="ID_DD" ColumnName="ID_DD" />
+                <ScalarProperty Name="ID_TK" ColumnName="ID_TK" />
+                <ScalarProperty Name="LINK_HA" ColumnName="LINK_HA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOAIDIADIEMs">
+            <EntityTypeMapping TypeName="QL_TICDModel.LOAIDIADIEM">
+              <MappingFragment StoreEntitySet="LOAIDIADIEM">
+                <ScalarProperty Name="ID_LOAIDD" ColumnName="ID_LOAIDD" />
+                <ScalarProperty Name="TEN_LOAIDD" ColumnName="TEN_LOAIDD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOAITAIKHOANs">
+            <EntityTypeMapping TypeName="QL_TICDModel.LOAITAIKHOAN">
+              <MappingFragment StoreEntitySet="LOAITAIKHOAN">
+                <ScalarProperty Name="ID_LOAITK" ColumnName="ID_LOAITK" />
+                <ScalarProperty Name="TEN_LOAITK" ColumnName="TEN_LOAITK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PHUONGXAs">
+            <EntityTypeMapping TypeName="QL_TICDModel.PHUONGXA">
+              <MappingFragment StoreEntitySet="PHUONGXA">
+                <ScalarProperty Name="ID_PX" ColumnName="ID_PX" />
+                <ScalarProperty Name="ID_Q" ColumnName="ID_Q" />
+                <ScalarProperty Name="TEN_PX" ColumnName="TEN_PX" />
+                <ScalarProperty Name="POLYGON_PX" ColumnName="POLYGON_PX" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QUANHUYENs">
+            <EntityTypeMapping TypeName="QL_TICDModel.QUANHUYEN">
+              <MappingFragment StoreEntitySet="QUANHUYEN">
+                <ScalarProperty Name="ID_Q" ColumnName="ID_Q" />
+                <ScalarProperty Name="TEN_Q" ColumnName="TEN_Q" />
+                <ScalarProperty Name="POLYGON_Q" ColumnName="POLYGON_Q" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="QL_TICDModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TAIKHOANs">
+            <EntityTypeMapping TypeName="QL_TICDModel.TAIKHOAN">
+              <MappingFragment StoreEntitySet="TAIKHOAN">
+                <ScalarProperty Name="ID_TK" ColumnName="ID_TK" />
+                <ScalarProperty Name="ID_LOAITK" ColumnName="ID_LOAITK" />
+                <ScalarProperty Name="TAIKHOAN_TK" ColumnName="TAIKHOAN_TK" />
+                <ScalarProperty Name="MATKHAU_TK" ColumnName="MATKHAU_TK" />
+                <ScalarProperty Name="EMAIL_TK" ColumnName="EMAIL_TK" />
+                <ScalarProperty Name="SDT_TK" ColumnName="SDT_TK" />
+                <ScalarProperty Name="TENHIENTHI_TK" ColumnName="TENHIENTHI_TK" />
+                <ScalarProperty Name="NGAYTAO_TK" ColumnName="NGAYTAO_TK" />
+                <ScalarProperty Name="LANHDCUOI_TK" ColumnName="LANHDCUOI_TK" />
+                <ScalarProperty Name="DAKHOA_TK" ColumnName="DAKHOA_TK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="BINHLUANDATHICH" TypeName="QL_TICDModel.BINHLUANDATHICH" StoreEntitySet="BINHLUANDATHICH">
+            <EndProperty Name="BINHLUAN">
+              <ScalarProperty Name="ID_BL" ColumnName="ID_BL" />
+            </EndProperty>
+            <EndProperty Name="TAIKHOAN">
+              <ScalarProperty Name="ID_TK" ColumnName="ID_TK" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="DIADIEMYEUTHICH" TypeName="QL_TICDModel.DIADIEMYEUTHICH" StoreEntitySet="DIADIEMYEUTHICH">
+            <EndProperty Name="DIADIEM">
+              <ScalarProperty Name="ID_DD" ColumnName="ID_DD" />
+            </EndProperty>
+            <EndProperty Name="TAIKHOAN">
+              <ScalarProperty Name="ID_TK" ColumnName="ID_TK" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

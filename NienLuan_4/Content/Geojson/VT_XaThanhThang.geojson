@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "VT_XaThanhThang",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "GID_0": "VNM", "NAME_0": "Vietnam", "GID_1": "VNM.12_1", "NAME_1": "Cần Thơ", "NL_NAME_1": null, "GID_2": "VNM.12.9_1", "NAME_2": "Vĩnh Thạnh", "NL_NAME_2": null, "GID_3": "VNM.12.9.6_1", "NAME_3": "Thạnh Thắng", "VARNAME_3": "Thanh Thang", "NL_NAME_3": null, "TYPE_3": "Xã", "ENGTYPE_3": "Ward", "CC_3": null, "HASC_3": null }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 105.303337097168026, 10.143636703491268 ], [ 105.298217773437557, 10.138554573059082 ], [ 105.275802612304631, 10.160813331604004 ], [ 105.264404296875, 10.169854164123649 ], [ 105.296493530273494, 10.202889442443791 ], [ 105.322830200195369, 10.170378684997672 ], [ 105.325859069824276, 10.16744422912592 ], [ 105.303337097168026, 10.143636703491268 ] ] ] ] } }
+]
+}
