@@ -32,6 +32,7 @@ namespace NienLuan_4.Models
         public Nullable<int> LUOTTHICH_DD { get; set; }
         public Nullable<System.DateTime> NGAYTHEM_DD { get; set; }
         public Nullable<bool> LADIEMCANHAN { get; set; }
+        public string DIACHI_DD { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BINHLUAN> BINHLUANs { get; set; }

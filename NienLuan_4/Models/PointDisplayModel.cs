@@ -8,6 +8,6 @@ namespace NienLuan_4.Models
     public class PointDisplayModel
     {
         public string id { get; set; }
-        public string 
+        public int loai { get; set; }
     }
 }

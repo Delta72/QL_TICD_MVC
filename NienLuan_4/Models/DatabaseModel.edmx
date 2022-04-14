@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="QL_TICDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="QL_TICDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BINHLUAN">
           <Key>
             <PropertyRef Name="ID_BL" />
@@ -33,6 +33,7 @@
           <Property Name="ID_LOAIDD" Type="int" Nullable="false" />
           <Property Name="ID_PX" Type="int" Nullable="false" />
           <Property Name="TEN_DD" Type="nvarchar" MaxLength="500" />
+          <Property Name="DIACHI_DD" Type="nvarchar" MaxLength="500" />
           <Property Name="TOADO_DD" Type="varchar" MaxLength="500" />
           <Property Name="MOTA_DD" Type="nvarchar" MaxLength="2000" />
           <Property Name="LUOTTHICH_DD" Type="int" />
@@ -61,14 +62,14 @@
             <PropertyRef Name="ID_LOAIDD" />
           </Key>
           <Property Name="ID_LOAIDD" Type="int" Nullable="false" />
-          <Property Name="TEN_LOAIDD" Type="varchar" MaxLength="5" />
+          <Property Name="TEN_LOAIDD" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="LOAITAIKHOAN">
           <Key>
             <PropertyRef Name="ID_LOAITK" />
           </Key>
           <Property Name="ID_LOAITK" Type="int" Nullable="false" />
-          <Property Name="TEN_LOAITK" Type="varchar" MaxLength="5" />
+          <Property Name="TEN_LOAITK" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="PHUONGXA">
           <Key>
@@ -333,8 +334,7 @@
             <End Role="TAIKHOAN" EntitySet="TAIKHOAN" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="QL_TICDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -372,6 +372,7 @@
           <NavigationProperty Name="TAIKHOAN" Relationship="Self.FK_DIADIEM_TAOBOI_TAIKHOAN" FromRole="DIADIEM" ToRole="TAIKHOAN" />
           <NavigationProperty Name="HINHANHs" Relationship="Self.FK_HINHANH_THUOCVE_DIADIEM" FromRole="DIADIEM" ToRole="HINHANH" />
           <NavigationProperty Name="TAIKHOANs" Relationship="Self.DIADIEMYEUTHICH" FromRole="DIADIEM" ToRole="TAIKHOAN" />
+          <Property Name="DIACHI_DD" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="HINHANH">
           <Key>
@@ -389,7 +390,7 @@
             <PropertyRef Name="ID_LOAIDD" />
           </Key>
           <Property Name="ID_LOAIDD" Type="Int32" Nullable="false" />
-          <Property Name="TEN_LOAIDD" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="TEN_LOAIDD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="DIADIEMs" Relationship="Self.FK_DIADIEM_LOAI_LOAIDIAD" FromRole="LOAIDIADIEM" ToRole="DIADIEM" />
         </EntityType>
         <EntityType Name="LOAITAIKHOAN">
@@ -397,7 +398,7 @@
             <PropertyRef Name="ID_LOAITK" />
           </Key>
           <Property Name="ID_LOAITK" Type="Int32" Nullable="false" />
-          <Property Name="TEN_LOAITK" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="TEN_LOAITK" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="TAIKHOANs" Relationship="Self.FK_TAIKHOAN_THUOC_LOAITAIK" FromRole="LOAITAIKHOAN" ToRole="TAIKHOAN" />
         </EntityType>
         <EntityType Name="PHUONGXA">
@@ -643,6 +644,7 @@
           <EntitySetMapping Name="DIADIEMs">
             <EntityTypeMapping TypeName="QL_TICDModel.DIADIEM">
               <MappingFragment StoreEntitySet="DIADIEM">
+                <ScalarProperty Name="DIACHI_DD" ColumnName="DIACHI_DD" />
                 <ScalarProperty Name="ID_DD" ColumnName="ID_DD" />
                 <ScalarProperty Name="ID_TK" ColumnName="ID_TK" />
                 <ScalarProperty Name="ID_LOAIDD" ColumnName="ID_LOAIDD" />
