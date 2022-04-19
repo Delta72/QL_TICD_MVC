@@ -37,9 +37,10 @@ if (logon == true) {
         content += '<tr><td>' + '<label for="mk" style="">Hình ảnh:</label>' + '</td><td>' + '<input type="button" value="Tải lên" class="btnMarker" id="browseImage" onclick="btnUpLoadClick()" /><input type="file" id="browseFile" class="upld" />' + '</td></tr>';
         content += '<tr><td colspan="2">' + '<div id="markerImage"><img src="#" id="imgMarker"/></div>' + '</td></tr>';
         content += '<tr><td>' + '<label for="mk">Tên địa điểm:</label>' + '</td><td>' + '<input type="text" class="form-control txt" id="ten">' + '</td></tr>';
-        content += '<tr><td>' + '<label for="mk">Loại dịch vụ:</label>' + '</td><td>' + SelectListLoaiDVu() + '</td></tr>';
+        content += '<tr><td>' + '<label for="mk">Địa chỉ:</label>' + '</td><td>' + '<input type="text" class="form-control txt" id="add">' + '</td></tr>';
+        content += '<tr><td>' + '<label for="mk">Loại dịch vụ:</label>' + '</td><td>' + SelectListLoaiDVu() + '</td></tr>';        
         content += '<tr><td>' + '<label for="mk">Mô tả:</label>' + '</td><td></td></tr>';
-        content += '<tr><td colspan="2">' + '<div id="trar"><textarea id="txtarea"></textarea></div>' + '</td></tr>';
+        content += '<tr><td colspan="2">' + '<div id="trar"><textarea id="txtarea"></textarea></div>' + '<br></td></tr>';
         content += '<tr><td>' + '<input type="button" value="Lưu" class="btnMarker" id="btnSaveMarker" onclick="btnSaveMarkerClick()">' + '</td><td>' + '<input type="button" value="Hủy bỏ" class="btnMarker" id="btnCancelMarker" oclick="btnCancelMarkerClick()">' + '</td></tr>';
         content += '</table>';
         content += '<input type="text" id="coor" readonly="true">' + '<input type="text" id="idpx" readonly="true">';
@@ -74,7 +75,7 @@ if (logon == true) {
             markerProp.addTo(mapObject);
             document.getElementById('markerMenu').innerHTML = content;
             document.getElementById('ten').focus();
-            $(".upld").change(function () {
+            $("#browseFile").change(function () {
                 readURL(this);
             });
         }
@@ -137,6 +138,7 @@ if (logon == true) {
             var img = document.getElementById('browseFile').files;
             var imgl = img.length;
             var name = $('#ten').val();
+            var dc = $('#add').val();
             var loai = $('#sllLoaiDVu').val();
             var coor = $('#coor').val();
             var mota = $('#txtarea').val();
@@ -147,6 +149,9 @@ if (logon == true) {
             }
             else if (name.length == 0) {
                 alert("Chưa nhập tên cho địa điểm !!!");
+            }
+            else if (dc == "") {
+                alert("Chưa nhập địa chỉ cho địa điểm !!!");
             }
             else if (mota.length == 0) {
                 alert("Chưa nhập mô tả cho địa điểm !!!");
@@ -159,13 +164,14 @@ if (logon == true) {
                 formData.append("imgLink", l);
                 formData.append("img", img[0]);
                 formData.append("name", name);
+                formData.append("add", dc);
                 formData.append("loai", loai);
                 formData.append("coor", coor);
                 formData.append("mota", mota);
                 formData.append("idpx", idpx);
 
                 $.ajax({
-                    url: 'User/AddMarker',
+                    url: 'Point/AddMarker',
                     type: 'post',
                     async: true,
                     dataType: 'json',
@@ -174,6 +180,8 @@ if (logon == true) {
                     data: formData,
                     success: function (data) {
                         alert("Thêm địa điểm thành công !!!");
+                        $('#btnMenu').click();
+                        $('#dnMap').click();
                     },
                     error: function () {
                         alert("AddMarker");

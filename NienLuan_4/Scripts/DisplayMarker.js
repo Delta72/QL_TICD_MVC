@@ -54,6 +54,8 @@ function ShowPrivatePoints() {
 }
 function PrivatePointClick(e) {
     // console.log(e.target.options.id);
+    
+    mapObject.setView(e.target.getLatLng(), 15, { animation: true, duration: 2 });
     GetPointProp(e.target.options.id);
 }
 
@@ -66,9 +68,55 @@ function GetPointProp(id) {
             pointID: id
         },
         success: function (data) {
-            console.log(data);
+            DisplayPointProperties(data);
         }
     })
+}
+
+// display point properties
+var layout = '';
+layout += '<div id="layout" onmouseover="DisableZoomDrag()" onmouseout="EnableZoomDrag()">';
+layout += '<div><table><tr><td><div id="pointName"></div></td><td><div id="pointClose"></div></td></tr></table></div>';
+layout += '<div id="pointImage"></div>';
+layout += '<div id="pointAddress"></div>';
+layout += '<div id="pointComments"></div>';
+layout += '</div>';
+
+function DisableZoomDrag() {
+    mapObject.scrollWheelZoom.disable();
+    mapObject.dragging.disable();
+}
+function EnableZoomDrag() {
+    mapObject.scrollWheelZoom.enable();
+    mapObject.dragging.enable();
+}
+
+var pointProp = L.control({ position: "topleft" });
+pointProp.onAdd = function (map) {
+    var div = L.DomUtil.create("div", "div4");
+    div.innerHTML = layout;
+    div.firstChild.onmousedown = div.firstChild.ondblclick = L.DomEvent.stopPropagation;
+    return div;
+}
+
+function DisplayPointProperties(data) {
+    removeAllMenu();
+    pointProp.addTo(mapObject);
+    var label = '<label for="mk">' + data.TEN_DD + '</label>';
+    document.getElementById('pointName').innerHTML = label;
+    var close = '<a href="#" onclick="removeAllMenu()"><i class="fa fa-times-circle-o" style="color:green"></i></a>';
+    document.getElementById('pointClose').innerHTML = close;
+    var img = '<img src="' + data.HINHANHs[0].LINK_HA + '" id="pointImg">';
+    document.getElementById('pointImage').innerHTML = img;
+    var add = '<label for="mk">' + data.DIACHI_DD + '</label>';
+    document.getElementById('pointAddress').innerHTML = add;
+    var i = 0;
+    var e = "";
+    for (i = 0; i < 20; i++) {
+        var eachComment = '<div class="pointEachComment">'+ i + '</div>';
+        e += eachComment;
+    }
+    document.getElementById('pointComments').innerHTML = e;
 }
 
 // on load

@@ -10,6 +10,7 @@ namespace NienLuan_4.Models
         public string imgLink { get; set; }
         public HttpPostedFileWrapper img { get; set; }
         public string name { get; set; }
+        public string add { get; set; }
         public string loai { get; set; }
         public string coor { get; set; }       
         public string mota { get; set; }

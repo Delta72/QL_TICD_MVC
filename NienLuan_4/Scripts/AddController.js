@@ -64,7 +64,6 @@ resetView.onAdd = function (map) {
     div.firstChild.onmousedown = div.firstChild.ondblclick = L.DomEvent.stopPropagation;
     return div;
 };
-resetView.addTo(mapObject);
 // Location
 
 function btnPosClick() {

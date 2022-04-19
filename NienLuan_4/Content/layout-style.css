@@ -201,11 +201,11 @@ label {
     text-decoration: none;
     width: 50%;
     width: 50vh;
-    height: 80%;
-    height: 80vh;
+    height: 90%;
+    height: 90vh;
     margin-left: 5%;
     margin-right: 5%;
-    margin-top: 5%;
+    margin-top: 0%;
     border-radius: 0%;
     outline: 5px dashed green;
 }
@@ -288,4 +288,86 @@ select option {
 
 #idpx {
     display: none;
+}
+
+#layout {
+    background-color: #EBEDEF;
+    text-decoration: none;
+    width: 70%;
+    width: 70vh;
+    height: 85%;
+    height: 85vh;
+    margin-left: 5%;
+    margin-top: 2%;
+    border-radius: 0%;
+    outline: 5px dashed green;
+}
+
+#pointName {
+    width: 65%;
+    width: 65vh;
+    height: 5%;
+    height: 5vh;
+    text-align: center;
+}
+
+#pointClose {
+    margin-left: 1%;
+    width: 5%;
+    width: 5vh;
+    height: 5%;
+    height: 5vh;
+    text-align: center;
+    font-size: 24px;
+    
+}
+
+#pointImage {
+    width: 70%;
+    width: 70vh;
+    height: 35%;
+    height: 35vh;
+}
+    #pointImage img {
+        display: block;
+        width: 69%;
+        width: 69vh;
+        height: 34%;
+        height: 34vh;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: auto;
+        margin-bottom: auto;
+        border-radius: 2%;
+    }
+#pointAddress {
+    width: 70%;
+    width: 70vh;
+    height: 5%;
+    height: 5vh;
+    text-align: center;
+}
+#pointComments {
+    width: 70%;
+    width: 70vh;
+    height: 40%;
+    height: 40vh;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.pointEachComment {
+
+    width: 70%;
+    width: 70vh;
+    height: 10%;
+    height: 10vh;
+    outline: 1px dashed green;
+}
+
+#pointImg {
+    width: 70%;
+    width: 70vh;
+    height: 35%;
+    height: 35vh;
 }

@@ -114,46 +114,7 @@ namespace NienLuan_4.Controllers
             return Content(report, "application/json");
         }
 
-        // Doanh nghiep them dia diem
-        [HttpPost]
-        public JsonResult AddMarker(addMarkerModel model) 
-        {
-            var success = false;
-            DIADIEM D = new DIADIEM();
-            string idtk = db.TAIKHOANs.Where(a => a.ID_TK == User.Identity.Name).Select(a => a.ID_TK).FirstOrDefault();
-            D.ID_DD = Guid.NewGuid().ToString();
-            D.ID_TK = idtk;
-            D.ID_LOAIDD = int.Parse(model.loai);
-            D.ID_PX = int.Parse(model.idpx);
-            D.TEN_DD = model.name;
-            D.TOADO_DD = model.coor;
-            D.MOTA_DD = model.mota;
-            D.LUOTTHICH_DD = 0;
-            D.NGAYTHEM_DD = DateTime.Today;
-            D.LADIEMCANHAN = false;
-            db.DIADIEMs.Add(D);
-            db.SaveChanges();
-
-            HINHANH H = new HINHANH();
-            H.ID_HA = Guid.NewGuid().ToString();
-            H.ID_DD = D.ID_DD;
-            H.LINK_HA = UploadImage(model.img);
-            db.HINHANHs.Add(H);
-            db.SaveChanges();
-
-            success = true;
-            return Json(new { success = success }, JsonRequestBehavior.AllowGet);
-        }
-
-        // Luu hinh anh
-        public string UploadImage(HttpPostedFileWrapper img)
-        {
-            string path = "";
-            path = Server.MapPath("/Content/Images/Point/") + img.FileName;
-            img.SaveAs(path);
-            path = "/Content/Images/Point/" + img.FileName;
-            return path;
-        }
+        
 
         // Xem ban do cong dong
 

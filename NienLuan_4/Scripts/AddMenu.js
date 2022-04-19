@@ -26,7 +26,7 @@ userMenuStr += '<hr>';
 userMenuStr += '<h3><a href="Home/About">Giới thiệu</a></h3>';
 // Menu doanh nghiep
 var dnMenuStr = '';
-dnMenuStr += '<h3><a href="#" onclick="dnMenuMapClick()"><i class="fa fa-map-signs"></i>&nbsp&nbspBản đồ</a></h3>';
+dnMenuStr += '<h3><a href="#" onclick="dnMenuMapClick()" id="dnMap"><i class="fa fa-map-signs"></i>&nbsp&nbspBản đồ</a></h3>';
 dnMenuStr += '<h3><a href="#"><i class="fa fa-user"></i>&nbsp&nbspQuản lý tài khoản</a></h3>';
 dnMenuStr += '<hr>';
 dnMenuStr += '<h3><a href="Home/About">Giới thiệu</a></h3>';
@@ -96,6 +96,7 @@ $('#btnMenu').click(function () {
         else {
             document.getElementById('menuContent').innerHTML = dnMenuStr;
             document.getElementById('menuFooter').innerHTML = footerMenuStr;
+            $('#dnMap').click();
         }
     }
     else {
@@ -108,6 +109,9 @@ function removeAllMenu() {
         markerProp.remove();
     }
     if (document.getElementById("userMenu")) {
-        markerProp.remove();
+        userMenu.remove();
+    }
+    if (document.getElementById("layout")) {
+        pointProp.remove();
     }
 }

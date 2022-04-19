@@ -9,5 +9,7 @@ namespace NienLuan_4.Models
     {
         public string id { get; set; }
         public int loai { get; set; }
+
+
     }
 }
