@@ -102,7 +102,7 @@ function Ve_PX(TenQ) {
                 var name = data[a].name;
                 L.geoJSON(draw, { opacity: 1, color: c, fillOpacity: 0 }).bindPopup(name, { autoPan: false }).on('mouseover', function () {
                     this.setStyle({
-                        fillOpacity: 0.3,
+                        fillOpacity: 0,
                         opacity: 1,
                     }),
                         this.openPopup();

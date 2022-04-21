@@ -1,6 +1,7 @@
 ﻿body {
     padding: 0;
     margin: 0;
+
 }
 
 html, body, #map {
@@ -167,33 +168,28 @@ label {
 #userProfile {
     background-color: #EBEDEF;
     text-decoration: none;
-    width: 30%;
-    width: 30vh;
-    height: 8%;
+    width: 15vw;
     height: 8vh;
-    margin-right: 5%;
-    margin-top: 5%;
     border-radius: 0%;
     outline: 5px dashed green;
 
 }
     #userProfile img {
-        margin-top: 20%;
-        width: 40px;
-        height: 40px;
+        width: 3vw;
+        height: 6vh;
         border-radius: 50%;
         border: 1px solid green;
     }
+
     #userProfile p {
-        width: 130px;
+        width: 10vw;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        margin-left: 20px;
-        margin-top: 7%;
         text-align: center;
         color: green;
         font-size: 18px;
+        margin-top: 2vh;
     }
 
 #markerMenu {
@@ -293,8 +289,7 @@ select option {
 #layout {
     background-color: #EBEDEF;
     text-decoration: none;
-    width: 70%;
-    width: 70vh;
+    width: 35vw;
     height: 85%;
     height: 85vh;
     margin-left: 5%;
@@ -304,18 +299,22 @@ select option {
 }
 
 #pointName {
-    width: 65%;
-    width: 65vh;
+    width: 32vw;
     height: 5%;
     height: 5vh;
     text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
+
+    #pointName label:hover {
+        animation: 5s linear 0s infinite alternate move;
+    }
 
 #pointClose {
     margin-left: 1%;
-    width: 5%;
-    width: 5vh;
-    height: 5%;
+    width: 3vw;
     height: 5vh;
     text-align: center;
     font-size: 24px;
@@ -323,15 +322,12 @@ select option {
 }
 
 #pointImage {
-    width: 70%;
-    width: 70vh;
-    height: 35%;
+    width: 35vw;
     height: 35vh;
 }
     #pointImage img {
         display: block;
-        width: 69%;
-        width: 69vh;
+        width: 34vw;
         height: 34%;
         height: 34vh;
         margin-left: auto;
@@ -341,28 +337,45 @@ select option {
         border-radius: 2%;
     }
 #pointAddress {
-    width: 70%;
-    width: 70vh;
-    height: 5%;
+    width: 30vw;
     height: 5vh;
     text-align: center;
-}
+    overflow: hidden;    
+}    
+    #pointAddress label:hover{
+        animation: 5s linear 0s infinite alternate move;
+    }
+    @keyframes move {
+        from {
+            overflow: auto;
+        }
+        0%, 25% {
+            transform: translateX(0%);
+            left: 0%;
+        }
+
+        75%, 100% {
+            transform: translateX(-100%);
+            left: 100%;
+        }
+    }
+
 #pointComments {
-    width: 70%;
-    width: 70vh;
-    height: 40%;
-    height: 40vh;
+    width: 35vw;
+    height: 30vh;
     overflow: scroll;
     overflow-x: hidden;
 }
 
 .pointEachComment {
-
-    width: 70%;
-    width: 70vh;
-    height: 10%;
-    height: 10vh;
-    outline: 1px dashed green;
+    width: 30vw;
+    height: auto;
+    border: 1px dashed green;
+    margin-top: 0.5vh;
+    border-right: none;
+}
+.pointEachComment:hover {
+    cursor: zoom-in;
 }
 
 #pointImg {
@@ -370,4 +383,155 @@ select option {
     width: 70vh;
     height: 35%;
     height: 35vh;
+}
+
+.commentUserName {
+    width: 30vw;
+    height: 10vh;
+}
+
+    .commentUserName table th {
+        padding-left: 3%;
+        height: 5%;
+        height: 5vh;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .commentUserName table td {
+        padding-left: 3%;
+        max-width: 30vw;
+        max-height: 5vh;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+#pointUserComment {
+    width: 70%;
+    width: 70vh;
+    height: 10%;
+    height: 10vh;
+}
+    #pointUserComment table th {
+        padding-top: 1vh;
+        padding-left: 2vh;
+    }
+    #pointUserComment table td {
+        padding-left: 2vh;
+        height: 5%;
+        height: 5vh;
+        width: 90vh;
+    }
+
+
+#CommentDetail {
+    width: 25vw;
+    height: 50vh;
+    outline: 1px dashed green;
+    margin-right: 10vw;
+    margin-top: 15vh;
+    background-color: #EBEDEF;
+}
+
+#pointControl {
+    width: 2vw;
+    height: 30vh;
+    outline: 1px dashed green;
+    margin-right: 59vw;
+    margin-bottom: 33vh; 
+}
+
+
+#UserA {
+    width: 3.5vw;
+    height: 7vh;
+    border-radius: 50%;
+    margin-top: 10px;
+    margin-left: 5px;
+    border: 1px solid green;
+}
+
+#UserNameC {
+    margin-top: -8vh;
+    margin-left: 6vw;
+    font-weight:  bold;
+}
+
+#ipbl {
+    margin-top: 0vh;
+    margin-left: 6vw;
+    
+}
+#ipbl input {
+    width: 30vw;
+    height: 5vh;
+}
+
+#ipbl2 {
+    width: 6vw;
+    margin-top: -5vh;
+    margin-left: 28vw;
+    height: 5vh;
+    outline: 1px dashed yellow;
+    text-align: center;
+    color: yellow;
+    line-height: 5vh;
+    background-color: green;
+}
+
+    #ipbl2:hover {
+        margin-top: -5vh;
+        margin-left: 28vw;
+        height: 5vh;
+        border: 0;
+        outline: 1px dashed green;
+        text-align: center;
+        color: green;
+        vertical-align: middle;
+        line-height: 5vh;
+        background-color: yellow;
+        outline: 1px dashed green;
+        cursor: pointer;
+    }
+
+.eachCommentImg {
+    margin-top: 0.5vh;
+    width: 2vw;
+    height: 3vh;
+    border: 0.5px solid green;
+}
+
+#cmi {
+    width: 5vw;
+    height: 8vh;
+    margin-left: 1vw;
+    margin-top: 1vh;
+    border-radius: 50%;
+    border: 1px solid green;
+}
+#cmn {
+    width: 18vw;
+    height: 7vh;
+    margin-left: 6vw;
+    margin-top: -7vh;
+    overflow-wrap: break-word;
+    line-height: 7vh;
+}
+    #cmn label {
+        font-size: 2vh;
+        display: inline-block;
+        line-height: normal;
+        vertical-align: middle;
+    }
+
+#cmc {
+    width: 23vw;
+    height: 37vh;
+    margin-top: 2vh;
+    margin-left: 1vw;
+    overflow-wrap: break-word;
+    overflow: hidden;
+    border: 0.5px dashed green;
 }

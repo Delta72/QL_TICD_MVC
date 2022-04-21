@@ -41,7 +41,7 @@ if (logon == true) {
         content += '<tr><td>' + '<label for="mk">Loại dịch vụ:</label>' + '</td><td>' + SelectListLoaiDVu() + '</td></tr>';        
         content += '<tr><td>' + '<label for="mk">Mô tả:</label>' + '</td><td></td></tr>';
         content += '<tr><td colspan="2">' + '<div id="trar"><textarea id="txtarea"></textarea></div>' + '<br></td></tr>';
-        content += '<tr><td>' + '<input type="button" value="Lưu" class="btnMarker" id="btnSaveMarker" onclick="btnSaveMarkerClick()">' + '</td><td>' + '<input type="button" value="Hủy bỏ" class="btnMarker" id="btnCancelMarker" oclick="btnCancelMarkerClick()">' + '</td></tr>';
+        content += '<tr><td>' + '<input type="button" value="Lưu" class="btnMarker" id="btnSaveMarker" onclick="btnSaveMarkerClick()">' + '</td><td>' + '<input type="button" value="Hủy bỏ" class="btnMarker" id="btnCancelMarker" onclick="btnCancelMarkerClick()">' + '</td></tr>';
         content += '</table>';
         content += '<input type="text" id="coor" readonly="true">' + '<input type="text" id="idpx" readonly="true">';
 
@@ -83,6 +83,7 @@ if (logon == true) {
         // on plus click
         var marker;
         function btnAddClick() {
+            removeAllMenu();
             addMarkerPropDiv();
             addMarker.clearLayers();
             var px;
@@ -122,6 +123,7 @@ if (logon == true) {
             addMarker.clearLayers();
             markerProp.remove();
         };
+
         function PreventDrag() {
             mapObject.dragging.disable();
         }
@@ -193,8 +195,7 @@ if (logon == true) {
 
         // btnCancelMarkerClick
         function btnCancelMarkerClick() {
-            addMarker.clearLayers();
-            markerProp.remove();
+            btnMinusClick();
         }
 
         // Tai file

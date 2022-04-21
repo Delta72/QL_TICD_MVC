@@ -54,7 +54,6 @@ function ShowPrivatePoints() {
 }
 function PrivatePointClick(e) {
     // console.log(e.target.options.id);
-    
     mapObject.setView(e.target.getLatLng(), 15, { animation: true, duration: 2 });
     GetPointProp(e.target.options.id);
 }
@@ -80,6 +79,7 @@ layout += '<div><table><tr><td><div id="pointName"></div></td><td><div id="point
 layout += '<div id="pointImage"></div>';
 layout += '<div id="pointAddress"></div>';
 layout += '<div id="pointComments"></div>';
+layout += '<div id="pointUserComment"></div>';
 layout += '</div>';
 
 function DisableZoomDrag() {
@@ -91,6 +91,7 @@ function EnableZoomDrag() {
     mapObject.dragging.enable();
 }
 
+// point properties div
 var pointProp = L.control({ position: "topleft" });
 pointProp.onAdd = function (map) {
     var div = L.DomUtil.create("div", "div4");
@@ -99,24 +100,74 @@ pointProp.onAdd = function (map) {
     return div;
 }
 
+// point point control
+var pointControl = L.control({ position: "bottomright" });
+pointControl.onAdd = function (map) {
+    var div = L.DomUtil.create("div", "div3");
+    var i = '<div id="pointControl">';
+    i += '</div>';
+    div.innerHTML = i;
+    return div;
+};
+
 function DisplayPointProperties(data) {
     removeAllMenu();
     pointProp.addTo(mapObject);
-    var label = '<label for="mk">' + data.TEN_DD + '</label>';
+    pointControl.addTo(mapObject);
+    var label = '<label for="dd" id="labelName">' + data.TEN_DD + '</label>';
     document.getElementById('pointName').innerHTML = label;
     var close = '<a href="#" onclick="removeAllMenu()"><i class="fa fa-times-circle-o" style="color:green"></i></a>';
     document.getElementById('pointClose').innerHTML = close;
     var img = '<img src="' + data.HINHANHs[0].LINK_HA + '" id="pointImg">';
     document.getElementById('pointImage').innerHTML = img;
-    var add = '<label for="mk">' + data.DIACHI_DD + '</label>';
+    var add = '<label for="dd" id="labelAdd">' + data.DIACHI_DD + '</label>';
     document.getElementById('pointAddress').innerHTML = add;
-    var i = 0;
     var e = "";
-    for (i = 0; i < 20; i++) {
-        var eachComment = '<div class="pointEachComment">'+ i + '</div>';
+    for (var i = 0; i < 5; i++) {
+        var eachComment = '<div class="pointEachComment">';
+        eachComment += '<div class="commentUserName" onmouseover="CommentHover(' + i + ')" onmouseout="CommentOut()">';
+        eachComment += '<table><tr><th><p id="user' + i + '"><img src="' + getUserAvatar() + '" class="eachCommentImg" id="eachCommentImgid' + i +'"/>&nbspNameNameNameName</p></th></tr><tr><td><p id="comment' + i + '">AAAAAAAAA AAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p></td></tr></table>';
+        eachComment += '</div>';
+        eachComment += '</div>';
         e += eachComment;
     }
     document.getElementById('pointComments').innerHTML = e;
+    var comment = '<img src="' + getUserAvatar() + '" id="UserA"><div id="UserNameC">' + getUserName() + '</div><div id="ipbl"><input type="text" /></div><div id="ipbl2"><p>Bình luận<p></div>';
+    document.getElementById('pointUserComment').innerHTML = comment;
+}
+
+// CommentClick
+var CommentDetailStr = '';
+CommentDetailStr += '<div id="CommentDetail" onmouseover="DisableZoomDrag()" onmouseout="EnableZoomDrag()"></div>';
+var CommentDetail = L.control({ position: "topright" });
+
+CommentDetail.onAdd = function (map) {
+    var div = L.DomUtil.create("div", "div4");
+    div.innerHTML = CommentDetailStr;
+    div.firstChild.onmousedown = div.firstChild.ondblclick = L.DomEvent.stopPropagation;
+    return div;
+}
+
+function CommentHover(i) {
+    // var name = document.getElementById('labelName').textContent;
+    // var img = document.getElementById('pointImg').src;
+    // var name = document.getElementById('labelAdd').textContent;
+    CommentDetail.remove();
+    var idu = 'user' + i;
+    var idc = 'comment' + i;
+    var idi = 'eachCommentImgid' + i;
+    var userName = document.getElementById(idu).innerText;
+    var userComment = document.getElementById(idc).innerText;
+    var img = document.getElementById(idi).src;
+    CommentDetail.addTo(mapObject);
+    var str = '';
+    str += '<img src="' + img + '" id="cmi" />';
+    str += '<div id="cmn"><label for"name">' + userName + '</label></div>';
+    str += '<div id="cmc"><p>' + userComment + '</p></div>';
+    document.getElementById('CommentDetail').innerHTML = str;
+}
+function CommentOut() {
+    CommentDetail.remove();
 }
 
 // on load

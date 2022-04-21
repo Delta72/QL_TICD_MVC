@@ -13,6 +13,7 @@ userMenu.onAdd = function (map) {
     return div;
 };
 
+
 // Menu nguoi chua dang nhap
 var AnoMenuStr = '';
 AnoMenuStr += '<br><p>Bạn chưa đăng nhập !!!</p>';
@@ -73,9 +74,7 @@ function addOptions() {
 
 // Hien menu
 $('#btnMenu').click(function () {
-    if (document.getElementById("markerMenu")) {
-        markerProp.remove();
-    }
+    removeAllMenu();
     addMarker.clearLayers();
     if (!document.getElementById("userMenu")) {
         userMenu.addTo(mapObject);
@@ -113,5 +112,8 @@ function removeAllMenu() {
     }
     if (document.getElementById("layout")) {
         pointProp.remove();
+    }
+    if (document.getElementById('pointControl')) {
+        pointControl.remove();
     }
 }
