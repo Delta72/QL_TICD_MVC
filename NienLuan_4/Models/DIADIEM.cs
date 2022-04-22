@@ -19,7 +19,6 @@ namespace NienLuan_4.Models
         {
             this.BINHLUANs = new HashSet<BINHLUAN>();
             this.HINHANHs = new HashSet<HINHANH>();
-            this.TAIKHOANs = new HashSet<TAIKHOAN>();
         }
     
         public string ID_DD { get; set; }
@@ -27,12 +26,12 @@ namespace NienLuan_4.Models
         public int ID_LOAIDD { get; set; }
         public int ID_PX { get; set; }
         public string TEN_DD { get; set; }
+        public string DIACHI_DD { get; set; }
         public string TOADO_DD { get; set; }
         public string MOTA_DD { get; set; }
         public Nullable<int> LUOTTHICH_DD { get; set; }
         public Nullable<System.DateTime> NGAYTHEM_DD { get; set; }
         public Nullable<bool> LADIEMCANHAN { get; set; }
-        public string DIACHI_DD { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BINHLUAN> BINHLUANs { get; set; }
@@ -41,7 +40,5 @@ namespace NienLuan_4.Models
         public virtual TAIKHOAN TAIKHOAN { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HINHANH> HINHANHs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TAIKHOAN> TAIKHOANs { get; set; }
     }
 }

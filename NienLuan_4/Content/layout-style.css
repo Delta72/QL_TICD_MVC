@@ -318,7 +318,6 @@ select option {
     height: 5vh;
     text-align: center;
     font-size: 24px;
-    
 }
 
 #pointImage {
@@ -341,6 +340,7 @@ select option {
     height: 5vh;
     text-align: center;
     overflow: hidden;    
+    border-bottom: 0.5px solid green;
 }    
     #pointAddress label:hover{
         animation: 5s linear 0s infinite alternate move;
@@ -439,8 +439,8 @@ select option {
     width: 2vw;
     height: 30vh;
     outline: 1px dashed green;
-    margin-right: 59vw;
-    margin-bottom: 33vh; 
+    margin-left: 37.5vw;
+    margin-top: -80vh; 
 }
 
 
@@ -533,5 +533,41 @@ select option {
     margin-left: 1vw;
     overflow-wrap: break-word;
     overflow: hidden;
-    border: 0.5px dashed green;
+    border-top: 1px dashed green;
+}
+    #cmc p {
+        margin-top: 1vh;
+    }
+
+#allLike {
+    width: 4vw;
+    height: 6vh;
+    font-size: 3vh;
+    margin-left: 30vw;
+    margin-top: -6vh;
+    text-align: center;
+}
+    #allLike i{
+        font-size: 3vh;
+        margin-top: -1vh;
+        
+    }
+        #allLike i:hover {
+            cursor: pointer;
+        }
+    #allLike p{
+        font-size: 2vh;
+        margin-top: -1vh;
+    }
+
+.KoHienThi{
+    display: none;
+}
+
+#EmptyCmt{
+    text-align: center;
+    margin-top: 5vh;
+    margin-left: 3vw;
+    font-size: 2vh;
+    width: 25vw;
 }

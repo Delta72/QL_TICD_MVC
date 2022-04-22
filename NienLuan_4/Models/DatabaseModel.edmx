@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="QL_TICDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="QL_TICDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BINHLUAN">
           <Key>
             <PropertyRef Name="ID_BL" />
@@ -18,11 +18,12 @@
         </EntityType>
         <EntityType Name="BINHLUANDATHICH">
           <Key>
-            <PropertyRef Name="ID_TK" />
-            <PropertyRef Name="ID_BL" />
+            <PropertyRef Name="ID_BLYT" />
           </Key>
+          <Property Name="ID_BLYT" Type="varchar" MaxLength="36" Nullable="false" />
           <Property Name="ID_TK" Type="varchar" MaxLength="36" Nullable="false" />
           <Property Name="ID_BL" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="NgayThich" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="DIADIEM">
           <Key>
@@ -42,11 +43,12 @@
         </EntityType>
         <EntityType Name="DIADIEMYEUTHICH">
           <Key>
-            <PropertyRef Name="ID_TK" />
-            <PropertyRef Name="ID_DD" />
+            <PropertyRef Name="ID_DDYT" />
           </Key>
+          <Property Name="ID_DDYT" Type="varchar" MaxLength="36" Nullable="false" />
           <Property Name="ID_TK" Type="varchar" MaxLength="36" Nullable="false" />
           <Property Name="ID_DD" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="NgayThich" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="HINHANH">
           <Key>
@@ -125,30 +127,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_BINHLUAN_GOM1_BINHLUAN">
-          <End Role="BINHLUAN" Type="Self.BINHLUAN" Multiplicity="1" />
-          <End Role="BINHLUANDATHICH" Type="Self.BINHLUANDATHICH" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BINHLUAN">
-              <PropertyRef Name="ID_BL" />
-            </Principal>
-            <Dependent Role="BINHLUANDATHICH">
-              <PropertyRef Name="ID_BL" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_BINHLUAN_GOM2_TAIKHOAN">
-          <End Role="TAIKHOAN" Type="Self.TAIKHOAN" Multiplicity="1" />
-          <End Role="BINHLUANDATHICH" Type="Self.BINHLUANDATHICH" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TAIKHOAN">
-              <PropertyRef Name="ID_TK" />
-            </Principal>
-            <Dependent Role="BINHLUANDATHICH">
-              <PropertyRef Name="ID_TK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_BINHLUAN_VE_DIADIEM">
           <End Role="DIADIEM" Type="Self.DIADIEM" Multiplicity="1" />
           <End Role="BINHLUAN" Type="Self.BINHLUAN" Multiplicity="*" />
@@ -193,30 +171,6 @@
               <PropertyRef Name="ID_TK" />
             </Principal>
             <Dependent Role="DIADIEM">
-              <PropertyRef Name="ID_TK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DIADIEMY_BAOGOM1_DIADIEM">
-          <End Role="DIADIEM" Type="Self.DIADIEM" Multiplicity="1" />
-          <End Role="DIADIEMYEUTHICH" Type="Self.DIADIEMYEUTHICH" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DIADIEM">
-              <PropertyRef Name="ID_DD" />
-            </Principal>
-            <Dependent Role="DIADIEMYEUTHICH">
-              <PropertyRef Name="ID_DD" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DIADIEMY_BAOGOM2_TAIKHOAN">
-          <End Role="TAIKHOAN" Type="Self.TAIKHOAN" Multiplicity="1" />
-          <End Role="DIADIEMYEUTHICH" Type="Self.DIADIEMYEUTHICH" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TAIKHOAN">
-              <PropertyRef Name="ID_TK" />
-            </Principal>
-            <Dependent Role="DIADIEMYEUTHICH">
               <PropertyRef Name="ID_TK" />
             </Dependent>
           </ReferentialConstraint>
@@ -285,14 +239,6 @@
             <End Role="TAIKHOAN" EntitySet="TAIKHOAN" />
             <End Role="BINHLUAN" EntitySet="BINHLUAN" />
           </AssociationSet>
-          <AssociationSet Name="FK_BINHLUAN_GOM1_BINHLUAN" Association="Self.FK_BINHLUAN_GOM1_BINHLUAN">
-            <End Role="BINHLUAN" EntitySet="BINHLUAN" />
-            <End Role="BINHLUANDATHICH" EntitySet="BINHLUANDATHICH" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BINHLUAN_GOM2_TAIKHOAN" Association="Self.FK_BINHLUAN_GOM2_TAIKHOAN">
-            <End Role="TAIKHOAN" EntitySet="TAIKHOAN" />
-            <End Role="BINHLUANDATHICH" EntitySet="BINHLUANDATHICH" />
-          </AssociationSet>
           <AssociationSet Name="FK_BINHLUAN_VE_DIADIEM" Association="Self.FK_BINHLUAN_VE_DIADIEM">
             <End Role="DIADIEM" EntitySet="DIADIEM" />
             <End Role="BINHLUAN" EntitySet="BINHLUAN" />
@@ -308,14 +254,6 @@
           <AssociationSet Name="FK_DIADIEM_TAOBOI_TAIKHOAN" Association="Self.FK_DIADIEM_TAOBOI_TAIKHOAN">
             <End Role="TAIKHOAN" EntitySet="TAIKHOAN" />
             <End Role="DIADIEM" EntitySet="DIADIEM" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DIADIEMY_BAOGOM1_DIADIEM" Association="Self.FK_DIADIEMY_BAOGOM1_DIADIEM">
-            <End Role="DIADIEM" EntitySet="DIADIEM" />
-            <End Role="DIADIEMYEUTHICH" EntitySet="DIADIEMYEUTHICH" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DIADIEMY_BAOGOM2_TAIKHOAN" Association="Self.FK_DIADIEMY_BAOGOM2_TAIKHOAN">
-            <End Role="TAIKHOAN" EntitySet="TAIKHOAN" />
-            <End Role="DIADIEMYEUTHICH" EntitySet="DIADIEMYEUTHICH" />
           </AssociationSet>
           <AssociationSet Name="FK_HINHANH_THEMBOI_TAIKHOAN" Association="Self.FK_HINHANH_THEMBOI_TAIKHOAN">
             <End Role="TAIKHOAN" EntitySet="TAIKHOAN" />
@@ -334,7 +272,8 @@
             <End Role="TAIKHOAN" EntitySet="TAIKHOAN" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="QL_TICDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -350,7 +289,15 @@
           <Property Name="NGAY_BL" Type="DateTime" Precision="3" />
           <NavigationProperty Name="TAIKHOAN" Relationship="Self.FK_BINHLUAN_CUA_TAIKHOAN" FromRole="BINHLUAN" ToRole="TAIKHOAN" />
           <NavigationProperty Name="DIADIEM" Relationship="Self.FK_BINHLUAN_VE_DIADIEM" FromRole="BINHLUAN" ToRole="DIADIEM" />
-          <NavigationProperty Name="TAIKHOANs" Relationship="Self.BINHLUANDATHICH" FromRole="BINHLUAN" ToRole="TAIKHOAN" />
+        </EntityType>
+        <EntityType Name="BINHLUANDATHICH">
+          <Key>
+            <PropertyRef Name="ID_BLYT" />
+          </Key>
+          <Property Name="ID_BLYT" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_TK" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_BL" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NgayThich" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="DIADIEM">
           <Key>
@@ -361,6 +308,7 @@
           <Property Name="ID_LOAIDD" Type="Int32" Nullable="false" />
           <Property Name="ID_PX" Type="Int32" Nullable="false" />
           <Property Name="TEN_DD" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="DIACHI_DD" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="TOADO_DD" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="MOTA_DD" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
           <Property Name="LUOTTHICH_DD" Type="Int32" />
@@ -371,8 +319,15 @@
           <NavigationProperty Name="PHUONGXA" Relationship="Self.FK_DIADIEM_NAM_TRONG_PHUONGXA" FromRole="DIADIEM" ToRole="PHUONGXA" />
           <NavigationProperty Name="TAIKHOAN" Relationship="Self.FK_DIADIEM_TAOBOI_TAIKHOAN" FromRole="DIADIEM" ToRole="TAIKHOAN" />
           <NavigationProperty Name="HINHANHs" Relationship="Self.FK_HINHANH_THUOCVE_DIADIEM" FromRole="DIADIEM" ToRole="HINHANH" />
-          <NavigationProperty Name="TAIKHOANs" Relationship="Self.DIADIEMYEUTHICH" FromRole="DIADIEM" ToRole="TAIKHOAN" />
-          <Property Name="DIACHI_DD" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DIADIEMYEUTHICH">
+          <Key>
+            <PropertyRef Name="ID_DDYT" />
+          </Key>
+          <Property Name="ID_DDYT" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_TK" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_DD" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NgayThich" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="HINHANH">
           <Key>
@@ -449,8 +404,6 @@
           <NavigationProperty Name="DIADIEMs" Relationship="Self.FK_DIADIEM_TAOBOI_TAIKHOAN" FromRole="TAIKHOAN" ToRole="DIADIEM" />
           <NavigationProperty Name="HINHANHs" Relationship="Self.FK_HINHANH_THEMBOI_TAIKHOAN" FromRole="TAIKHOAN" ToRole="HINHANH" />
           <NavigationProperty Name="LOAITAIKHOAN" Relationship="Self.FK_TAIKHOAN_THUOC_LOAITAIK" FromRole="TAIKHOAN" ToRole="LOAITAIKHOAN" />
-          <NavigationProperty Name="BINHLUANs1" Relationship="Self.BINHLUANDATHICH" FromRole="TAIKHOAN" ToRole="BINHLUAN" />
-          <NavigationProperty Name="DIADIEMs1" Relationship="Self.DIADIEMYEUTHICH" FromRole="TAIKHOAN" ToRole="DIADIEM" />
         </EntityType>
         <Association Name="FK_BINHLUAN_CUA_TAIKHOAN">
           <End Role="TAIKHOAN" Type="Self.TAIKHOAN" Multiplicity="1" />
@@ -560,17 +513,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="BINHLUANDATHICH">
-          <End Role="BINHLUAN" Type="Self.BINHLUAN" Multiplicity="*" />
-          <End Role="TAIKHOAN" Type="Self.TAIKHOAN" Multiplicity="*" />
-        </Association>
-        <Association Name="DIADIEMYEUTHICH">
-          <End Role="DIADIEM" Type="Self.DIADIEM" Multiplicity="*" />
-          <End Role="TAIKHOAN" Type="Self.TAIKHOAN" Multiplicity="*" />
-        </Association>
-        <EntityContainer Name="QL_TICD_Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Database_Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="BINHLUANs" EntityType="Self.BINHLUAN" />
+          <EntitySet Name="BINHLUANDATHICHes" EntityType="Self.BINHLUANDATHICH" />
           <EntitySet Name="DIADIEMs" EntityType="Self.DIADIEM" />
+          <EntitySet Name="DIADIEMYEUTHICHes" EntityType="Self.DIADIEMYEUTHICH" />
           <EntitySet Name="HINHANHs" EntityType="Self.HINHANH" />
           <EntitySet Name="LOAIDIADIEMs" EntityType="Self.LOAIDIADIEM" />
           <EntitySet Name="LOAITAIKHOANs" EntityType="Self.LOAITAIKHOAN" />
@@ -614,21 +561,13 @@
             <End Role="QUANHUYEN" EntitySet="QUANHUYENs" />
             <End Role="PHUONGXA" EntitySet="PHUONGXAs" />
           </AssociationSet>
-          <AssociationSet Name="BINHLUANDATHICH" Association="Self.BINHLUANDATHICH">
-            <End Role="BINHLUAN" EntitySet="BINHLUANs" />
-            <End Role="TAIKHOAN" EntitySet="TAIKHOANs" />
-          </AssociationSet>
-          <AssociationSet Name="DIADIEMYEUTHICH" Association="Self.DIADIEMYEUTHICH">
-            <End Role="DIADIEM" EntitySet="DIADIEMs" />
-            <End Role="TAIKHOAN" EntitySet="TAIKHOANs" />
-          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="QL_TICDModelStoreContainer" CdmEntityContainer="QL_TICD_Entities">
+        <EntityContainerMapping StorageEntityContainer="QL_TICDModelStoreContainer" CdmEntityContainer="Database_Entities">
           <EntitySetMapping Name="BINHLUANs">
             <EntityTypeMapping TypeName="QL_TICDModel.BINHLUAN">
               <MappingFragment StoreEntitySet="BINHLUAN">
@@ -641,20 +580,40 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="BINHLUANDATHICHes">
+            <EntityTypeMapping TypeName="QL_TICDModel.BINHLUANDATHICH">
+              <MappingFragment StoreEntitySet="BINHLUANDATHICH">
+                <ScalarProperty Name="ID_BLYT" ColumnName="ID_BLYT" />
+                <ScalarProperty Name="ID_TK" ColumnName="ID_TK" />
+                <ScalarProperty Name="ID_BL" ColumnName="ID_BL" />
+                <ScalarProperty Name="NgayThich" ColumnName="NgayThich" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="DIADIEMs">
             <EntityTypeMapping TypeName="QL_TICDModel.DIADIEM">
               <MappingFragment StoreEntitySet="DIADIEM">
-                <ScalarProperty Name="DIACHI_DD" ColumnName="DIACHI_DD" />
                 <ScalarProperty Name="ID_DD" ColumnName="ID_DD" />
                 <ScalarProperty Name="ID_TK" ColumnName="ID_TK" />
                 <ScalarProperty Name="ID_LOAIDD" ColumnName="ID_LOAIDD" />
                 <ScalarProperty Name="ID_PX" ColumnName="ID_PX" />
                 <ScalarProperty Name="TEN_DD" ColumnName="TEN_DD" />
+                <ScalarProperty Name="DIACHI_DD" ColumnName="DIACHI_DD" />
                 <ScalarProperty Name="TOADO_DD" ColumnName="TOADO_DD" />
                 <ScalarProperty Name="MOTA_DD" ColumnName="MOTA_DD" />
                 <ScalarProperty Name="LUOTTHICH_DD" ColumnName="LUOTTHICH_DD" />
                 <ScalarProperty Name="NGAYTHEM_DD" ColumnName="NGAYTHEM_DD" />
                 <ScalarProperty Name="LADIEMCANHAN" ColumnName="LADIEMCANHAN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DIADIEMYEUTHICHes">
+            <EntityTypeMapping TypeName="QL_TICDModel.DIADIEMYEUTHICH">
+              <MappingFragment StoreEntitySet="DIADIEMYEUTHICH">
+                <ScalarProperty Name="ID_DDYT" ColumnName="ID_DDYT" />
+                <ScalarProperty Name="ID_TK" ColumnName="ID_TK" />
+                <ScalarProperty Name="ID_DD" ColumnName="ID_DD" />
+                <ScalarProperty Name="NgayThich" ColumnName="NgayThich" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -730,22 +689,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="BINHLUANDATHICH" TypeName="QL_TICDModel.BINHLUANDATHICH" StoreEntitySet="BINHLUANDATHICH">
-            <EndProperty Name="BINHLUAN">
-              <ScalarProperty Name="ID_BL" ColumnName="ID_BL" />
-            </EndProperty>
-            <EndProperty Name="TAIKHOAN">
-              <ScalarProperty Name="ID_TK" ColumnName="ID_TK" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="DIADIEMYEUTHICH" TypeName="QL_TICDModel.DIADIEMYEUTHICH" StoreEntitySet="DIADIEMYEUTHICH">
-            <EndProperty Name="DIADIEM">
-              <ScalarProperty Name="ID_DD" ColumnName="ID_DD" />
-            </EndProperty>
-            <EndProperty Name="TAIKHOAN">
-              <ScalarProperty Name="ID_TK" ColumnName="ID_TK" />
-            </EndProperty>
-          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -13,10 +13,10 @@ namespace NienLuan_4.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class QL_TICD_Entities : DbContext
+    public partial class Database_Entities : DbContext
     {
-        public QL_TICD_Entities()
-            : base("name=QL_TICD_Entities")
+        public Database_Entities()
+            : base("name=Database_Entities")
         {
         }
     
@@ -26,7 +26,9 @@ namespace NienLuan_4.Models
         }
     
         public virtual DbSet<BINHLUAN> BINHLUANs { get; set; }
+        public virtual DbSet<BINHLUANDATHICH> BINHLUANDATHICHes { get; set; }
         public virtual DbSet<DIADIEM> DIADIEMs { get; set; }
+        public virtual DbSet<DIADIEMYEUTHICH> DIADIEMYEUTHICHes { get; set; }
         public virtual DbSet<HINHANH> HINHANHs { get; set; }
         public virtual DbSet<LOAIDIADIEM> LOAIDIADIEMs { get; set; }
         public virtual DbSet<LOAITAIKHOAN> LOAITAIKHOANs { get; set; }

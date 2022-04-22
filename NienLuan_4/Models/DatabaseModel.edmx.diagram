@@ -4,16 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b7f70b41732a4332969b8f9115ee4a0f" Name="Diagram1">
-        <EntityTypeShape EntityType="QL_TICDModel.BINHLUAN" Width="1.5" PointX="7.5" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_TICDModel.DIADIEM" Width="1.5" PointX="5.25" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_TICDModel.HINHANH" Width="1.5" PointX="12" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_TICDModel.LOAIDIADIEM" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_TICDModel.LOAITAIKHOAN" Width="1.5" PointX="7.5" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_TICDModel.PHUONGXA" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_TICDModel.QUANHUYEN" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_TICDModel.sysdiagram" Width="1.5" PointX="5.75" PointY="8.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_TICDModel.TAIKHOAN" Width="1.5" PointX="9.75" PointY="2.5" IsExpanded="true" />
+      <Diagram DiagramId="e26df581d9ff449a8caa939d2302d705" Name="Diagram1" ZoomLevel="64">
+        <EntityTypeShape EntityType="QL_TICDModel.BINHLUAN" Width="1.5" PointX="7.5" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_TICDModel.BINHLUANDATHICH" Width="1.5" PointX="5.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_TICDModel.DIADIEM" Width="1.5" PointX="5.25" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_TICDModel.DIADIEMYEUTHICH" Width="1.5" PointX="7.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_TICDModel.HINHANH" Width="1.5" PointX="10.5" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_TICDModel.LOAIDIADIEM" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_TICDModel.LOAITAIKHOAN" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_TICDModel.PHUONGXA" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_TICDModel.QUANHUYEN" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_TICDModel.sysdiagram" Width="1.5" PointX="9.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_TICDModel.TAIKHOAN" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
         <AssociationConnector Association="QL_TICDModel.FK_BINHLUAN_CUA_TAIKHOAN" ManuallyRouted="false" />
         <AssociationConnector Association="QL_TICDModel.FK_BINHLUAN_VE_DIADIEM" ManuallyRouted="false" />
         <AssociationConnector Association="QL_TICDModel.FK_DIADIEM_LOAI_LOAIDIAD" ManuallyRouted="false" />
@@ -23,8 +25,6 @@
         <AssociationConnector Association="QL_TICDModel.FK_HINHANH_THEMBOI_TAIKHOAN" ManuallyRouted="false" />
         <AssociationConnector Association="QL_TICDModel.FK_TAIKHOAN_THUOC_LOAITAIK" ManuallyRouted="false" />
         <AssociationConnector Association="QL_TICDModel.FK_PHUONGXA_TRUC_THUO_QUANHUYE" ManuallyRouted="false" />
-        <AssociationConnector Association="QL_TICDModel.BINHLUANDATHICH" ManuallyRouted="false" />
-        <AssociationConnector Association="QL_TICDModel.DIADIEMYEUTHICH" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

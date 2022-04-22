@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -10,7 +11,7 @@ namespace NienLuan_4.Controllers
 {
     public class PointController : Controller
     {
-        QL_TICD_Entities db = new QL_TICD_Entities();
+        Database_Entities db = new Database_Entities();
         // GET: Point
         public ActionResult ShowAllPoints()
         {
@@ -106,6 +107,73 @@ namespace NienLuan_4.Controllers
             img.SaveAs(path);
             path = "/Content/Images/Point/" + guid + img.FileName;
             return path;
+        }
+
+        public JsonResult KiemTraDaThichDiaDiem(string id)
+        {
+            Boolean dathich = false;
+            int luotthich;
+            DIADIEMYEUTHICH D = db.DIADIEMYEUTHICHes.Where(a => a.ID_DD == id && a.ID_TK == User.Identity.Name).FirstOrDefault();
+            DIADIEM dd = db.DIADIEMs.Where(a => a.ID_DD == id).FirstOrDefault();
+            luotthich = dd.LUOTTHICH_DD.Value;
+            if (D == null)
+            {
+                dathich = false;
+            }
+            else
+            {
+                dathich = true;                
+            }
+            return Json(new { success = dathich, luotthich = luotthich }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult ThichDiaDiem(string id)
+        {
+            Boolean success = false;
+            DIADIEMYEUTHICH D = db.DIADIEMYEUTHICHes.Where(a => a.ID_DD == id && a.ID_TK == User.Identity.Name).FirstOrDefault();
+            if (D == null)
+            {
+                DIADIEMYEUTHICH d = new DIADIEMYEUTHICH();
+                d.ID_DDYT = Guid.NewGuid().ToString();
+                d.ID_DD = id;
+                d.ID_TK = User.Identity.Name;
+                d.NgayThich = DateTime.Today;
+                db.DIADIEMYEUTHICHes.Add(d);
+                db.SaveChanges();
+
+                DIADIEM DD = db.DIADIEMs.Where(a => a.ID_DD == id).FirstOrDefault();
+                db.Entry(DD).State = EntityState.Detached;
+                DD.LUOTTHICH_DD += 1;
+                db.Entry(DD).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            else
+            {
+                db.DIADIEMYEUTHICHes.Remove(D);
+                db.SaveChanges();
+
+
+                DIADIEM DD = db.DIADIEMs.Where(a => a.ID_DD == id).FirstOrDefault();
+                db.Entry(DD).State = EntityState.Detached;
+                DD.LUOTTHICH_DD -= 1;
+                db.Entry(DD).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            return Json(new { success = success }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult DangBinhLuan(string dd, string cmt)
+        {
+            BINHLUAN B = new BINHLUAN();
+            B.ID_BL = Guid.NewGuid().ToString();
+            B.ID_TK = User.Identity.Name;
+            B.ID_DD = dd;
+            B.NOIDUNG_BL = cmt;
+            B.LUOTTHICH_BL = 0;
+            B.NGAY_BL = DateTime.Today;
+            db.BINHLUANs.Add(B);
+            db.SaveChanges();
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
     }
 }

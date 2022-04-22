@@ -145,6 +145,9 @@
     <Compile Include="Models\BINHLUAN.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BINHLUANDATHICH.cs">
+      <DependentUpon>DatabaseModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DatabaseModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -161,6 +164,9 @@
       <DependentUpon>DatabaseModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\DIADIEM.cs">
+      <DependentUpon>DatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DIADIEMYEUTHICH.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HINHANH.cs">
@@ -247,13 +253,6 @@
     <Content Include="Content\Geojson\QH_ThoiLai.geojson" />
     <Content Include="Content\Geojson\QH_ThotNot.geojson" />
     <Content Include="Content\Geojson\QH_VinhThanh.geojson" />
-    <EntityDeploy Include="Models\DatabaseModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DatabaseModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\DatabaseModel.edmx.diagram">
-      <DependentUpon>DatabaseModel.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\Geojson\BT_PhuongAnThoi.geojson" />
     <Content Include="Content\Geojson\BT_PhuongBinhThuy.geojson" />
     <Content Include="Content\Geojson\BT_PhuongBuiHuuNghia.geojson" />
@@ -339,6 +338,13 @@
     <Content Include="Content\Geojson\VT_XaThanhTien.geojson" />
     <Content Include="Content\Geojson\VT_XaVinhBinh.geojson" />
     <Content Include="Content\Geojson\VT_XaVinhTrinh.geojson" />
+    <EntityDeploy Include="Models\DatabaseModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DatabaseModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DatabaseModel.edmx.diagram">
+      <DependentUpon>DatabaseModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\DisplayMarker.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

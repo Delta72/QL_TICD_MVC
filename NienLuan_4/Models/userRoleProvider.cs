@@ -38,7 +38,7 @@ namespace NienLuan_4.Models
 
         public override string[] GetRolesForUser(string username)
         {
-            using (QL_TICD_Entities db = new QL_TICD_Entities())
+            using (Database_Entities db = new Database_Entities())
             {
                 var userRole = (from TAIKHOAN in db.TAIKHOANs
                                 where TAIKHOAN.TAIKHOAN_TK == username

@@ -20,8 +20,6 @@ namespace NienLuan_4.Models
             this.BINHLUANs = new HashSet<BINHLUAN>();
             this.DIADIEMs = new HashSet<DIADIEM>();
             this.HINHANHs = new HashSet<HINHANH>();
-            this.BINHLUANs1 = new HashSet<BINHLUAN>();
-            this.DIADIEMs1 = new HashSet<DIADIEM>();
         }
     
         public string ID_TK { get; set; }
@@ -42,9 +40,5 @@ namespace NienLuan_4.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HINHANH> HINHANHs { get; set; }
         public virtual LOAITAIKHOAN LOAITAIKHOAN { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BINHLUAN> BINHLUANs1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DIADIEM> DIADIEMs1 { get; set; }
     }
 }

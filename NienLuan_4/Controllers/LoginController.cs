@@ -11,7 +11,7 @@ namespace NienLuan_4.Controllers
 {
     public class LoginController : Controller
     {
-        QL_TICD_Entities db = new QL_TICD_Entities();
+        Database_Entities db = new Database_Entities();
         // GET: Login
 
         [AllowAnonymous]

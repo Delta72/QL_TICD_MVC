@@ -10,7 +10,7 @@ namespace NienLuan_4.Controllers
 {
     public class HomeController : Controller
     {
-        QL_TICD_Entities db = new QL_TICD_Entities();
+        Database_Entities db = new Database_Entities();
         public ActionResult Index()
         {
             return View();

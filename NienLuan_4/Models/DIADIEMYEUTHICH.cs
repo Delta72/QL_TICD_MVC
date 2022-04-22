@@ -12,16 +12,11 @@ namespace NienLuan_4.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class BINHLUAN
+    public partial class DIADIEMYEUTHICH
     {
-        public string ID_BL { get; set; }
+        public string ID_DDYT { get; set; }
         public string ID_TK { get; set; }
         public string ID_DD { get; set; }
-        public string NOIDUNG_BL { get; set; }
-        public Nullable<int> LUOTTHICH_BL { get; set; }
-        public Nullable<System.DateTime> NGAY_BL { get; set; }
-    
-        public virtual TAIKHOAN TAIKHOAN { get; set; }
-        public virtual DIADIEM DIADIEM { get; set; }
+        public System.DateTime NgayThich { get; set; }
     }
 }
