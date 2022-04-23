@@ -44,7 +44,7 @@ function ShowPrivatePoints() {
                 var c = String(data[i].coor).split(', ');
                 var l1 = StrToFloat(c[0]);
                 var l2 = StrToFloat(c[1]);
-                var marker = L.marker([l1, l2], { id: data[i].id }).on('click', PrivatePointClick).addTo(privatePointLayer);
+                var marker = L.marker([l1, l2], { id: data[i].id }).on('click', PointClick).addTo(privatePointLayer);
             }
         },
         error: function () {
@@ -52,7 +52,7 @@ function ShowPrivatePoints() {
         }
     })
 }
-function PrivatePointClick(e) {
+function PointClick(e) {
     // console.log(e.target.options.id);
     mapObject.setView(e.target.getLatLng(), 15, { animation: true, duration: 2 });
     GetPointProp(e.target.options.id);
@@ -101,15 +101,85 @@ pointProp.onAdd = function (map) {
 }
 
 // point point control
+var controlDNStr = '';
+controlDNStr += '<div id="pointEdit" onclick="SuaDiaDiem()"><i class="fa fa-pencil"></i></div>';
+controlDNStr += '<div id="pointDelete"><i class="fa fa-trash"></i></div>';
+
+var controlAnoStr = '';
+controlAnoStr += '<div id="pointLead"></div>';
+
+
 var pointControl = L.control({ position: "topleft" });
 pointControl.onAdd = function (map) {
     var div = L.DomUtil.create("div", "div3");
-    var i = '<div id="pointControl">';
+    var i = '<div id="pointControl" onmouseover="DisableZoomDrag()" onmouseout="EnableZoomDrag()">';
+    if (getUserRole() == "dn") {
+        i += controlDNStr;
+    } else {
+        i += controlAnoStr;
+    }
     i += '</div>';
     div.innerHTML = i;
     return div;
 };
 
+// Sua dia diem
+var pointEditDiv = L.control({ position: "topleft" });
+pointEditDiv.onAdd = function (map) {
+    var div = L.DomUtil.create("div", "div");
+    var i = '<div id="EditDiv" onmouseover="DisableZoomDrag()" onmouseout="EnableZoomDrag()"></div>';
+    div.innerHTML = i;
+    return div;
+}
+
+// Sua dia diem
+function SuaDiaDiem() {
+    if (!document.getElementById('EditDiv')) {
+        pointEditDiv.addTo(mapObject);
+        var id = document.getElementById('inputID').value;
+        HienSuaDiaDiem(id);
+    }
+    else {
+        pointEditDiv.remove();
+    }    
+}
+
+// Hien sua dia diem
+function HienSuaDiaDiem(id) {
+    var name = document.getElementById('labelName').textContent;
+    var add = document.getElementById('labelAdd').textContent;
+    var img = document.getElementById('pointImg').src;
+
+    var str = '<div id="divEdit">';
+    str += '<table>';
+    str += '<tr><td colspan="2"><label><div id="cs">Chỉnh sửa địa điểm</div></label></td></tr>';
+    str += '<tr><td><label for="name" >Tên địa điểm: </label></td><td><input type="text" class="form-control" id="EditName" value="' + name + '"/></td></tr>';
+    str += '<tr><td><label for="name" >Địa chỉ: </label></td><td><input type="text" class="form-control" id="EditAdd" value="' + add + '"/></td></tr>';
+    str += '<tr><td><label for="name" >Hình ảnh: </label></td><td><div id="divEditImg" onclick="chonfile()">Chọn hình ảnh<div><input type="file" id="EditImg" class="KoHienThi"/></td></tr>';
+    str += '<tr><td colspan="2"><div id="ImgEdit"><img src="' + img + '" id="imgedit"/></div></td></tr>';
+    str += '<tr><td><label for="name" >Loại: </label></td><td>' + SelectListLoaiDVu() + '</td></tr>';
+    str += '</table></div>';
+    document.getElementById('EditDiv').innerHTML = str;
+    $("#EditImg").change(function () {
+        HienImg(this);
+    });
+}
+
+// Hien edit img
+function HienImg(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#imgedit').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+function chonfile() {
+    document.getElementById('EditImg').click();
+}
+
+// Hien thong tin dia diem
 function DisplayPointProperties(data) {
     removeAllMenu();
     pointProp.addTo(mapObject);
@@ -132,6 +202,8 @@ function DisplayPointProperties(data) {
     document.getElementById('pointUserComment').innerHTML = comment;    
 }
 
+
+
 // Hien thi binh luan
 function HienBinhLuan(data) {
     document.getElementById('pointComments').innerHTML = '';
@@ -139,35 +211,88 @@ function HienBinhLuan(data) {
         document.getElementById('pointComments').innerHTML = '<label id="EmptyCmt">Chưa có bình luận nào</label>';
     }
     else {
+        data.sort((a, b) => parseInt(b.LUOTTHICH_BL) - parseInt(a.LUOTTHICH_BL));
         for (var i = 0; i < data.length; i++) {
-            console.log(data[i]);
-            var e = "";
-            var eachComment = '<div class="pointEachComment">';
+            var eachComment = '<div class="pointEachComment"><input type="text" class="KoHienThi" id="cmt' + i +'" value="' + data[i].ID_BL + '">';
             eachComment += '<div class="commentUserName" onmouseover="CommentHover(' + i + ')" onmouseout="CommentOut()">';
             eachComment += '<table><tr><th><p id="user' + i + '"><img src="' + data[i].TAIKHOAN.HINHANHs[0].LINK_HA + '" class="eachCommentImg" id="eachCommentImgid' + i + '"/>&nbsp' + data[i].TAIKHOAN.TENHIENTHI_TK + '</p></th></tr><tr><td><p id="comment' + i + '">' + data[i].NOIDUNG_BL + '</p></td></tr></table>';
             eachComment += '</div>';
             eachComment += '</div>';
-            e += eachComment;
-        }
-        document.getElementById('pointComments').innerHTML = e;
+            eachComment += '<div id="cmtLike"><i class="" style="color:red" onclick="ThichBinhLuan(' + i +')" id="cmtHeart' + i + '"></i><p id="cmtLuotThich'+ i + '"></p></div>';
+            document.getElementById('pointComments').innerHTML += eachComment;
+            KiemTraDaThichBL(i);
+        }        
     }
+}
+
+
+// Kiem tra da thich binh luan
+function KiemTraDaThichBL(id) {
+    var x = 'cmt' + id;
+    var bl = document.getElementById(x).value;
+    var h = 'cmtHeart' + id;
+    var p = 'cmtLuotThich' + id;
+    $.ajax({
+        url: 'Point/KiemTraDaThichBL',
+        type: 'post',
+        data: {
+            id: bl
+        },
+        success: function (data) {
+            if (data.liked == true) {                
+                document.getElementById(h).className = "fa fa-heart";
+            }
+            else {
+                document.getElementById(h).className = "fa fa-heart-o";
+            }
+            if (parseInt(data.luotthich) <= 999) {
+                document.getElementById(p).innerHTML = data.luotthich;
+            }
+            else {
+                document.getElementById(p).innerHTML = "999+";
+            }
+        }
+    })
+}
+
+// Thich binh luan
+function ThichBinhLuan(id) {
+    var x = 'cmt' + id;
+    var bl = document.getElementById(x).value;
+    $.ajax({
+        url: 'Point/ThichBinhLuan',
+        type: 'post',
+        data: {
+            id: bl
+        },
+        success: function (data) {
+            KiemTraDaThichBL(id);
+        }
+    })
 }
 
 // Dang binh luan
 function DangBinhLuan() {
     var dd = document.getElementById('inputID').value;
     var cmt = document.getElementById('cmt').value;
-    $.ajax({
-        url: 'Point/DangBinhLuan',
-        type: 'post',
-        data: {
-            dd: dd,
-            cmt: cmt
-        },
-        success: function (data) {
+    if (cmt == "" || cmt == null) {
 
-        }
-    })
+    }
+    else {
+        $.ajax({
+            url: 'Point/DangBinhLuan',
+            type: 'post',
+            data: {
+                dd: dd,
+                cmt: cmt
+            },
+            success: function (data) {
+                HienBinhLuan(data);
+                document.getElementById('cmt').value = "";
+                document.getElementById('pointComments').scrollTop = document.getElementById('pointComments').scrollHeight;
+            }
+        });        
+    }
 }
 
 // Kiem tra da thich dia diem

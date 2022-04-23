@@ -162,7 +162,7 @@ namespace NienLuan_4.Controllers
             return Json(new { success = success }, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult DangBinhLuan(string dd, string cmt)
+        public ActionResult DangBinhLuan(string dd, string cmt)
         {
             BINHLUAN B = new BINHLUAN();
             B.ID_BL = Guid.NewGuid().ToString();
@@ -173,7 +173,63 @@ namespace NienLuan_4.Controllers
             B.NGAY_BL = DateTime.Today;
             db.BINHLUANs.Add(B);
             db.SaveChanges();
-            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+
+            List<BINHLUAN> L = db.BINHLUANs.Where(a => a.ID_DD == dd).ToList();
+            var report = JsonConvert.SerializeObject(L, Formatting.None,
+                                     new JsonSerializerSettings()
+                                     {
+                                         ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                                     });
+            return Content(report, "application/json");
+        }
+
+        public JsonResult KiemTraDaThichBL(string id)
+        {
+            int luotthich = 0;
+            BINHLUANDATHICH B = db.BINHLUANDATHICHes.Where(a => a.ID_BL == id && a.ID_TK == User.Identity.Name).FirstOrDefault();
+            if(B == null)
+            {
+                return Json(new { liked = false, luotthich = luotthich }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                BINHLUAN b = db.BINHLUANs.Where(a => a.ID_BL == id).FirstOrDefault();
+                luotthich = b.LUOTTHICH_BL.Value;
+                return Json(new { liked = true, luotthich = luotthich }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public ActionResult ThichBinhLuan(string id)
+        {
+            BINHLUANDATHICH B = db.BINHLUANDATHICHes.Where(a => a.ID_BL == id && a.ID_TK == User.Identity.Name).FirstOrDefault();
+            if(B == null)
+            {
+                BINHLUANDATHICH b = new BINHLUANDATHICH();
+                b.ID_BL = id;
+                b.ID_BLYT = Guid.NewGuid().ToString();
+                b.ID_TK = User.Identity.Name;
+                b.NgayThich = DateTime.Today;
+                db.BINHLUANDATHICHes.Add(b);
+                db.SaveChanges();
+
+                BINHLUAN bl = db.BINHLUANs.Where(a => a.ID_BL == id).FirstOrDefault();
+                db.Entry(bl).State = EntityState.Detached;
+                bl.LUOTTHICH_BL += 1;
+                db.Entry(bl).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            else
+            {
+                db.BINHLUANDATHICHes.Remove(B);
+                db.SaveChanges();
+
+                BINHLUAN bl = db.BINHLUANs.Where(a => a.ID_BL == id).FirstOrDefault();
+                db.Entry(bl).State = EntityState.Detached;
+                bl.LUOTTHICH_BL -= 1;
+                db.Entry(bl).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            return Json(new { s = true }, JsonRequestBehavior.AllowGet);
         }
     }
 }
