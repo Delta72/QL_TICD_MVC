@@ -116,4 +116,7 @@ function removeAllMenu() {
     if (document.getElementById('pointControl')) {
         pointControl.remove();
     }
+    if (document.getElementById('EditDiv')) {
+        pointEditDiv.remove();
+    }
 }

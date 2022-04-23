@@ -231,5 +231,91 @@ namespace NienLuan_4.Controllers
             }
             return Json(new { s = true }, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult ChinhSuaDiaDiem(EditPointModel model)
+        {
+            DIADIEM D = db.DIADIEMs.Where(a => a.ID_DD == model.id).FirstOrDefault();
+            db.Entry(D).State = EntityState.Detached;
+            if(D.TEN_DD != model.name) D.TEN_DD = model.name;
+            if (D.DIACHI_DD != model.add) D.DIACHI_DD = model.add;
+            HINHANH H = db.HINHANHs.Where(a => a.ID_DD == model.id).FirstOrDefault();
+            string link = H.LINK_HA;
+            if (model.img != null)
+            {
+                var path = Server.MapPath(link);
+                System.IO.File.Delete(path);
+               
+                db.Entry(H).State = EntityState.Detached;
+                H.LINK_HA = UploadImage(model.img);
+                db.Entry(H).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            int l = 0; int.TryParse(model.loai, out l);
+            if (D.ID_LOAIDD != l) D.ID_LOAIDD = l;
+            if (D.MOTA_DD != model.mota) D.MOTA_DD = model.mota;
+
+            db.Entry(D).State = EntityState.Modified;
+            db.SaveChanges();
+            DIADIEM DD = db.DIADIEMs.Where(a => a.ID_DD == model.id).FirstOrDefault();
+
+            var report = JsonConvert.SerializeObject(DD, Formatting.None,
+                                     new JsonSerializerSettings()
+                                     {
+                                         ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                                     });
+            return Content(report, "application/json");
+        }
+
+        public JsonResult XoaDiaDiem(string id)
+        {
+            var s = "success";
+            DIADIEM D = db.DIADIEMs.Where(a => a.ID_DD == id).FirstOrDefault();
+            try
+            {
+                List<BINHLUAN> B = db.BINHLUANs.Where(a => a.ID_DD == id).ToList();
+                if(B != null)
+                {
+                    // xoa binh luan yeu thich
+                    foreach (var item in B)
+                    {
+                        BINHLUANDATHICH b = db.BINHLUANDATHICHes.Where(a => a.ID_BL == item.ID_BL).FirstOrDefault();
+                        if(b != null)
+                        {
+                            db.BINHLUANDATHICHes.Remove(b);
+                            db.SaveChanges();
+                        }                       
+                    }
+                    // xoa binh luan
+                    foreach (var item in B)
+                    {
+                        db.BINHLUANs.Remove(item);
+                        db.SaveChanges();
+                    }
+                }
+
+                List<DIADIEMYEUTHICH> d = db.DIADIEMYEUTHICHes.Where(a => a.ID_DD == id).ToList();
+                // xoa dia diem yeu thich
+                foreach(var item in d)
+                {
+                    db.DIADIEMYEUTHICHes.Remove(item);
+                    db.SaveChanges();
+                }
+
+                // xoa hinh anh
+                HINHANH H = db.HINHANHs.Where(a => a.ID_DD == id).FirstOrDefault();
+                System.IO.File.Delete(Server.MapPath(H.LINK_HA));
+                db.HINHANHs.Remove(H);
+
+                // xoa dia diem
+                db.DIADIEMs.Remove(D);
+                db.SaveChanges();
+
+            }
+            catch(Exception e)
+            {
+                s = e.ToString();
+            }
+            return Json(new { s = s }, JsonRequestBehavior.AllowGet);
+        }
     }
 }

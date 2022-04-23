@@ -15,7 +15,7 @@ if (logon == true) {
                 async: false,
                 success: function (data) {
                     for (var a in data) {
-                        str += '<option value="' + (parseInt(a) + 1) + '">' + data[a] + '</option>';
+                        str += '<option value="' + data[a].ID_LOAIDD + '">' + data[a].TEN_LOAIDD + '</option>';
                     }
                 }
             });

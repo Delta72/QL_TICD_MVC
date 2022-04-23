@@ -169,6 +169,7 @@
     <Compile Include="Models\DIADIEMYEUTHICH.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EditPointModel.cs" />
     <Compile Include="Models\HINHANH.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>

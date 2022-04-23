@@ -1,7 +1,6 @@
 ﻿body {
     padding: 0;
     margin: 0;
-
 }
 
 html, body, #map {
@@ -97,30 +96,33 @@ label {
     margin-bottom: 5%;
 }
 
-    #menuContent a{
+    #menuContent a {
         color: green;
         font-size: 15px;
         transition-property: font-size;
         transition-duration: 1s;
         transition-delay: 0s
     }
+
         #menuContent a:hover {
             font-size: 18px;
         }
+
         #menuContent a:active {
             font-size: 18px;
         }
+
 #avatar {
     margin-left: 20%;
     margin-top: 20%;
 }
 
-#avatar img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    border:1px solid green;
-}
+    #avatar img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 1px solid green;
+    }
 
 #menuFooter {
     position: absolute;
@@ -129,17 +131,17 @@ label {
     margin-bottom: 5%;
 }
 
-#menuFooter a {
-    color: green;
-    font-size: 20px;
-    transition-property: font-size;
-    transition-duration: 1s;
-    transition-delay: 0s
-}
+    #menuFooter a {
+        color: green;
+        font-size: 20px;
+        transition-property: font-size;
+        transition-duration: 1s;
+        transition-delay: 0s
+    }
 
-#menuFooter a:hover {
-    font-size: 22px;
-}
+        #menuFooter a:hover {
+            font-size: 22px;
+        }
 
 #userName p {
     color: black;
@@ -158,10 +160,12 @@ label {
 #tkct {
     margin-left: 5%;
 }
+
     #tkct a {
         font-size: 15px;
     }
-        #tkct a:hover{
+
+        #tkct a:hover {
             font-size: 17px;
         }
 
@@ -172,8 +176,8 @@ label {
     height: 8vh;
     border-radius: 0%;
     outline: 5px dashed green;
-
 }
+
     #userProfile img {
         width: 3vw;
         height: 6vh;
@@ -205,19 +209,23 @@ label {
     border-radius: 0%;
     outline: 5px dashed green;
 }
-#markerMenu table{
-    text-align: center;
-    margin-left: 5%;
-}
+
+    #markerMenu table {
+        text-align: center;
+        margin-left: 5%;
+    }
+
     #markerMenu label {
         margin-top: 15%;
         font-size: 15px;
     }
+
     #markerMenu .txt {
         width: 180px;
         margin-left: 5%;
         margin-top: 5%;
     }
+
 .btnMarker {
     margin-top: 5px;
     width: 100px;
@@ -226,6 +234,7 @@ label {
     color: yellow;
     transition: 0.25s;
 }
+
     .btnMarker:hover {
         background-color: yellow;
         color: green;
@@ -261,24 +270,25 @@ select option {
 #btnCancelMarker {
     margin-left: 35%;
 }
-#btnCancelMarker:hover{
-    color: red;
-}
 
-#btnSaveMarker{
+    #btnCancelMarker:hover {
+        color: red;
+    }
+
+#btnSaveMarker {
     margin-left: 10%;
 }
 
-#browseFile{
+#browseFile {
     display: none;
 }
 
-#imgMarker{
+#imgMarker {
     width: 300px;
     height: 150px;
 }
 
-#coor{
+#coor {
     display: none;
 }
 
@@ -324,6 +334,7 @@ select option {
     width: 35vw;
     height: 35vh;
 }
+
     #pointImage img {
         display: block;
         width: 34vw;
@@ -335,30 +346,34 @@ select option {
         margin-bottom: auto;
         border-radius: 2%;
     }
+
 #pointAddress {
     width: 30vw;
     height: 5vh;
     text-align: center;
-    overflow: hidden;    
+    overflow: hidden;
     border-bottom: 0.5px solid green;
-}    
-    #pointAddress label:hover{
+}
+
+    #pointAddress label:hover {
         animation: 5s linear 0s infinite alternate move;
     }
-    @keyframes move {
-        from {
-            overflow: auto;
-        }
-        0%, 25% {
-            transform: translateX(0%);
-            left: 0%;
-        }
 
-        75%, 100% {
-            transform: translateX(-100%);
-            left: 100%;
-        }
+@keyframes move {
+    from {
+        overflow: auto;
     }
+
+    0%, 25% {
+        transform: translateX(0%);
+        left: 0%;
+    }
+
+    75%, 100% {
+        transform: translateX(-100%);
+        left: 100%;
+    }
+}
 
 #pointComments {
     width: 35vw;
@@ -374,9 +389,10 @@ select option {
     margin-top: 0.5vh;
     border-right: none;
 }
-.pointEachComment:hover {
-    cursor: zoom-in;
-}
+
+    .pointEachComment:hover {
+        cursor: zoom-in;
+    }
 
 #pointImg {
     width: 70%;
@@ -414,10 +430,12 @@ select option {
     height: 10%;
     height: 10vh;
 }
+
     #pointUserComment table th {
         padding-top: 1vh;
         padding-left: 2vh;
     }
+
     #pointUserComment table td {
         padding-left: 2vh;
         height: 5%;
@@ -429,9 +447,9 @@ select option {
 #CommentDetail {
     width: 25vw;
     height: 50vh;
-    outline: 1px dashed green;
-    margin-right: 10vw;
-    margin-top: 15vh;
+    outline: 3px dashed green;
+    margin-right: 35vw;
+    margin-top: 33vh;
     background-color: #EBEDEF;
 }
 
@@ -448,18 +466,18 @@ select option {
 #UserNameC {
     margin-top: -8vh;
     margin-left: 6vw;
-    font-weight:  bold;
+    font-weight: bold;
 }
 
 #ipbl {
     margin-top: 0vh;
     margin-left: 6vw;
-    
 }
-#ipbl input {
-    width: 30vw;
-    height: 5vh;
-}
+
+    #ipbl input {
+        width: 30vw;
+        height: 5vh;
+    }
 
 #ipbl2 {
     width: 6vw;
@@ -503,6 +521,7 @@ select option {
     border-radius: 50%;
     border: 1px solid green;
 }
+
 #cmn {
     width: 18vw;
     height: 7vh;
@@ -511,6 +530,7 @@ select option {
     overflow-wrap: break-word;
     line-height: 7vh;
 }
+
     #cmn label {
         font-size: 2vh;
         display: inline-block;
@@ -527,6 +547,7 @@ select option {
     overflow: hidden;
     border-top: 1px dashed green;
 }
+
     #cmc p {
         margin-top: 1vh;
     }
@@ -539,24 +560,26 @@ select option {
     margin-top: -6vh;
     text-align: center;
 }
-    #allLike i{
+
+    #allLike i {
         font-size: 3vh;
         margin-top: -1vh;
-        
     }
+
         #allLike i:hover {
             cursor: pointer;
         }
-    #allLike p{
+
+    #allLike p {
         font-size: 2vh;
         margin-top: -1vh;
     }
 
-.KoHienThi{
+.KoHienThi {
     display: none;
 }
 
-#EmptyCmt{
+#EmptyCmt {
     text-align: center;
     margin-top: 5vh;
     margin-left: 3vw;
@@ -572,14 +595,15 @@ select option {
     text-align: center;
 }
 
-#cmtLike i {
-    font-size: 3vh;
-    margin-top: 2vh;
-}
-    #cmtLike i:hover {
-        font-size: 3.2vh;
-        cursor: pointer;
+    #cmtLike i {
+        font-size: 3vh;
+        margin-top: 2vh;
     }
+
+        #cmtLike i:hover {
+            font-size: 3.2vh;
+            cursor: pointer;
+        }
 
 #cmtLuotThich {
     font-size: 2vh;
@@ -600,17 +624,21 @@ select option {
     line-height: 4vh;
     vertical-align: middle;
 }
-    #pointEdit:hover {        
+
+    #pointEdit:hover {
         border: 1px dashed green;
         background-color: yellow;
         cursor: pointer;
     }
-    #pointEdit i{
+
+    #pointEdit i {
         color: yellow;
     }
+
         #pointEdit i:hover {
             color: black;
         }
+
 #pointDelete {
     margin-top: 1vh;
     width: 2vw;
@@ -621,6 +649,7 @@ select option {
     text-align: center;
     vertical-align: middle;
 }
+
     #pointDelete:hover {
         border: 1px dashed green;
         background-color: yellow;
@@ -639,35 +668,39 @@ select option {
 #EditDiv {
     border: 3px dashed green;
     width: 30vw;
-    height: 70vh;
+    height: 80vh;
     margin-left: 40vw;
     margin-top: -85vh;
     background: #EBEDEF;
 }
+
     #EditDiv label {
         font-size: 2vh;
         margin-top: 1vh;
     }
+
     #EditDiv input {
         width: 20vw;
         margin-left: 1vw;
         margin-top: 1vh;
     }
+
     #EditDiv select {
         width: 20vw;
         margin-left: 1vw;
         margin-top: 1vh;
     }
-    #cs { 
-        width: 29vw;
-        text-align: center;
-    }
+
+#cs {
+    width: 29vw;
+    text-align: center;
+}
 
 #divEdit {
     width: 30vw;
 }
 
-#EditImg{
+#EditImg {
     display: none;
 }
 
@@ -683,7 +716,7 @@ select option {
     margin-left: 5vw;
 }
 
-    #divEditImg:hover{
+    #divEditImg:hover {
         cursor: pointer;
         color: green;
         background-color: yellow;
@@ -696,8 +729,81 @@ select option {
     text-align: center;
 }
 
-#ImgEdit img{
-    border-radius: 2%;
-    width: 29vw;
-    height: 25vh;
+    #ImgEdit img {
+        border-radius: 2%;
+        width: 29vw;
+        height: 25vh;
+    }
+
+#Editarea {
+    width: 29.5vw;
+    height: 20vh;
+    text-align: left;
 }
+
+    #Editarea textarea {
+        margin-left: 0.25vw;
+        resize: none;
+        max-width: 25vw;
+        width: 25vw;
+        height: 20vh;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        border-radius: 2%;
+    }
+
+#btnSaveEdit {
+    height: 5vh;
+    width: 3vw;
+    border: 1px solid yellow;
+    margin-left: 26vw;
+    margin-top: -20vh;
+    line-height: 5vh;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 1.5vw;
+    background-color: green;
+}
+
+    #btnSaveEdit:hover {
+        background-color: yellow;
+        border: 1px solid green;
+        cursor: pointer;
+    }
+
+    #btnSaveEdit i {
+        color: yellow;
+    }
+
+        #btnSaveEdit i:hover {
+            color: green;
+        }
+
+#btnCancelEdit {
+    height: 4vh;
+    width: 2vw;
+    border: 1px solid yellow;
+    margin-left: 27vw;
+    margin-top: -62vh;
+    line-height: 4vh;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 1vw;
+    background-color: green;
+}
+
+    #btnCancelEdit:hover {
+        background-color: yellow;
+        border: 1px solid green;
+        cursor: pointer;
+    }
+
+    #btnCancelEdit i {
+        color: yellow;
+    }
+
+        #btnCancelEdit i:hover {
+            color: red;
+        }
+

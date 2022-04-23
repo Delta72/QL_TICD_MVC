@@ -100,13 +100,8 @@ namespace NienLuan_4.Controllers
         // Select list loai dich vu
         public ActionResult selectLoaiDVu()
         {
-            List<string> str = new List<string>();
-            foreach(var a in db.LOAIDIADIEMs)
-            {
-                string s = a.TEN_LOAIDD;
-                str.Add(s);
-            }
-            var report = JsonConvert.SerializeObject(str, Formatting.None,
+            List<LOAIDIADIEM> L = db.LOAIDIADIEMs.OrderBy(a => a.TEN_LOAIDD).ToList();         
+            var report = JsonConvert.SerializeObject(L, Formatting.None,
                                      new JsonSerializerSettings()
                                      {
                                          ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
