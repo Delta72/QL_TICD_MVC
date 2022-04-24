@@ -494,11 +494,25 @@ function btnPosClick() {
         myLocation.clearLayers();
         if (e.accuracy < 100) {
             // L.circle(e.latlng, e.accuracy).addTo(myLocation);
+            var popupStr = '';
+            popupStr += '<div id="popupDiv"><table>';
+            popupStr += '<tr><td><label>Tìm địa điểm gần nhất trong phạm vi: </label></td><td><input class="form-control" id="inputKC" value="5"/><div id="km"><label>km</label></div></td></tr>';
+            popupStr += '<tr><td>' + SelectListLoaiDVu() + '</td><td><div id="btnTimKiemGanNhat">Tìm kiếm</div></td></tr>'
+            popupStr += '</table></div>';
+
             mapObject.setView([e.latlng.lat, e.latlng.lng], 15, { animate: true, duration: 2 });
-            var marker = L.marker([e.latitude, e.longitude], { icon: greenHuman }).on('click', function (e) {
-                mapObject.setView([e.latlng.lat, e.latlng.lng], 15, { animate: true, duration: 2 });
-            }).addTo(myLocation);
-            HienDiaDiemCongDong(e.latlng.lat, e.latlng.lng);
+            var popup = L.popup({ closeOnClick: false, autoClose: false, closeButton: true, className: 'idpopup'});
+            var marker = L.marker([e.latitude, e.longitude], { icon: greenHuman })
+                .on('click', function (e) {
+                    mapObject.setView([e.latlng.lat, e.latlng.lng], 15, { animate: true, duration: 2 });
+                    popup.options.offset = e.target.options.icon.options.popupAnchor;
+                    popup.setContent(popupStr).setLatLng(e.target.getLatLng()).addTo(mapObject);
+                    $('#sllLoaiDVu').prepend('<option value="all" selected="selected">--- Tất cả địa điểm ---</option>');
+                })
+                .addTo(myLocation)
+                .openPopup();
+            
+            HienDiaDiemCongDong(e.latlng.lat + ', ' + e.latlng.lng);
         }
         else {
             alert("Đường truyền không ổn định, không thể xác nhận vị trí !!!");
@@ -509,8 +523,8 @@ function btnPosClick() {
 }
 
 // Hien dia diem cong dong xung quanh
-function HienDiaDiemCongDong(lat, lng) {
-    console.log(lat + ', ' + lng);
+function HienDiaDiemCongDong(coor) {
+    console.log(coor);
 };
 
 // on load

@@ -807,3 +807,53 @@ select option {
             color: red;
         }
 
+.idpopup .leaflet-popup-content-wrapper, .idpopup .leaflet-popup-tip {
+    width: 30vw;
+    background-color: #FEF54F;
+    border: 1px solid green;
+}
+
+#popupDiv {
+    width: 27vw;
+    height: 11vh;
+}
+
+    #popupDiv label {
+        font-size: 1vw;
+    }
+
+    #popupDiv input {
+        width: 5vw;
+        margin-left: 1vw;
+    }
+
+    #popupDiv select {
+        margin-top: 1vh;
+    }
+
+#km {
+    margin-left: 7vw;
+    margin-top: -4vh;
+}
+
+#btnTimKiemGanNhat {
+    height: 5vh;
+    width: 5vw;
+    border: 1px solid black;
+    margin-left: 3vw;
+    margin-top: 1vh;
+    line-height: 5vh;
+    text-align: center;
+    vertical-align: middle;
+    color: yellow;
+    background-color: green;
+    font-size: 1vw;
+}
+
+    #btnTimKiemGanNhat:hover {
+        color: white;
+        cursor: pointer;
+        background-color: forestgreen;
+        font-size: 1.1vw;
+    }
+

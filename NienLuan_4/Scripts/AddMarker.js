@@ -1,27 +1,29 @@
 ﻿var logon = isLogOn();
 
+// Select list loai dich vu
+function SelectListLoaiDVu() {
+    var str = '';
+    str += '<select class="form-control txt" id="sllLoaiDVu">';
+    $.ajax({
+        url: '/User/selectLoaiDVu',
+        type: 'get',
+        async: false,
+        success: function (data) {
+            for (var a in data) {
+                str += '<option value="' + data[a].ID_LOAIDD + '">' + data[a].TEN_LOAIDD + '</option>';
+            }
+        }
+    });
+    str += '</select>';
+    return str;
+}
+
 if (logon == true) {
     var role = getUserRole();
     if (role == "dn") {
         minus.addTo(mapObject);
         add.addTo(mapObject);
-        // Select list loai dich vu
-        function SelectListLoaiDVu() {
-            var str = '';
-            str += '<select class="form-control txt" id="sllLoaiDVu">';
-            $.ajax({
-                url: '/User/selectLoaiDVu',
-                type: 'get',
-                async: false,
-                success: function (data) {
-                    for (var a in data) {
-                        str += '<option value="' + data[a].ID_LOAIDD + '">' + data[a].TEN_LOAIDD + '</option>';
-                    }
-                }
-            });
-            str += '</select>';
-            return str;
-        }
+        
         
 
         // Noi dung marker

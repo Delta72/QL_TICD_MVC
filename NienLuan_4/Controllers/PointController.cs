@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 using NienLuan_4.Models;
+using System.Device.Location;
 
 namespace NienLuan_4.Controllers
 {
@@ -298,10 +299,33 @@ namespace NienLuan_4.Controllers
             return Json(new { s = s }, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult HienDiaDiemCongDong(string id)
+        public double Khoang_cach(string p1, string p2)
         {
-            List<DIADIEM> D = db.DIADIEMs.Where(a => a.LADIEMCANHAN == false).ToList();
-            var report = JsonConvert.SerializeObject(D, Formatting.None,
+            double lat1, lat2, lng1, lng2;
+            double.TryParse(p1.Split(',')[0], out lat1);
+            double.TryParse(p1.Split(',')[1], out lng1);
+            double.TryParse(p2.Split(',')[0], out lat2);
+            double.TryParse(p2.Split(',')[1], out lng2);
+            var sCoord = new GeoCoordinate(lat1, lng1);
+            var eCoord = new GeoCoordinate(lat2, lng2);
+            double r = sCoord.GetDistanceTo(eCoord);
+            return r;
+        }
+
+        public ActionResult HienDiaDiemCongDong(string coor, string dis)
+        {
+            double kc = 0; double.TryParse(dis, out kc);
+            List<DIADIEM> D1 = new List<DIADIEM>();
+            List<DIADIEM> D2 = db.DIADIEMs.Where(a => a.LADIEMCANHAN == false).ToList();
+            foreach(var item in D2)
+            {
+                if(Khoang_cach(coor, item.TOADO_DD) <= kc)
+                {
+                    D1.Add(item);
+
+                }
+            }
+            var report = JsonConvert.SerializeObject(D1, Formatting.None,
                                      new JsonSerializerSettings()
                                      {
                                          ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore

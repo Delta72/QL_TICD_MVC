@@ -4,7 +4,7 @@ var IconShape = L.Icon.extend({
     options: {
         iconSize: [40, 40], 
         iconAnchor: [20, 35],  
-        popupAnchor: [0, -35]
+        popupAnchor: [0, -40]
     }
 });
 
