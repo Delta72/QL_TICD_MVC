@@ -87,7 +87,7 @@ if (logon == true) {
             addMarkerPropDiv();
             addMarker.clearLayers();
             var px;
-            marker = L.marker(mapObject.getCenter(), { draggable: 'true'}).addTo(addMarker);
+            marker = L.marker(mapObject.getCenter(), { draggable: 'true', icon: iconThem}).addTo(addMarker);
             $('#coor').val(marker._latlng.lat + ', ' + marker._latlng.lng);
             allPX.eachLayer(function (l) {
                 if (leafletPip.pointInLayer(marker.getLatLng(), l, true).length != 0) {

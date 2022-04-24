@@ -12,28 +12,7 @@ namespace NienLuan_4.Controllers
     public class PointController : Controller
     {
         Database_Entities db = new Database_Entities();
-        // GET: Point
-        public ActionResult ShowAllPoints()
-        {
-            List<pointModel> listModel = new List<pointModel>();
-            foreach(var item in db.DIADIEMs)
-            {
-                if(item.LADIEMCANHAN == false)
-                {
-                    pointModel p = new pointModel();
-                    p.id = item.ID_DD;
-                    p.coor = item.TOADO_DD;
-                    p.loai = item.ID_LOAIDD;
-                    listModel.Add(p);
-                }
-            }
-            var r = JsonConvert.SerializeObject(listModel, Formatting.None,
-                                     new JsonSerializerSettings()
-                                     {
-                                         ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-                                     });
-            return Content(r, "application/json");
-        }
+        // GET: Point       
 
         public ActionResult GetPointProp(string pointID)
         {
@@ -55,7 +34,7 @@ namespace NienLuan_4.Controllers
                 pointModel p = new pointModel();
                 p.id = item.ID_DD;
                 p.coor = item.TOADO_DD;
-                p.loai = item.ID_LOAIDD;
+                p.loai = item.LOAIDIADIEM.ICON_LOAIDD;
                 P.Add(p);
             }
             var report = JsonConvert.SerializeObject(P, Formatting.None,
@@ -175,6 +154,7 @@ namespace NienLuan_4.Controllers
             db.SaveChanges();
 
             List<BINHLUAN> L = db.BINHLUANs.Where(a => a.ID_DD == dd).ToList();
+            
             var report = JsonConvert.SerializeObject(L, Formatting.None,
                                      new JsonSerializerSettings()
                                      {
@@ -316,6 +296,17 @@ namespace NienLuan_4.Controllers
                 s = e.ToString();
             }
             return Json(new { s = s }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult HienDiaDiemCongDong(string id)
+        {
+            List<DIADIEM> D = db.DIADIEMs.Where(a => a.LADIEMCANHAN == false).ToList();
+            var report = JsonConvert.SerializeObject(D, Formatting.None,
+                                     new JsonSerializerSettings()
+                                     {
+                                         ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                                     });
+            return Content(report, "application/json");
         }
     }
 }

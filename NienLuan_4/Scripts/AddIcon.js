@@ -1,13 +1,19 @@
 ﻿
-
-var LeafIcon = L.Icon.extend({
+// Tao kich thuoc icon
+var IconShape = L.Icon.extend({
     options: {
-        iconSize: [35, 40], 
-        iconAnchor: [15, 35],  
+        iconSize: [40, 40], 
+        iconAnchor: [20, 35],  
         popupAnchor: [0, -35]
     }
 });
 
-var greenHuman = new LeafIcon({
+// green human
+var greenHuman = new IconShape({
     iconUrl: '/Content/Leaflet/images/greenhuman.png',
+})
+
+// them dia diem
+var iconThem = new IconShape({
+    iconUrl: '/Content/Images/Icon/iconThem.png',
 })

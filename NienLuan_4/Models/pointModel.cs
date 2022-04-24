@@ -9,7 +9,7 @@ namespace NienLuan_4.Models
     {
         public string id { get; set; }
         public string coor { get; set; }
-        public int loai { get; set; }
+        public string loai { get; set; }
 
     }
 }

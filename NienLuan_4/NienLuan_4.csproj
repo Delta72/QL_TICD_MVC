@@ -203,6 +203,11 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\3.jpg" />
+    <Content Include="Content\Images\Icon\coffee_b.png" />
+    <Content Include="Content\Images\Icon\eat_b.png" />
+    <Content Include="Content\Images\Icon\grocery.png" />
+    <Content Include="Content\Images\Icon\hospital_b.png" />
+    <Content Include="Content\Images\Icon\moto.png" />
     <Content Include="Content\Images\UserProfile\AnoAvatar.png" />
     <Content Include="Content\Images\UserProfile\User1.png" />
     <Content Include="Content\layout-style.css" />

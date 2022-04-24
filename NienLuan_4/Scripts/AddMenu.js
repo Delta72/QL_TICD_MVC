@@ -20,8 +20,8 @@ AnoMenuStr += '<br><p>Bạn chưa đăng nhập !!!</p>';
 AnoMenuStr += '<h3"><a href="#" onClick="btnSignInClick2()">Đăng nhập</a></h3>';
 // Menu nguoi dung
 var userMenuStr = '';
-userMenuStr += '<h3><a href="#"><i class="fa fa-map"></i>&nbsp&nbspBản đồ cộng đồng</a></h3>';
-userMenuStr += '<h3><a href="#"><i class="fa fa-map-signs"></i>&nbsp&nbspBản đồ cá nhân</a></h3>';
+userMenuStr += '<h3><a href="#" onclick="btnPosClick()"><i class="fa fa-map"></i>&nbsp&nbspBản đồ cộng đồng</a></h3>';
+userMenuStr += '<h3><a href="#"><i class="fa fa-map-signs"></i>&nbsp&nbspĐịa điểm đã thích</a></h3>';
 userMenuStr += '<h3><a href="#"><i class="fa fa-user"></i>&nbsp&nbspQuản lý tài khoản</a></h3>';
 userMenuStr += '<hr>';
 userMenuStr += '<h3><a href="Home/About">Giới thiệu</a></h3>';
@@ -73,8 +73,7 @@ function addOptions() {
 }
 
 // Hien menu
-$('#btnMenu').click(function () {
-    removeAllMenu();
+$('#btnMenu').click(function () {   
     addMarker.clearLayers();
     if (!document.getElementById("userMenu")) {
         userMenu.addTo(mapObject);
@@ -99,7 +98,7 @@ $('#btnMenu').click(function () {
         }
     }
     else {
-        userMenu.remove();
+        removeAllMenu();
     }    
 })
 

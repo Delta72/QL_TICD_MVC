@@ -44,7 +44,10 @@ function ShowPrivatePoints() {
                 var c = String(data[i].coor).split(', ');
                 var l1 = StrToFloat(c[0]);
                 var l2 = StrToFloat(c[1]);
-                var marker = L.marker([l1, l2], { id: data[i].id }).on('click', PointClick).addTo(privatePointLayer);
+                var icon = new IconShape({
+                     iconUrl: data[i].loai,
+                })
+                var marker = L.marker([l1, l2], { id: data[i].id, icon: icon }).bindPopup("AAAAAAAAAA").on('click', PointClick).addTo(privatePointLayer);
             }
         },
         error: function () {
@@ -484,6 +487,31 @@ function CommentHover(i) {
 function CommentOut() {
     CommentDetail.remove();
 }
+
+// Phat hien dia diem nguoi dung
+function btnPosClick() {
+    mapObject.locate({ setView: true, watch: false }).on('locationfound', function (e) {
+        myLocation.clearLayers();
+        if (e.accuracy < 100) {
+            // L.circle(e.latlng, e.accuracy).addTo(myLocation);
+            mapObject.setView([e.latlng.lat, e.latlng.lng], 15, { animate: true, duration: 2 });
+            var marker = L.marker([e.latitude, e.longitude], { icon: greenHuman }).on('click', function (e) {
+                mapObject.setView([e.latlng.lat, e.latlng.lng], 15, { animate: true, duration: 2 });
+            }).addTo(myLocation);
+            HienDiaDiemCongDong(e.latlng.lat, e.latlng.lng);
+        }
+        else {
+            alert("Đường truyền không ổn định, không thể xác nhận vị trí !!!");
+        }                
+    }).on('locationerror', function () {
+        alert("Không thể truy cập vị trí");
+    });
+}
+
+// Hien dia diem cong dong xung quanh
+function HienDiaDiemCongDong(lat, lng) {
+    console.log(lat + ', ' + lng);
+};
 
 // on load
 $(document).ready(function () {

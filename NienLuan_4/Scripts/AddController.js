@@ -66,14 +66,3 @@ resetView.onAdd = function (map) {
 };
 // Location
 
-function btnPosClick() {
-    mapObject.locate({ setView: true, watch: false }).on('locationfound', function (e) {
-        myLocation.clearLayers();
-        mapObject.setView([e.latitude, e.longitude], 17);
-        var marker = L.marker([e.latitude, e.longitude], { icon: greenHuman }).on('click', function (e) {
-            mapObject.setView([e.latlng.lat, e.latlng.lng], 17, { "animate": true, "duration": 2 });
-        }).addTo(myLocation);
-    }).on('locationerror', function () {
-        alert("Không thể truy cập vị trí");
-    });
-}

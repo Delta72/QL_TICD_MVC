@@ -22,6 +22,7 @@ namespace NienLuan_4.Models
     
         public int ID_LOAIDD { get; set; }
         public string TEN_LOAIDD { get; set; }
+        public string ICON_LOAIDD { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DIADIEM> DIADIEMs { get; set; }
