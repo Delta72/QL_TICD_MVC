@@ -1,4 +1,5 @@
 ﻿
+var isLoading = false;
 // Hien tat ca dia diem
 function ShowAllPoints() {
     allPointsLayer.clearLayers();
@@ -47,7 +48,7 @@ function ShowPrivatePoints() {
                 var icon = new IconShape({
                      iconUrl: data[i].loai,
                 })
-                var marker = L.marker([l1, l2], { id: data[i].id, icon: icon }).bindPopup("AAAAAAAAAA").on('click', PointClick).addTo(privatePointLayer);
+                var marker = L.marker([l1, l2], { id: data[i].id, icon: icon }).bindPopup(data[i].mota).on('click', PointClick).addTo(privatePointLayer);
             }
         },
         error: function () {
@@ -63,6 +64,7 @@ function PointClick(e) {
 
 // get point properties
 function GetPointProp(id) {
+    isLoading = true;
     $.ajax({
         url: 'Point/GetPointProp',
         type: 'post',
@@ -73,6 +75,7 @@ function GetPointProp(id) {
             DisplayPointProperties(data);
         }
     })
+    isLoading = false;
 }
 
 // display point properties
@@ -109,8 +112,8 @@ controlDNStr += '<div id="pointEdit" onclick="SuaDiaDiem()"><i class="fa fa-penc
 controlDNStr += '<div id="pointDelete" onclick="XoaDiaDiem()"><i class="fa fa-trash"></i></div>';
 
 var controlAnoStr = '';
-controlAnoStr += '<div id="pointLead"></div>';
-
+controlAnoStr += '<div class="AnoPoint" onclick="ChiDuong()"><i>&#9736</i></div>';
+controlAnoStr += '<div class="AnoPoint" onclick="BaoCaoDiaDiem()"><i>&#9785</i></div>';
 
 var pointControl = L.control({ position: "topleft" });
 pointControl.onAdd = function (map) {
@@ -293,13 +296,18 @@ function DisplayPointProperties(data) {
     var img = '<img src="' + data.HINHANHs[0].LINK_HA + '" id="pointImg">';
     document.getElementById('pointImage').innerHTML = img;
     var add = '<label for="dd" id="labelAdd">' + data.DIACHI_DD + '</label>';
-    document.getElementById('pointAddress').innerHTML = add;   
-    var like = '<i class="" style="color:green" onclick="ThichDiaDiem()" id="heart"></i><p id="LuotThich"></p>';
-    document.getElementById('allLike').innerHTML = like;
-    KiemTraDaThichDD();
+    document.getElementById('pointAddress').innerHTML = add;        
     HienBinhLuan(data.BINHLUANs);
-    var comment = '<img src="' + getUserAvatar() + '" id="UserA"><div id="UserNameC">' + getUserName() + '</div><div id="ipbl"><input type="text" id="cmt"/></div><div id="ipbl2" onclick="DangBinhLuan()"><p>Bình luận<p></div>';
-    document.getElementById('pointUserComment').innerHTML = comment;    
+    if (getUserRole() != "ano") {
+        var like = '<i class="" style="color:green" onclick="ThichDiaDiem()" id="heart"></i><p id="LuotThich"></p>';
+        document.getElementById('allLike').innerHTML = like;
+        KiemTraDaThichDD();
+        var comment = '<img src="' + getUserAvatar() + '" id="UserA"><div id="UserNameC">' + getUserName() + '</div><div id="ipbl"><input type="text" id="cmt"/></div><div id="ipbl2" onclick="DangBinhLuan()"><p>Bình luận<p></div>';
+        document.getElementById('pointUserComment').innerHTML = comment;
+    }
+    else {
+        document.getElementById('pointUserComment').innerHTML = "<label>Đăng nhập để bình luận</label>";
+    }
 }
 
 
@@ -318,7 +326,9 @@ function HienBinhLuan(data) {
             eachComment += '<table><tr><th><p id="user' + i + '"><img src="' + data[i].TAIKHOAN.HINHANHs[0].LINK_HA + '" class="eachCommentImg" id="eachCommentImgid' + i + '"/>&nbsp' + data[i].TAIKHOAN.TENHIENTHI_TK + '</p></th></tr><tr><td><p id="comment' + i + '">' + data[i].NOIDUNG_BL + '</p></td></tr></table>';
             eachComment += '</div>';
             eachComment += '</div>';
-            eachComment += '<div id="cmtLike"><i class="" style="color:red" onclick="ThichBinhLuan(' + i +')" id="cmtHeart' + i + '"></i><p id="cmtLuotThich'+ i + '"></p></div>';
+            if (getUserRole() != "ano") {
+                eachComment += '<div id="cmtLike"><i class="" style="color:red" onclick="ThichBinhLuan(' + i + ')" id="cmtHeart' + i + '"></i><p id="cmtLuotThich' + i + '"></p></div>';
+            }
             document.getElementById('pointComments').innerHTML += eachComment;
             KiemTraDaThichBL(i);
         }        
@@ -490,10 +500,13 @@ function CommentOut() {
 
 // Phat hien dia diem nguoi dung
 function btnPosClick() {
-    mapObject.locate({ setView: true, watch: false }).on('locationfound', function (e) {
+    mapObject.locate({ setView: false, watch: false }).on('locationfound', function (e) {
         myLocation.clearLayers();
-        if (e.accuracy < 100) {
+        if (e.accuracy != 100) {
+            //$("html").css("cursor: progress");
             // L.circle(e.latlng, e.accuracy).addTo(myLocation);
+            var toado = e.latlng.lat + ', ' + e.latlng.lng;
+
             var popupStr = '';
             popupStr += '<div id="popupDiv"><table>';
             popupStr += '<tr><td><label>Tìm địa điểm gần nhất trong phạm vi: </label></td><td><input class="form-control" id="inputKC" value="5"/><div id="km"><label>km</label></div></td></tr>';
@@ -508,11 +521,14 @@ function btnPosClick() {
                     popup.options.offset = e.target.options.icon.options.popupAnchor;
                     popup.setContent(popupStr).setLatLng(e.target.getLatLng()).addTo(mapObject);
                     $('#sllLoaiDVu').prepend('<option value="all" selected="selected">--- Tất cả địa điểm ---</option>');
+                    $('#btnTimKiemGanNhat').click(function () {
+                        TimKiemDiaDiem(toado);
+                    })
                 })
                 .addTo(myLocation)
-                .openPopup();
-            
-            HienDiaDiemCongDong(e.latlng.lat + ', ' + e.latlng.lng);
+                .openPopup();            
+            HienDiaDiemCongDong(toado);
+            //$("html").css("cursor: auto");
         }
         else {
             alert("Đường truyền không ổn định, không thể xác nhận vị trí !!!");
@@ -522,7 +538,7 @@ function btnPosClick() {
     });
 }
 
-// Hien dia diem cong dong xung quanh
+// Hien dia diem cong dong xung quanh 5 km
 function HienDiaDiemCongDong(coor) {
     $.ajax({
         url: 'Point/HienDiaDiemCongDong',
@@ -531,12 +547,82 @@ function HienDiaDiemCongDong(coor) {
             coor: coor,
         },
         success: function (data) {
-            console.log(data);
+            HienMarker(data);
         }
     })
 };
 
+// Hien marker nguoi dung khong phai doanh nghiep
+function HienMarker(data) {
+    privatePointLayer.clearLayers();
+    // console.log(data);
+    for (var i in data) {
+        var c = String(data[i].coor).split(', ');
+        var l1 = StrToFloat(c[0]);
+        var l2 = StrToFloat(c[1]);
+        var icon = new IconShape({
+            iconUrl: data[i].loai,
+        })
+        var marker = L.marker([l1, l2], { id: data[i].id, icon: icon })
+            .bindPopup(data[i].mota).on('click', MarkerOnClick)
+            .addTo(privatePointLayer);
+    }
+}
+
+// Marker on click
+function MarkerOnClick(m) {
+    mapObject.setView(m.target.getLatLng(), 17, { animation: true, duration: 2 });
+    //$("html").css("cursor: progress");
+    GetPointProp(m.target.options.id);
+    //$("html").css("cursor: auto");
+}
+
+
+// Hien dia diem cong dong xung quanh theo tim kiem
+function TimKiemDiaDiem(coor) {
+    var loai = $('#sllLoaiDVu').val();
+    var dis = $('#inputKC').val();
+
+    $.ajax({
+        url: 'Point/TimKiemDiaDiem',
+        type: 'post',
+        data: {
+            coor: coor,
+            dis: dis,
+            loai: loai,
+        },
+        async: false,
+        success: function (data) {
+            HienMarker(data);
+        }
+    })
+}
+
+// Chi duong
+function ChiDuong() {
+    removeAllMenu();
+    var route = L.Routing.control({
+        waypoints: [
+            L.latLng(10.02851086871173, 105.772402882576),
+            L.latLng(10.030555172841881, 105.76869606971742)
+        ],
+        lineOptions: {
+            styles: [{
+                color: 'green',
+                opacity: 1,
+                weight: 3
+            }]
+        },
+        createMarker: function () {
+            return null;
+        },
+        language: 'en',
+    }).addTo(mapObject);
+    route.on('routesfound', function (e) {
+        console.log(e.routes[0].instructions);
+    });
+}
+
 // on load
 $(document).ready(function () {
-    
 });

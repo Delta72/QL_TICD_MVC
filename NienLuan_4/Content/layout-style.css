@@ -426,8 +426,15 @@ select option {
     width: 70vh;
     height: 10%;
     height: 10vh;
+    text-align: center;
+    word-wrap: break-word;
 }
-
+    #pointUserComment label {
+        margin-left: -10vw;
+        font-size: 2vw;
+        word-wrap: break-word;
+    }
+   
     #pointUserComment table th {
         padding-top: 1vh;
         padding-left: 2vh;
@@ -439,6 +446,7 @@ select option {
         height: 5vh;
         width: 90vh;
     }
+
 
 
 #CommentDetail {
@@ -854,3 +862,35 @@ select option {
         font-size: 1.1vw;
     }
 
+.AnoPoint{
+    width: 2vw;
+    height: 4vh;
+    border: 2px solid yellow;
+    background-color: green;
+    text-align: center;
+    line-height: 4vh;
+    vertical-align: middle;
+    margin-top: 1vh;
+}
+
+    .AnoPoint:hover {
+        border: 2px solid green;
+        background-color: yellow;
+        cursor: pointer;
+
+    }
+
+    .AnoPoint i {
+        color: yellow;
+        font-size: 1.3vw;
+    }
+
+        .AnoPoint i:hover {
+            color: black;
+        }
+
+.leaflet-control-container .leaflet-routing-container-hide {
+    width: 40vw;
+    height: 70vh;
+    border: 3px dashed green;
+}

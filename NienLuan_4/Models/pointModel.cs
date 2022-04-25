@@ -11,5 +11,7 @@ namespace NienLuan_4.Models
         public string coor { get; set; }
         public string loai { get; set; }
 
+        public string mota { get; set; }
+
     }
 }

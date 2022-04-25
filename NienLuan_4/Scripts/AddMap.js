@@ -17,6 +17,7 @@ var allPX = L.layerGroup().addTo(mapObject);
 var myLocation = L.layerGroup().addTo(mapObject);
 var allPointsLayer = L.layerGroup().addTo(mapObject);
 var privatePointLayer = L.layerGroup().addTo(mapObject);
+var routeLayer = L.layerGroup().addTo(mapObject);
 
 // Popup
 var popup = L.popup({ autoPan: false });

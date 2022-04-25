@@ -36,6 +36,7 @@ namespace NienLuan_4.Controllers
                 p.id = item.ID_DD;
                 p.coor = item.TOADO_DD;
                 p.loai = item.LOAIDIADIEM.ICON_LOAIDD;
+                p.mota = item.MOTA_DD;
                 P.Add(p);
             }
             var report = JsonConvert.SerializeObject(P, Formatting.None,
@@ -315,15 +316,66 @@ namespace NienLuan_4.Controllers
         public ActionResult HienDiaDiemCongDong(string coor)
         {           
             List<DIADIEM> D1 = db.DIADIEMs.Where(a => a.LADIEMCANHAN == false).ToList();
-            List<DIADIEM> D2 = new List<DIADIEM>();
+            List<pointModel> D2 = new List<pointModel>();
             foreach(var item in D1)
             {
-                if(Khoang_cach(coor, item.TOADO_DD) > 5000)
+                if(Khoang_cach(coor, item.TOADO_DD) <= 5000)
                 {
-                    D2.Add(item);
+                    pointModel p = new pointModel();
+                    p.id = item.ID_DD;
+                    p.coor = item.TOADO_DD;
+                    p.mota = item.MOTA_DD;
+                    p.loai = item.LOAIDIADIEM.ICON_LOAIDD;
+                    D2.Add(p);
                 }
             }
             var report = JsonConvert.SerializeObject(D2, Formatting.None,
+                                     new JsonSerializerSettings()
+                                     {
+                                         ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                                     });
+            return Content(report, "application/json");
+        }
+
+        public ActionResult TimKiemDiaDiem(string coor, string dis, string loai)
+        {
+            double k; double.TryParse(dis, out k); k *= 1000;
+            int maloai = 0;
+            List<pointModel> P = new List<pointModel>();
+            var L = db.DIADIEMs.Where(a => a.LADIEMCANHAN == false).ToList();
+
+            if(!int.TryParse(loai, out maloai))
+            {               
+                foreach (var item in L)
+                {
+                    if (Khoang_cach(coor, item.TOADO_DD) <= k)
+                    {
+                        pointModel p = new pointModel();
+                        p.id = item.ID_DD;
+                        p.coor = item.TOADO_DD;
+                        p.mota = item.MOTA_DD;
+                        p.loai = item.LOAIDIADIEM.ICON_LOAIDD;
+                        P.Add(p);
+                    }
+                }
+            }
+            else
+            {
+                foreach (var item in L)
+                {
+                    if (Khoang_cach(coor, item.TOADO_DD) <= k && item.ID_LOAIDD == maloai)
+                    {
+                        pointModel p = new pointModel();
+                        p.id = item.ID_DD;
+                        p.coor = item.TOADO_DD;
+                        p.mota = item.MOTA_DD;
+                        p.loai = item.LOAIDIADIEM.ICON_LOAIDD;
+                        P.Add(p);
+                    }
+                }
+            }            
+
+            var report = JsonConvert.SerializeObject(P, Formatting.None,
                                      new JsonSerializerSettings()
                                      {
                                          ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
