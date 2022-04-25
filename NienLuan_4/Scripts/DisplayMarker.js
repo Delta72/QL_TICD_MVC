@@ -57,7 +57,7 @@ function ShowPrivatePoints() {
 }
 function PointClick(e) {
     // console.log(e.target.options.id);
-    mapObject.setView(e.target.getLatLng(), 15, { animation: true, duration: 2 });
+    mapObject.setView(e.target.getLatLng(), 17, { animation: true, duration: 2 });
     GetPointProp(e.target.options.id);
 }
 
@@ -524,7 +524,16 @@ function btnPosClick() {
 
 // Hien dia diem cong dong xung quanh
 function HienDiaDiemCongDong(coor) {
-    console.log(coor);
+    $.ajax({
+        url: 'Point/HienDiaDiemCongDong',
+        type: 'post',
+        data: {
+            coor: coor,
+        },
+        success: function (data) {
+            console.log(data);
+        }
+    })
 };
 
 // on load

@@ -319,7 +319,7 @@ select option {
 }
 
     #pointName label:hover {
-        animation: 5s linear 0s infinite alternate move;
+        animation: 5s linear 0s infinite move;
     }
 
 #pointClose {
@@ -352,26 +352,23 @@ select option {
     height: 5vh;
     text-align: center;
     overflow: hidden;
+    white-space: nowrap;
     border-bottom: 0.5px solid green;
 }
 
     #pointAddress label:hover {
-        animation: 5s linear 0s infinite alternate move;
+        animation: 5s linear 0s infinite move;
+        transform: translateX(0%);
     }
 
 @keyframes move {
-    from {
-        overflow: auto;
-    }
 
-    0%, 25% {
+    0%{
         transform: translateX(0%);
-        left: 0%;
     }
 
-    75%, 100% {
+    100% {
         transform: translateX(-100%);
-        left: 100%;
     }
 }
 

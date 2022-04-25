@@ -312,20 +312,18 @@ namespace NienLuan_4.Controllers
             return r;
         }
 
-        public ActionResult HienDiaDiemCongDong(string coor, string dis)
-        {
-            double kc = 0; double.TryParse(dis, out kc);
-            List<DIADIEM> D1 = new List<DIADIEM>();
-            List<DIADIEM> D2 = db.DIADIEMs.Where(a => a.LADIEMCANHAN == false).ToList();
-            foreach(var item in D2)
+        public ActionResult HienDiaDiemCongDong(string coor)
+        {           
+            List<DIADIEM> D1 = db.DIADIEMs.Where(a => a.LADIEMCANHAN == false).ToList();
+            List<DIADIEM> D2 = new List<DIADIEM>();
+            foreach(var item in D1)
             {
-                if(Khoang_cach(coor, item.TOADO_DD) <= kc)
+                if(Khoang_cach(coor, item.TOADO_DD) > 5000)
                 {
-                    D1.Add(item);
-
+                    D2.Add(item);
                 }
             }
-            var report = JsonConvert.SerializeObject(D1, Formatting.None,
+            var report = JsonConvert.SerializeObject(D2, Formatting.None,
                                      new JsonSerializerSettings()
                                      {
                                          ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore

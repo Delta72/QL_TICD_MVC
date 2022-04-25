@@ -118,4 +118,5 @@ function removeAllMenu() {
     if (document.getElementById('EditDiv')) {
         pointEditDiv.remove();
     }
+    EnableZoomDrag();
 }

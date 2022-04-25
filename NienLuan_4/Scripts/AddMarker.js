@@ -186,6 +186,7 @@ if (logon == true) {
                         alert("Thêm địa điểm thành công !!!");
                         $('#btnMenu').click();
                         $('#dnMap').click();
+                        removeAllMenu();
                     },
                     error: function () {
                         alert("AddMarker");
