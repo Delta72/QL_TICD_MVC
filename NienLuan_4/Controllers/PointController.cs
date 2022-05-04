@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using Newtonsoft.Json;
 using NienLuan_4.Models;
 using System.Device.Location;
+using System.Text;
 
 namespace NienLuan_4.Controllers
 {
@@ -374,6 +375,33 @@ namespace NienLuan_4.Controllers
                     }
                 }
             }            
+
+            var report = JsonConvert.SerializeObject(P, Formatting.None,
+                                     new JsonSerializerSettings()
+                                     {
+                                         ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                                     });
+            return Content(report, "application/json");
+        }
+
+        public ActionResult TimKiemTheoTen(string str)
+        {
+            List<pointModel> P = new List<pointModel>();
+
+            foreach (var i in db.DIADIEMs)
+            {
+                if(i.TEN_DD.Contains(str) || i.DIACHI_DD.Contains(str) || i.MOTA_DD.Contains(str) ||
+                    i.TEN_DD.Contains(str.ToLower()) || i.DIACHI_DD.Contains(str.ToLower()) || i.MOTA_DD.Contains(str.ToLower()) ||
+                    i.TEN_DD.Contains(str.ToUpper()) || i.DIACHI_DD.Contains(str.ToUpper()) || i.MOTA_DD.Contains(str.ToLower()))
+                {
+                    pointModel p = new pointModel();
+                    p.id = i.ID_DD;
+                    p.coor = i.TOADO_DD;
+                    p.mota = i.MOTA_DD;
+                    p.loai = i.LOAIDIADIEM.ICON_LOAIDD;
+                    P.Add(p);
+                }
+            }
 
             var report = JsonConvert.SerializeObject(P, Formatting.None,
                                      new JsonSerializerSettings()

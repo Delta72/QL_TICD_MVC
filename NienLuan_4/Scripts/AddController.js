@@ -5,10 +5,10 @@
 var menu = L.control({ position: "topleft" });
 menu.onAdd = function (map) {
     var div = L.DomUtil.create("div", "div3");
-    var i = '<div class="container-fluid"><table>';
+    var i = '<div class="container-fluid" onmouseover="DisableZoomDrag()" onmouseout="EnableZoomDrag()"><table>';
     i += '<tr><td><button type="submit" class="form-control" id="btnMenu"><div id="menubar"></div><div  id="menubar"></div><div id="menubar"></div></button></td><td>&nbsp&nbsp&nbsp</td>';
-    i += '<td><input type="text" class="form-control" size="500" id="SbSearch"></td><td>&nbsp&nbsp&nbsp</td>';
-    i += '<td><button type="submit" class="form-control id="btnSearch"><i class="fa fa-search"></i></button></td></tr>';
+    i += '<td><input type="text" class="form-control" size="50vw" id="SbSearch"></td><td>&nbsp&nbsp&nbsp</td>';
+    i += '<td><button type="submit" class="form-control id="btnSearch" onclick="btnSearchClick()"><i class="fa fa-search"></i></button></td></tr>';
     i += '</table></div>'
     div.innerHTML = i;
     div.firstChild.onmousedown = div.firstChild.ondblclick = L.DomEvent.stopPropagation;

@@ -502,7 +502,7 @@ function CommentOut() {
 function btnPosClick() {
     mapObject.locate({ setView: false, watch: false }).on('locationfound', function (e) {
         myLocation.clearLayers();
-        if (e.accuracy != 100) {
+        if (e.accuracy <= 100) {
             //$("html").css("cursor: progress");
             // L.circle(e.latlng, e.accuracy).addTo(myLocation);
             var toado = e.latlng.lat + ', ' + e.latlng.lng;
@@ -601,6 +601,8 @@ function TimKiemDiaDiem(coor) {
 // Chi duong
 function ChiDuong() {
     removeAllMenu();
+    privatePointLayer.clearLayers();
+    console.log(myLocation._layers);
     var route = L.Routing.control({
         waypoints: [
             L.latLng(10.02851086871173, 105.772402882576),
@@ -618,11 +620,58 @@ function ChiDuong() {
         },
         language: 'en',
     }).addTo(mapObject);
+    route._container.style.display = "None";
     route.on('routesfound', function (e) {
-        console.log(e.routes[0].instructions);
+        // console.log(e.routes[0].instructions);
     });
+}
+
+// Tim kiem dia diem
+function TimKiemTheoTen(str) {
+    $.ajax({
+        url: 'Point/TimKiemTheoTen',
+        type: 'post',
+        data: {
+            str: str,
+        },
+        success: function (data) {
+            console.log(data);
+            if (data.length == 0) {
+                alert("Không tìm thấy địa điểm nào phù hợp");
+            }
+            else {
+                HienMarker(data);
+            }
+            
+        }
+    })
+}
+function btnSearchClick() {
+    var str = document.getElementById('SbSearch').value;
+    if (str == "") {
+
+    }
+    else if (str.length < 3) {
+        alert("hãy nhập tối thiểu 3 ký tự !!!");
+    }
+    else {
+        str = str.toLowerCase()
+        TimKiemTheoTen(str.substring(0));
+        // console.log(str);
+    }
+}
+
+// Hien diem onload
+function DisplayPoints() {
+    if (getUserRole == 'dn') {
+        ShowPrivatePoints();
+    }
+    else {
+        btnPosClick();
+    }
 }
 
 // on load
 $(document).ready(function () {
+    // DisplayPoints();
 });

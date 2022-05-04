@@ -890,7 +890,5 @@ select option {
         }
 
 .leaflet-control-container .leaflet-routing-container-hide {
-    width: 40vw;
-    height: 70vh;
-    border: 3px dashed green;
+    display: none !important;
 }
