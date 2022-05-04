@@ -306,6 +306,9 @@ function DisplayPointProperties(data) {
         document.getElementById('pointUserComment').innerHTML = comment;
     }
     else {
+        var like = '<i class="fa fa-heart-o" style="color:green" id="heart"></i><p id="LuotThich"></p>';
+        document.getElementById('allLike').innerHTML = like;
+        KiemTraDaThichDD();
         document.getElementById('pointUserComment').innerHTML = "<label>Đăng nhập để bình luận</label>";
     }
 }
@@ -329,6 +332,9 @@ function HienBinhLuan(data) {
             if (getUserRole() != "ano") {
                 eachComment += '<div id="cmtLike"><i class="" style="color:red" onclick="ThichBinhLuan(' + i + ')" id="cmtHeart' + i + '"></i><p id="cmtLuotThich' + i + '"></p></div>';
             }
+            else {
+                eachComment += '<div id="cmtLike"><i class="fa fa-heart-o" style="color:red" id="cmtHeart' + i + '"></i><p id="cmtLuotThich' + i + '"></p></div>';
+            }
             document.getElementById('pointComments').innerHTML += eachComment;
             KiemTraDaThichBL(i);
         }        
@@ -342,27 +348,46 @@ function KiemTraDaThichBL(id) {
     var bl = document.getElementById(x).value;
     var h = 'cmtHeart' + id;
     var p = 'cmtLuotThich' + id;
-    $.ajax({
-        url: 'Point/KiemTraDaThichBL',
-        type: 'post',
-        data: {
-            id: bl
-        },
-        success: function (data) {
-            if (data.liked == true) {                
-                document.getElementById(h).className = "fa fa-heart";
+    if (getUserRole() == 'ano') {
+        $.ajax({
+            url: 'Point/LayLuotThichBinhLuan',
+            type: 'post',
+            data: {
+                id: bl
+            },
+            success: function (data) {
+                if (parseInt(data) <= 999) {
+                    document.getElementById(p).innerHTML = data;
+                }
+                else {
+                    document.getElementById(p).innerHTML = "999+";
+                }
             }
-            else {
-                document.getElementById(h).className = "fa fa-heart-o";
+        })
+    }
+    else {
+        $.ajax({
+            url: 'Point/KiemTraDaThichBL',
+            type: 'post',
+            data: {
+                id: bl
+            },
+            success: function (data) {
+                if (data.liked == true) {
+                    document.getElementById(h).className = "fa fa-heart";
+                }
+                else {
+                    document.getElementById(h).className = "fa fa-heart-o";
+                }
+                if (parseInt(data.luotthich) <= 999) {
+                    document.getElementById(p).innerHTML = data.luotthich;
+                }
+                else {
+                    document.getElementById(p).innerHTML = "999+";
+                }
             }
-            if (parseInt(data.luotthich) <= 999) {
-                document.getElementById(p).innerHTML = data.luotthich;
-            }
-            else {
-                document.getElementById(p).innerHTML = "999+";
-            }
-        }
-    })
+        })
+    }
 }
 
 // Thich binh luan
@@ -408,36 +433,69 @@ function DangBinhLuan() {
 // Kiem tra da thich dia diem
 function KiemTraDaThichDD() {
     var id = document.getElementById('inputID').value;
-    var dathichdd = false;
-    $.ajax({
-        url: 'Point/KiemTraDaThichDiaDiem',
-        type: 'post',
-        async: false,
-        data: {
-            id: id
-        },
-        success: function (data) {
-            if (data.success == false) {
-                document.getElementById('heart').className = "fa fa-heart-o";
+    if (getUserRole == 'ano') {
+        $.ajax({
+            url: 'Point/LayLuotThich',
+            type: 'post',
+            data: {
+                id: id,
+            },
+            success: function (data) {
+                if (data > 999) {
+                    document.getElementById('LuotThich').innerHTML = "999+";
+                }
+                else {
+                    document.getElementById('LuotThich').innerHTML = data.luotthich;
+                }
             }
-            else {
-                document.getElementById('heart').className = "fa fa-heart";
+        })
+    }
+    else {        
+        var dathichdd = false;
+        $.ajax({
+            url: 'Point/KiemTraDaThichDiaDiem',
+            type: 'post',
+            async: false,
+            data: {
+                id: id
+            },
+            success: function (data) {
+                if (data.success == false) {
+                    document.getElementById('heart').className = "fa fa-heart-o";
+                }
+                else {
+                    document.getElementById('heart').className = "fa fa-heart";
+                }
+                if (parseInt(data.luotthich) > 999) {
+                    document.getElementById('LuotThich').innerHTML = "999+";
+                }
+                else {
+                    document.getElementById('LuotThich').innerHTML = data.luotthich;
+                }
             }
-            if (data.luotthich > 999) {
-                document.getElementById('LuotThich').innerHTML = "999+";
-            }
-            else {
-                document.getElementById('LuotThich').innerHTML = data.luotthich;
-            }
-        }
-    })
+        })
+    }
 }
 
 // Thich dia diem
 function ThichDiaDiem() {
-    var id = $('#inputID').val();
-    if (document.getElementById('heart').className == "fa fa-heart") {
-        if (confirm("Bỏ thích địa điểm này?")) {
+        var id = $('#inputID').val();
+        if (document.getElementById('heart').className == "fa fa-heart") {
+            if (confirm("Bỏ thích địa điểm này?")) {
+                $.ajax({
+                    url: 'Point/ThichDiaDiem',
+                    type: 'post',
+                    async: false,
+                    data: {
+                        id: id
+                    }
+                });
+            }
+            else {
+
+            }
+        }
+        else {
             $.ajax({
                 url: 'Point/ThichDiaDiem',
                 type: 'post',
@@ -447,21 +505,7 @@ function ThichDiaDiem() {
                 }
             });
         }
-        else {
-            
-        }
-    }
-    else {
-        $.ajax({
-            url: 'Point/ThichDiaDiem',
-            type: 'post',
-            async: false,
-            data: {
-                id: id
-            }
-        });
-    }
-    KiemTraDaThichDD();
+        KiemTraDaThichDD();
 }
 
 // CommentClick
@@ -502,7 +546,7 @@ function CommentOut() {
 function btnPosClick() {
     mapObject.locate({ setView: false, watch: false }).on('locationfound', function (e) {
         myLocation.clearLayers();
-        if (e.accuracy <= 100) {
+        if (e.accuracy != 100) {
             //$("html").css("cursor: progress");
             // L.circle(e.latlng, e.accuracy).addTo(myLocation);
             var toado = e.latlng.lat + ', ' + e.latlng.lng;
@@ -602,10 +646,18 @@ function TimKiemDiaDiem(coor) {
 function ChiDuong() {
     removeAllMenu();
     privatePointLayer.clearLayers();
-    console.log(myLocation._layers);
+    var mLat = 0.0; var mLng = 0.0;
+    myLocation.eachLayer(function (layer) {
+        // console.log(layer._latlng);
+        mLat = layer._latlng.lat;
+        mLng = layer._latlng.lng;
+    });
+    polyLayer.clearLayers();
+    polyPX.clearLayers();
+    Ve_CT();
     var route = L.Routing.control({
         waypoints: [
-            L.latLng(10.02851086871173, 105.772402882576),
+            L.latLng(mLat, mLng),
             L.latLng(10.030555172841881, 105.76869606971742)
         ],
         lineOptions: {

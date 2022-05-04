@@ -410,5 +410,27 @@ namespace NienLuan_4.Controllers
                                      });
             return Content(report, "application/json");
         }
+
+        public ActionResult LayLuotThich(string id)
+        {
+            DIADIEM D = db.DIADIEMs.Where(a => a.ID_DD == id).FirstOrDefault();
+            var report = JsonConvert.SerializeObject(D.LUOTTHICH_DD, Formatting.None,
+                                     new JsonSerializerSettings()
+                                     {
+                                         ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                                     });
+            return Content(report, "application/json");
+        }
+
+        public ActionResult LayLuotThichBinhLuan(string id)
+        {
+            BINHLUAN B = db.BINHLUANs.Where(a => a.ID_BL == id).FirstOrDefault();
+            var report = JsonConvert.SerializeObject(B.LUOTTHICH_BL, Formatting.None,
+                                     new JsonSerializerSettings()
+                                     {
+                                         ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                                     });
+            return Content(report, "application/json");
+        }
     }
 }

@@ -463,20 +463,21 @@ select option {
     width: 3.5vw;
     height: 7vh;
     border-radius: 50%;
-    margin-top: 10px;
-    margin-left: 5px;
+    margin-top: 0.5vh;
+    margin-left: -27vw;
     border: 1px solid green;
 }
 
 #UserNameC {
-    margin-top: -8vh;
-    margin-left: 6vw;
+    margin-top: 0.2vh;
+    margin-left: -27vw;
     font-weight: bold;
+    text-align: center;
 }
 
 #ipbl {
-    margin-top: 0vh;
-    margin-left: 6vw;
+    margin-top: -9vh;
+    margin-left: 0vw;
 }
 
     #ipbl input {
