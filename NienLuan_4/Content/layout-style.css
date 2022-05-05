@@ -893,3 +893,10 @@ select option {
 .leaflet-control-container .leaflet-routing-container-hide {
     display: none !important;
 }
+
+#ThongTinDuongDi {
+    border: 2px dashed green;
+    height: 10vh;
+    width: 25vw;
+    background: #FEF54F;
+}

@@ -288,6 +288,7 @@ function DisplayPointProperties(data) {
     pointControl.addTo(mapObject);
     var hiddeninput = '<input class="KoHienThi" type="text" value="' + data.ID_LOAIDD + '" id="LoaiDD"/>';
     hiddeninput += '<input class="KoHienThi" type="text" value="' + data.ID_DD + '" id="inputID">';
+    hiddeninput += '<input class="KoHienThi" type="text" value="' + data.TOADO_DD + '" id="toadodd">';
     hiddeninput += '<input class="KoHienThi" type="text" value="' + data.MOTA_DD + '" id="mota">';
     var label = '<label for="dd" id="labelName">' + data.TEN_DD + '</label>';
     document.getElementById('pointName').innerHTML = label + hiddeninput;
@@ -643,39 +644,78 @@ function TimKiemDiaDiem(coor) {
 }
 
 // Chi duong
+var route = L.Routing.control({}).addTo(mapObject);
 function ChiDuong() {
+    var toado = document.getElementById('toadodd').value;
     removeAllMenu();
-    privatePointLayer.clearLayers();
+    route.remove();
     var mLat = 0.0; var mLng = 0.0;
+    var c = toado.split(', ');
+    var l1 = StrToFloat(c[0]);
+    var l2 = StrToFloat(c[1]);
     myLocation.eachLayer(function (layer) {
         // console.log(layer._latlng);
         mLat = layer._latlng.lat;
         mLng = layer._latlng.lng;
     });
-    polyLayer.clearLayers();
     polyPX.clearLayers();
     Ve_CT();
-    var route = L.Routing.control({
+    route = L.Routing.control({
         waypoints: [
             L.latLng(mLat, mLng),
-            L.latLng(10.030555172841881, 105.76869606971742)
+            L.latLng(l1, l2)
         ],
         lineOptions: {
             styles: [{
                 color: 'green',
                 opacity: 1,
-                weight: 3
+                weight: 5
             }]
         },
         createMarker: function () {
             return null;
         },
         language: 'en',
-    }).addTo(mapObject);
+    }).addTo(mapObject);    
     route._container.style.display = "None";
     route.on('routesfound', function (e) {
-        // console.log(e.routes[0].instructions);
+        HienThongTinDuongDi(e.routes[0].summary);
     });
+}
+
+// Hien thong tin duong
+var ThongTinDuongDi = L.control({ position: "topright" });
+ThongTinDuongDi.onAdd = function (map) {
+    var div = L.DomUtil.create("div", "div3");
+    var i = '<div id="ThongTinDuongDi"><table>';
+    i += '<tr><td><label>Độ dài quãng đường: </label></td><td><label id="quangduong">300</label></td></tr>';
+    i += '<tr><td><label>Thời gian ước tính: </label></td><td><label id="thoigian">300</label></td></tr>';
+    i += '</table></div>';
+    div.innerHTML = i;
+    div.firstChild.onmousedown = div.firstChild.ondblclick = L.DomEvent.stopPropagation;
+    return div;
+};
+function HienThongTinDuongDi(e) {
+    ThongTinDuongDi.addTo(mapObject);
+    document.getElementById('quangduong').innerText = e.totalDistance + ' m';
+    document.getElementById('thoigian').innerText = Math.round(e.totalTime % 3600 / 60) + ' phút';
+}
+
+
+// Lay toa do
+function LayToaDoDD(id) {
+    var toado;
+    $.ajax({
+        url: 'Point\LayToaDo',
+        type: 'post',
+        data: {
+            id: id,
+        },
+        success: function (data) {
+            toado = data;
+        }
+    })
+    return toado;
 }
 
 // Tim kiem dia diem

@@ -432,5 +432,45 @@ namespace NienLuan_4.Controllers
                                      });
             return Content(report, "application/json");
         }
+
+        public ActionResult LayToaDo(string id)
+        {
+            DIADIEM D = db.DIADIEMs.Where(a => a.ID_DD == id).FirstOrDefault();
+            var report = JsonConvert.SerializeObject(D.TOADO_DD, Formatting.None,
+                                     new JsonSerializerSettings()
+                                     {
+                                         ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                                     });
+            return Content(report, "application/json");
+        }
+
+        public ActionResult HienDiaDiemYeuThich()
+        {
+            string idu = User.Identity.Name;
+            List<DIADIEMYEUTHICH> Y = db.DIADIEMYEUTHICHes.Where(a => a.ID_TK == idu).ToList();
+            List<pointModel> P = new List<pointModel>();
+            foreach(var i in Y)
+            {
+                foreach(var i2 in db.DIADIEMs)
+                {
+                    if(i.ID_DD == i2.ID_DD)
+                    {
+                        pointModel p = new pointModel();
+                        p.id = i2.ID_DD;
+                        p.coor = i2.TOADO_DD;
+                        p.mota = i2.MOTA_DD;
+                        p.loai = i2.LOAIDIADIEM.ICON_LOAIDD;
+                        P.Add(p);
+                    }
+                }
+            }
+
+            var report = JsonConvert.SerializeObject(P, Formatting.None,
+                                     new JsonSerializerSettings()
+                                     {
+                                         ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                                     });
+            return Content(report, "application/json");
+        }
     }
 }
