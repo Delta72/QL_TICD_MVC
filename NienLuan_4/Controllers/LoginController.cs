@@ -19,14 +19,18 @@ namespace NienLuan_4.Controllers
         {
             Boolean check = false;
             TAIKHOAN TK = db.TAIKHOANs.Where(a => a.TAIKHOAN_TK == tk).FirstOrDefault();
-            if(TK == null || TK.MATKHAU_TK != mk)
+            if(TK == null || TK.MATKHAU_TK != mk || TK.DAKHOA_TK == true)
             {
                 check = false;
             }            
             else
             {
-                check = true;               
+                check = true;
                 FormsAuthentication.SetAuthCookie(TK.ID_TK, false);
+                db.Entry(TK).State = System.Data.Entity.EntityState.Detached;
+                TK.LANHDCUOI_TK = DateTime.Today;
+                db.Entry(TK).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
             }
             var r = JsonConvert.SerializeObject(check, Formatting.None,
                                      new JsonSerializerSettings()

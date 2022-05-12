@@ -363,7 +363,7 @@ select option {
 
 @keyframes move {
 
-    0%{
+    0% {
         transform: translateX(0%);
     }
 
@@ -429,12 +429,13 @@ select option {
     text-align: center;
     word-wrap: break-word;
 }
+
     #pointUserComment label {
         margin-left: -10vw;
         font-size: 2vw;
         word-wrap: break-word;
     }
-   
+
     #pointUserComment table th {
         padding-top: 1vh;
         padding-left: 2vh;
@@ -863,7 +864,7 @@ select option {
         font-size: 1.1vw;
     }
 
-.AnoPoint{
+.AnoPoint {
     width: 2vw;
     height: 4vh;
     border: 2px solid yellow;
@@ -878,7 +879,6 @@ select option {
         border: 2px solid green;
         background-color: yellow;
         cursor: pointer;
-
     }
 
     .AnoPoint i {
@@ -900,3 +900,269 @@ select option {
     width: 25vw;
     background: #FEF54F;
 }
+
+#UserManager {
+    border: 5px dashed green;
+    background: #EBEDEF;
+    height: 47vh;
+    width: 26vw;
+}
+
+#mAvatar {
+    background: #FEF54F;
+    height: 10vh;
+    width: 25.3vw;
+}
+
+#mAvatar img {
+    width: 4vw;
+    height: 4vw;
+    border-radius: 50%;
+    margin-left: 0.2vw;
+    margin-top: 1vh;
+}
+
+#mAvatar label{
+    font-size: 13px;
+    margin-top: 0.2vh;
+    margin-left: 1vw;
+}
+
+    #mAvatar #btnEditAvatar {
+        width: 5vw;
+        height: 3vh;
+        border: 1px dashed green;
+        margin-left: 1vw;
+        background: #EBEDEF;
+        line-height: 3vh;
+        text-align: center;
+        vertical-align: middle;
+        color: green;
+    }
+    #mAvatar #btnEditAvatar:hover {
+        background: green;
+        color: yellow;
+        cursor: pointer;
+    }
+
+#mInfo {
+    height: 40vh;
+    width: 25.5vw;
+    margin-top: 1vh;
+}
+
+    #mInfo label {
+        font-size: 15px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    #mInfo input{
+        margin-top: -0.3vh;
+        margin-left: 2vw;
+        width: 11vw;
+    }
+
+.InfoL {
+    margin-left: 7vw;
+}
+
+.mButton {
+    width: 10vw;
+    height: 4vh;
+    border: 1px dashed green;
+    margin-left: 1vw;
+    margin-top: 2vh;
+    background: green;
+    line-height: 4vh;
+    text-align: center;
+    vertical-align: middle;
+    color: yellow;
+}
+
+    .mButton:hover {
+        cursor: pointer;
+        background: yellow;
+        color: green;
+    }
+
+#mEditInfo {
+    margin-left: 14vw;
+    margin-top: -4vh;
+}
+
+#mCancel {
+    margin-left: 14vw;
+    margin-top: -4vh;
+}
+
+.adminCtrl {
+    width: 50vw;
+    height: 70vh;
+    border: 4px dashed green;
+    margin-left: 25vw;
+    margin-top: -70vh;
+    background: #EBEDEF;
+}
+
+.adminTitle{
+    text-align: center;
+    height: 10vh;
+    line-height: 10vh;
+    vertical-align: middle;
+}
+
+.adminSearch {
+    margin-left: 5vw;
+
+}
+
+.adminSearch input{
+    width: 50vw;
+    margin-left: 5vw;
+}
+
+#btnAdminSearch {
+    width: 10vw;
+    height: 5vh;
+    border: 2px solid yellow;
+    margin-left: 28vw;
+    margin-top: -5vh;
+    background: green;
+    line-height: 5vh;
+    text-align: center;
+    vertical-align: middle;
+    color: yellow;
+}
+
+#btnAdminSearch:hover {    
+    border: 2px solid green;
+    background: yellow;
+    color: green;
+    cursor: pointer;
+}
+
+.adminTableImg{
+    width: 3vw;
+    height: 4vh;
+}
+
+#adminAList {
+    overflow: scroll;
+    overflow-x: hidden;
+    border: 3px solid green;
+    height: 40vh;
+    margin-top: 1vh;
+}
+
+.adminEachAccount {
+    text-align: center;
+    border-top: 0.5px dashed green;
+    margin-top: 0.5vh;
+}
+
+.adminEachAccount label {
+    font-size: 13px;
+}
+
+    .adminEachAccount table td {
+        max-width: 7vw;
+        width: 7vw;
+        text-align: center;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .adminEachAccount i:hover{
+        cursor: pointer;
+    }
+
+#tableadmin td {
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+    #tableadmin td label {
+        font-size: 13px;
+    }
+
+.adminFooter {
+    height: 13vh;
+    border: 3px solid red;
+    align-content: center;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 13vh;
+}
+
+.adminFooter label{
+    font-size: 13px;
+}
+
+.adminFooter select{
+    margin-left: 3vw;
+    width: 13vw;
+}
+
+#btnKhoa {
+    width: 10vw;
+    height: 5vh;
+    border: 2px solid yellow;
+    margin-left: 3vw;
+    background: green;
+    line-height: 5vh;
+    text-align: center;
+    vertical-align: middle;
+    color: yellow;
+}
+
+    #btnKhoa:hover {
+        border: 2px solid green;
+        background: yellow;
+        color: green;
+        cursor: pointer;
+    }
+
+.tablettdd {
+    margin-top: 1vh;
+    table-layout: fixed;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+    .tablettdd td {
+        height: 2vh;
+        table-layout: fixed;
+        line-height: 2vh;
+    }
+
+    .tablettdd img{
+        width: 6vw;
+        height: 6vh;
+    }
+
+#btnAdminRemove{
+    width: 4vw;
+    height: 4vh;
+    border: 1px solid green;
+    color: yellow;
+    background: red;
+    text-align: center;
+    line-height: 4vh;
+    vertical-align: middle;
+    margin-top: -4vh;
+    border-radius: 20%;
+    margin-left: 3vw;
+}
+
+    #btnAdminRemove:hover {
+        border: 1px solid red;
+        color: yellow;
+        background: green;
+        cursor: pointer;
+    }

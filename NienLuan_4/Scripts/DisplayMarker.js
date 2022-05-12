@@ -181,11 +181,11 @@ function ListLoaiDVu(i) {
         async: false,
         success: function (data) {
             for (var a in data) {
-                if (i == data[a].ID_LOAIDD) {
-                    str += '<option value="' + data[a].ID_LOAIDD + '" selected="selected">' + data[a].TEN_LOAIDD + '</option>';
+                if (i == data[a].id) {
+                    str += '<option value="' + data[a].id + '" selected="selected">' + data[a].loai + '</option>';
                 }
                 else{
-                    str += '<option value="' + data[a].ID_LOAIDD + '">' + data[a].TEN_LOAIDD + '</option>';
+                    str += '<option value="' + data[a].id + '">' + data[a].loai + '</option>';
                 }
             }
         }
@@ -763,7 +763,20 @@ function DisplayPoints() {
     }
 }
 
+// Hien dia diem yeu thich
+function HienDiaDiemYeuThich() {
+    $.ajax({
+        url: 'Point/HienDiaDiemYeuThich',
+        type: 'get',
+        success: function (data) {
+            HienMarker(data);
+        }
+    })
+}
+
 // on load
 $(document).ready(function () {
-    // DisplayPoints();
+    if (getUserRole() == 'ano' || getUserRole == 'cn') {
+        //DisplayPoints();
+    }
 });

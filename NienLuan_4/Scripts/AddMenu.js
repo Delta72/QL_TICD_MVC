@@ -4,7 +4,7 @@
 var userMenu = L.control({ position: "topleft" });
 userMenu.onAdd = function (map) {
     var div = L.DomUtil.create("div", "div3");
-    var i = '<div id="userMenu">';
+    var i = '<div id="userMenu" onmouseover="DisableZoomDrag()" onmouseout="EnableZoomDrag()">';
     i += '<table id="tableHeader"><tr><td><div id="avatar"></div></td>' + '<td><div id="userName"></div></td></tr><table>';
     i += '<div id="menuContent"></div>';
     i += '<div id="menuFooter"></div>';
@@ -21,20 +21,20 @@ AnoMenuStr += '<h3"><a href="#" onClick="btnSignInClick2()">Đăng nhập</a></h
 // Menu nguoi dung
 var userMenuStr = '';
 userMenuStr += '<h3><a href="#" onclick="btnPosClick()"><i class="fa fa-map"></i>&nbsp&nbspBản đồ cộng đồng</a></h3>';
-userMenuStr += '<h3><a href="#"><i class="fa fa-map-signs"></i>&nbsp&nbspĐịa điểm đã thích</a></h3>';
-userMenuStr += '<h3><a href="#"><i class="fa fa-user"></i>&nbsp&nbspQuản lý tài khoản</a></h3>';
+userMenuStr += '<h3><a href="#" onclick="HienDiaDiemYeuThich()"><i class="fa fa-map-signs"></i>&nbsp&nbspĐịa điểm đã thích</a></h3>';
+userMenuStr += '<h3><a href="#" onclick="QuanLyTaiKhoan()"><i class="fa fa-user"></i>&nbsp&nbspQuản lý tài khoản</a></h3>';
 userMenuStr += '<hr>';
 userMenuStr += '<h3><a href="Home/About">Giới thiệu</a></h3>';
 // Menu doanh nghiep
 var dnMenuStr = '';
 dnMenuStr += '<h3><a href="#" onclick="dnMenuMapClick()" id="dnMap"><i class="fa fa-map-signs"></i>&nbsp&nbspBản đồ</a></h3>';
-dnMenuStr += '<h3><a href="#"><i class="fa fa-user"></i>&nbsp&nbspQuản lý tài khoản</a></h3>';
+dnMenuStr += '<h3><a href="#" onclick="QuanLyTaiKhoan()"><i class="fa fa-user"></i>&nbsp&nbspQuản lý tài khoản</a></h3>';
 dnMenuStr += '<hr>';
 dnMenuStr += '<h3><a href="Home/About">Giới thiệu</a></h3>';
 // Menu admin
 var adMenuStr = '';
-adMenuStr += '<h3><a href="#"><i class="fa fa-map"></i>&nbsp&nbspQuản lý tài khoản</a></h3>';
-adMenuStr += '<h3><a href="#"><i class="fa fa-map"></i>&nbsp&nbspQuản lý địa điểm</a></h3>';
+adMenuStr += '<h3><a href="#" onclick="QuanLyTaiKhoan()"><i class="fa fa-map"></i>&nbsp&nbspQuản lý tài khoản</a></h3>';
+adMenuStr += '<h3><a href="#" onclick="QuanLyDiaDiem()"><i class="fa fa-map"></i>&nbsp&nbspQuản lý địa điểm</a></h3>';
 adMenuStr += '<h3><a href="#" id="coll" onClick="addOptions()"><i class="fa fa-map"></i>&nbsp&nbspThống kê&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<i class="fa fa-chevron-down" id="arrow"></i></a></h3>';
 adMenuStr += '<div id="tkct">';
 adMenuStr += '</div>';
@@ -117,6 +117,15 @@ function removeAllMenu() {
     }
     if (document.getElementById('EditDiv')) {
         pointEditDiv.remove();
+    }
+    if (document.getElementById('UserManager')) {
+        UserManager.remove();
+    }
+    if (document.getElementById('AccountManagerControl')) {
+        AccountManagerControl.remove();
+    }
+    if (document.getElementById('PointManagerControl')) {
+        PointManagerControl.remove();
     }
     EnableZoomDrag();
 }

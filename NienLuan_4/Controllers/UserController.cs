@@ -2,6 +2,7 @@
 using NienLuan_4.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -100,8 +101,16 @@ namespace NienLuan_4.Controllers
         // Select list loai dich vu
         public ActionResult selectLoaiDVu()
         {
-            List<LOAIDIADIEM> L = db.LOAIDIADIEMs.OrderBy(a => a.TEN_LOAIDD).ToList();         
-            var report = JsonConvert.SerializeObject(L, Formatting.None,
+            List<LOAIDIADIEM> L = db.LOAIDIADIEMs.OrderBy(a => a.TEN_LOAIDD).ToList();
+            List<loaiModel> l = new List<loaiModel>();
+            foreach(var i in L)
+            {
+                loaiModel lo = new loaiModel();
+                lo.id = i.ID_LOAIDD;
+                lo.loai = i.TEN_LOAIDD;
+                l.Add(lo);
+            }
+            var report = JsonConvert.SerializeObject(l, Formatting.None,
                                      new JsonSerializerSettings()
                                      {
                                          ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
@@ -109,9 +118,161 @@ namespace NienLuan_4.Controllers
             return Content(report, "application/json");
         }
 
-        
+        public ActionResult LayThongTin()
+        {
+            string id = User.Identity.Name;
+            TAIKHOAN TK = db.TAIKHOANs.Where(a => a.ID_TK == id).First();
+            UserManagerModel m = new UserManagerModel();
+            m.id = TK.ID_TK;
+            m.name = TK.TAIKHOAN_TK;
+            m.displayname = TK.TENHIENTHI_TK;
+            m.img = db.HINHANHs.Where(a => a.ID_TK == id).Select(a => a.LINK_HA).First();
+            m.pass = TK.MATKHAU_TK;
+            m.email = TK.EMAIL_TK;
+            m.phone = TK.SDT_TK;
 
-        // Xem ban do cong dong
+            var report = JsonConvert.SerializeObject(m, Formatting.None,
+                                     new JsonSerializerSettings()
+                                     {
+                                         ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                                     });
+            return Content(report, "application/json");
+        }
 
+
+        public ActionResult KiemTraMatKhau(string mk)
+        {
+            Boolean isValid = false;
+            if(db.TAIKHOANs.Where(a => a.ID_TK == User.Identity.Name).Select(a => a.MATKHAU_TK).FirstOrDefault() == mk)
+            {
+                isValid = true;
+            }
+            var report = JsonConvert.SerializeObject(isValid, Formatting.None,
+                                     new JsonSerializerSettings()
+                                     {
+                                         ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                                     });
+            return Content(report, "application/json");
+        }
+
+        public ActionResult DoiMatKhau(string mk)
+        {
+            TAIKHOAN T = db.TAIKHOANs.Where(a => a.ID_TK == User.Identity.Name).First();
+            db.Entry(T).State = EntityState.Detached;
+            T.MATKHAU_TK = mk;
+            db.Entry(T).State = EntityState.Modified;
+            db.SaveChanges();
+
+            var report = JsonConvert.SerializeObject(true, Formatting.None,
+                                     new JsonSerializerSettings()
+                                     {
+                                         ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                                     });
+            return Content(report, "application/json");
+        }
+
+        public ActionResult LuuThongTin(string tentk, string tenht, string email, string sdt)
+        {
+            TAIKHOAN T = db.TAIKHOANs.Where(a => a.ID_TK == User.Identity.Name).First();
+            db.Entry(T).State = EntityState.Detached;
+
+            T.TAIKHOAN_TK = tentk;
+            T.TENHIENTHI_TK = tenht;
+            T.EMAIL_TK = email;
+            T.SDT_TK = sdt;
+
+            db.Entry(T).State = EntityState.Modified;
+            db.SaveChanges();
+
+            var report = JsonConvert.SerializeObject(true, Formatting.None,
+                                     new JsonSerializerSettings()
+                                     {
+                                         ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                                     });
+            return Content(report, "application/json");
+        }
+
+        public ActionResult DanhSachTaiKhoan(string s)
+        {
+            List<UserManagerModel> M = new List<UserManagerModel>();
+
+            foreach(var t in db.TAIKHOANs.Where(a => a.ID_LOAITK != 3 && (a.TAIKHOAN_TK.Contains(s) || 
+                a.TENHIENTHI_TK.Contains(s) || a.EMAIL_TK.Contains(s) || a.SDT_TK.Contains(s))).ToList())
+            {
+                UserManagerModel m = new UserManagerModel();
+                m.id = t.ID_TK;
+                m.name = t.TAIKHOAN_TK;
+                m.displayname = t.TENHIENTHI_TK;
+                m.email = t.EMAIL_TK;
+                m.phone = t.SDT_TK;
+                string l = db.HINHANHs.Where(a => a.ID_TK == t.ID_TK).Select(a => a.LINK_HA).FirstOrDefault();
+                if(l != null)
+                {
+                    m.img = l;
+                }
+                else
+                {
+                    m.img = "/Content/Images/UserProfile/AnoAvatar.png";
+                }
+                M.Add(m);
+            }
+
+            var report = JsonConvert.SerializeObject(M, Formatting.None,
+                                     new JsonSerializerSettings()
+                                     {
+                                         ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                                     });
+            return Content(report, "application/json");
+        }
+
+        public JsonResult KiemTraDaKhoa(string id)
+        {
+            Boolean dakhoa = false;
+            TAIKHOAN T = db.TAIKHOANs.Where(a => a.ID_TK == id).First();
+            if(T.DAKHOA_TK == true)
+            {
+                dakhoa = true;
+            }
+            return Json(dakhoa, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult KhoaTaiKhoan(string id)
+        {
+            TAIKHOAN T = db.TAIKHOANs.Where(a => a.ID_TK == id).First();
+            db.Entry(T).State = EntityState.Detached;
+            if (T.DAKHOA_TK == true)
+            {
+                T.DAKHOA_TK = false;
+            }
+            else
+            {
+                T.DAKHOA_TK = true;
+            }
+            db.Entry(T).State = EntityState.Modified;
+            db.SaveChanges();
+            return Json(T.DAKHOA_TK, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult KhoaKhongHoatDong(string time)
+        {
+            int ngay; int.TryParse(time, out ngay);
+            ngay *= 30;
+            DateTime d = DateTime.Today;
+
+            foreach (var i in db.TAIKHOANs)
+            {
+                DateTime dc = (DateTime)i.LANHDCUOI_TK;
+                int n = (d - dc).Days;
+                if(n >= ngay)
+                {
+                    db.Entry(i).State = EntityState.Detached;
+                    i.DAKHOA_TK = true;
+                    db.Entry(i).State = EntityState.Modified;
+                    
+                }
+            }
+            db.SaveChanges();
+            return Json(ngay, JsonRequestBehavior.AllowGet);
+        }
     }
 }

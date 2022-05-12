@@ -9,8 +9,9 @@ function SelectListLoaiDVu() {
         type: 'get',
         async: false,
         success: function (data) {
+            console.log(data);
             for (var a in data) {
-                str += '<option value="' + data[a].ID_LOAIDD + '">' + data[a].TEN_LOAIDD + '</option>';
+                str += '<option value="' + data[a].id + '">' + data[a].loai + '</option>';
             }
         }
     });
@@ -98,6 +99,9 @@ if (logon == true) {
             })
             if (px != null) {
                 $('#idpx').val(px[0].options.id);
+            }
+            else {
+                alert("Vị trí điểm không hợp lệ !!!");
             }
 
             marker.on("dragend", function (e) {

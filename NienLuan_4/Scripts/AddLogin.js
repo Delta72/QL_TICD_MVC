@@ -117,7 +117,7 @@ if (LogOn == false) {
             },
             success: function (data) {
                 if (data == false) {
-                    alert("Sai tên tài khoản hoặc mật khẩu !!!");
+                    alert("Sai tên tài khoản/mật khẩu hoặc tài khoản của bạn đã bị khóa !!!");
                 }
                 else {
                     document.location.reload();
@@ -283,10 +283,11 @@ if (LogOn == false) {
     // Kiem tra so dien thoai
     function KiemTraSdt(sdt) {
         let regex = new RegExp('[0-9]');
-        if (regex.test(sdt) && sdt.length == 10) {
+        if (regex.test(sdt) && (sdt.length == 10 || sdt.length == 0)) {
             return true;
         }
         else {
+            alert("Số điện thoại không hợp lệ !!!");
             return false;
         }
     }
