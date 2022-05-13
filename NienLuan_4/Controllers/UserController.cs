@@ -274,5 +274,118 @@ namespace NienLuan_4.Controllers
             db.SaveChanges();
             return Json(ngay, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult DSTKTK(string date1, string date2, string select)
+        {
+            List<UserManagerModel> M = new List<UserManagerModel>();
+            DateTime d1 = DateTime.Now; 
+            DateTime d2 = DateTime.Now;
+            if (date1 != "")
+            {
+                d1 = DateTime.Parse(date1);
+            }
+            if(date2 != "")
+            {
+                d2 = DateTime.Parse(date2);
+            }
+
+            if(date1 == "" && date2 != "")
+            {
+                foreach(var i in db.TAIKHOANs)
+                {
+                    if(DateTime.Compare((DateTime)i.NGAYTAO_TK, d2) < 0)
+                    {
+                        UserManagerModel m = new UserManagerModel();
+                        m.name = i.TAIKHOAN_TK;
+                        m.displayname = i.TENHIENTHI_TK;
+                        m.luotthich = (from x in db.DIADIEMYEUTHICHes where x.ID_TK == i.ID_TK select x).Count();
+                        m.luotbl = (from x in db.BINHLUANs where x.ID_TK == i.ID_TK select x).Count();
+                        M.Add(m);
+                    }
+                }
+            }
+            if(date1 != "" && date2 == "")
+            {
+                foreach (var i in db.TAIKHOANs)
+                {
+                    if (DateTime.Compare((DateTime)i.NGAYTAO_TK, d1) > 0)
+                    {
+                        UserManagerModel m = new UserManagerModel();
+                        m.name = i.TAIKHOAN_TK;
+                        m.displayname = i.TENHIENTHI_TK;
+                        m.luotthich = (from x in db.DIADIEMYEUTHICHes where x.ID_TK == i.ID_TK select x).Count();
+                        m.luotbl = (from x in db.BINHLUANs where x.ID_TK == i.ID_TK select x).Count();
+                        M.Add(m);
+                    }
+                }
+            }
+            if (date1 != "" && date2 != "")
+            {
+                foreach (var i in db.TAIKHOANs)
+                {
+                    if (DateTime.Compare((DateTime)i.NGAYTAO_TK, d1) > 0 && DateTime.Compare((DateTime)i.NGAYTAO_TK, d2) < 0)
+                    {
+                        UserManagerModel m = new UserManagerModel();
+                        m.name = i.TAIKHOAN_TK;
+                        m.displayname = i.TENHIENTHI_TK;
+                        m.luotthich = (from x in db.DIADIEMYEUTHICHes where x.ID_TK == i.ID_TK select x).Count();
+                        m.luotbl = (from x in db.BINHLUANs where x.ID_TK == i.ID_TK select x).Count();
+                        M.Add(m);
+                    }
+                }
+            }
+            if(date1 == "" && date2 == "")
+            {
+                foreach (var i in db.TAIKHOANs)
+                {
+                        UserManagerModel m = new UserManagerModel();
+                        m.name = i.TAIKHOAN_TK;
+                        m.displayname = i.TENHIENTHI_TK;
+                        m.luotthich = (from x in db.DIADIEMYEUTHICHes where x.ID_TK == i.ID_TK select x).Count();
+                        m.luotbl = (from x in db.BINHLUANs where x.ID_TK == i.ID_TK select x).Count();
+                        M.Add(m);
+                }
+            }
+
+            List<UserManagerModel> r = new List<UserManagerModel>();
+            if(select == "bl")
+            {
+                foreach(var i in M.OrderByDescending(a => a.luotbl))
+                {
+                    if(i.name != "ccc")
+                    {
+                        r.Add(i);
+                    }
+                }                
+            }
+            else if(select == "lt")
+            {
+                foreach (var i in M.OrderByDescending(a => a.luotthich))
+                {
+                    if (i.name != "ccc")
+                    {
+                        r.Add(i);
+                    }
+                }
+            }
+            else
+            {
+                foreach (var i in M)
+                {
+                    if (i.name != "ccc")
+                    {
+                        r.Add(i);
+                    }
+                }
+            }
+
+
+            var report = JsonConvert.SerializeObject(r, Formatting.None,
+                                     new JsonSerializerSettings()
+                                     {
+                                         ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                                     });
+            return Content(report, "application/json");
+        }
     }
 }

@@ -281,6 +281,88 @@ function TimKiemDiaDiem() {
     HienDanhSachDiaDiem(s);
 }
 
+// Thong ke tai khoan
+var TKTK = L.control({ position: "topleft" });
+TKTK.onAdd = function (map) {
+    var div = L.DomUtil.create("div", "div3");
+    var i = '<div id="TKTK" class="adminCtrl" onmouseover="DisableZoomDrag()" onmouseout="EnableZoomDrag()">';
+    i += '</div>';
+    div.innerHTML = i;
+    return div;
+};
+
+// thong ke tai khoan
+function ThongKeTaiKhoan() {
+    removeAllMenu();
+    document.getElementById('btnMenu').click();
+    TKTK.addTo(mapObject);
+
+    var inner = '<div class="adminTitle"><label>Thống kê tài khoản</label></div>';
+    inner += '<div class="adminTKcontrol"><table class="tableTKhead">';
+    inner += '<tr><td><label>Từ ngày: </label><input type="date" id="date1"></input></td>';
+    inner += '<td><label>Đến ngày: </label><input type="date" id="date2"></input></td>';
+    inner += '<td><label>Xếp theo: </label><select id="xep">';
+    inner += '<option value="all" selected>--- Tất cả ---</option>';
+    inner += '<option value="lt"> Lượt thích </option>';
+    inner += '<option value="bl"> Bình luận </option>';
+    inner += '</select></td>';
+    inner += '<td><button type="button" onclick="DSTKTK()">Thực hiện</button></td>';
+    inner += '</table></div>';
+    inner += '<div class="adminTable" id="adminAList">' + '</div>';
+
+    document.getElementById('TKTK').innerHTML = inner;
+    DSTKTK();
+}
+
+// danh sach thong ke tai khoan
+function DSTKTK() {
+    var d1 = document.getElementById('date1').value;
+    var d2 = document.getElementById('date2').value;
+    var select = document.getElementById('xep').value;
+
+    $.ajax({
+        url: 'User/DSTKTK',
+        type: 'post',
+        data: {
+            date1: d1,
+            date2: d2,
+            select: select,
+        },
+        success: function (data) {
+            //console.log(data);
+            HienDanhSachDiaDiemTK(data);
+        }
+    })
+}
+
+// danh sach dia diem thong ke
+function HienDanhSachDiaDiemTK(data) {
+    document.getElementById('adminAList').innerHTML = "";
+    var i = '';
+    i += '<table id="tableadmin" style="width:100%"><tr>';
+    i += '<td style="width:5%"><label>STT</label></td>';
+    i += '<td style="width:45%"><label>Tài khoản</label></td>';
+    i += '<td style="width:45%"><label>Tên hiển thị</label></td>';
+    i += '<td style="width:15%"><label>Tổng bình luận</label></td>';
+    i += '<td style="width:15%"><label>Địa điểm đã thích</label></td>';
+    i += '</tr></table>';
+    document.getElementById('adminAList').innerHTML += i;
+    for (var x in data) {
+        var u = '';
+        u += '<div class="adminEachAccount">';
+        u += '<table style="width:100%"><tr>';
+        u += '<td style="width:5%"><label>' + (parseInt(x) + 1) + '</label></td>';
+        u += '<td style="width:35%; text-align:left"><label>' + data[x].name + '</label></td>';
+        u += '<td style="width:25%; text-align:left"><label>' + data[x].displayname + '</label></td>';
+        u += '<td style="width:10%; text-align:left"><label>' + data[x].luotbl + '</label></td>';
+        u += '<td style="width:10%; text-align:left"><label>' + data[x].luotthich + '<label></td>';
+        u += '</tr></table>';
+        u += '</div>';
+        document.getElementById('adminAList').innerHTML += u;
+    }
+}
+
+
 // load
 $(document).ready(function () {
     if (getUserRole() == "ad" || getUserRole() == "dn") {

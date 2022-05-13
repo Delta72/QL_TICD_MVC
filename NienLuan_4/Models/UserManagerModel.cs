@@ -14,5 +14,7 @@ namespace NienLuan_4.Models
         public string email { get; set; }
         public string phone { get; set; }
         public string displayname { get; set; }
+        public int luotthich { get; set; }
+        public int luotbl { get; set; }
     }
 }

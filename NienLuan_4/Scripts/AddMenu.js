@@ -60,7 +60,7 @@ function SignOut() {
 // addOptions
 function addOptions() {
     var i = '';
-    i += '<h3><a href="#"><i class="fa fa-map"></i>&nbsp&nbspThống kê tài khoản</a></h3>';
+    i += '<h3><a href="#" onclick="ThongKeTaiKhoan()"><i class="fa fa-map"></i>&nbsp&nbspThống kê tài khoản</a></h3>';
     i += '<h3><a href="#"><i class="fa fa-map"></i>&nbsp&nbspThống kê địa điểm</a></h3>';
     if (document.getElementById('tkct').childNodes.length == 0) {
         document.getElementById('arrow').style.transform = 'rotate(270deg)';
@@ -126,6 +126,9 @@ function removeAllMenu() {
     }
     if (document.getElementById('PointManagerControl')) {
         PointManagerControl.remove();
+    }
+    if (document.getElementById('TKTK')) {
+        TKTK.remove();
     }
     EnableZoomDrag();
 }
